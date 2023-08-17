@@ -1,10 +1,23 @@
 import React, { useState } from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
-
-
 import us_flag from '../../images/flags/us_flag.png';
 import vn_flag from '../../images/flags/vn_flag.png';
-import { FaChevronDown } from 'react-icons/fa';
+import {
+    Dropdown,
+    Badge,
+} from 'react-bootstrap';
+import {
+    FaChevronDown,
+    FaRegBell,
+    FaBellSlash,
+    FaRegUser,
+    FaWallet,
+    FaRegSun,
+    FaPowerOff,
+    FaBars,
+    FaMagnifyingGlass,
+} from 'react-icons/fa6';
+
+const logo = 'https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <div
@@ -19,22 +32,9 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     </div>
 ));
 
-const CustomItem = React.forwardRef(({ children, onClick }, ref) => (
-    <div
-        ref={ref}
-        onClick={(e) => {
-            e.preventDefault();
-            onClick(e);
-        }}
-    >
-        {children}
-
-    </div>
-));
-
-
 const NavBar = () => {
     const [titleDropdown, setTitleDropdown] = useState("English");
+    const [notification, setNotification] = useState([1, 2, 3]);
 
     const selectItem = (select) => {
         console.log(select)
@@ -46,10 +46,10 @@ const NavBar = () => {
 
     return (
         <nav className="navbar-custom">
-            <ul className="list-unstyled topbar-nav float-right mb-0">
+            <ul className="list-unstyled topbar-nav float-end mb-0">
                 <li className="hidden-sm">
                     <Dropdown>
-                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components3">
                             <a
                                 className="nav-link dropdown-toggle waves-effect waves-light"
                                 href=""
@@ -64,113 +64,101 @@ const NavBar = () => {
                         <Dropdown.Menu >
                             <Dropdown.Item onClick={(s) => selectItem("1")}>
                                 <span> English </span>
-                                <img src={us_flag} alt="us_flag" className="ml-2 float-right" height={18} />
+                                <img src={us_flag} alt="us_flag" className="ml-2 float-end" height={18} />
                             </Dropdown.Item>
                             <Dropdown.Item onClick={(s) => selectItem("2")}>
                                 <span>Tiếng Việt </span>
-                                <img src={vn_flag} alt="vn_flag" className="ml-2 float-right" height={18} />
+                                <img src={vn_flag} alt="vn_flag" className="ml-2 float-end" height={18} />
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </li>
-                <li className="dropdown notification-list">
-                    <a className="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <i className="ti-bell noti-icon" />
-                        <span className="badge badge-danger badge-pill noti-icon-badge">2</span>
-                    </a>
-                    <div className="dropdown-menu dropdown-menu-right dropdown-lg pt-0">
-                        <h6 className="dropdown-item-text font-15 m-0 py-3 bg-primary text-white d-flex justify-content-between align-items-center">
-                            Notifications <span className="badge badge-light badge-pill">2</span>
-                        </h6>
-                        <div className="slimscroll notification-list">
-                            {/* item*/}
-                            <a href="#" className="dropdown-item py-3">
-                                <small className="float-right text-muted pl-2">2 min ago</small>
-                                <div className="media">
-                                    <div className="avatar-md bg-primary">
-                                        <i className="la la-cart-arrow-down text-white" />
-                                    </div>
-                                    <div className="media-body align-self-center ml-2 text-truncate">
-                                        <h6 className="my-0 font-weight-normal text-dark">Your order is placed</h6>
-                                        <small className="text-muted mb-0">Dummy text of the printing and industry.</small>
-                                    </div>{/*end media-body*/}
-                                </div>{/*end media*/}
-                            </a>{/*end-item*/}
-                            {/* item*/}
-                            <a href="#" className="dropdown-item py-3">
-                                <small className="float-right text-muted pl-2">10 min ago</small>
-                                <div className="media">
-                                    <div className="avatar-md bg-success">
-                                        <i className="la la-group text-white" />
-                                    </div>
-                                    <div className="media-body align-self-center ml-2 text-truncate">
-                                        <h6 className="my-0 font-weight-normal text-dark">Meeting with designers</h6>
-                                        <small className="text-muted mb-0">It is a long established fact that a reader.</small>
-                                    </div>{/*end media-body*/}
-                                </div>{/*end media*/}
-                            </a>{/*end-item*/}
-                            {/* item*/}
-                            <a href="#" className="dropdown-item py-3">
-                                <small className="float-right text-muted pl-2">40 min ago</small>
-                                <div className="media">
-                                    <div className="avatar-md bg-pink">
-                                        <i className="la la-list-alt text-white" />
-                                    </div>
-                                    <div className="media-body align-self-center ml-2 text-truncate">
-                                        <h6 className="my-0 font-weight-normal text-dark">UX 3 Task complete.</h6>
-                                        <small className="text-muted mb-0">Dummy text of the printing.</small>
-                                    </div>{/*end media-body*/}
-                                </div>{/*end media*/}
-                            </a>{/*end-item*/}
-                            {/* item*/}
-                            <a href="#" className="dropdown-item py-3">
-                                <small className="float-right text-muted pl-2">1 hr ago</small>
-                                <div className="media">
-                                    <div className="avatar-md bg-warning">
-                                        <i className="la la-truck text-white" />
-                                    </div>
-                                    <div className="media-body align-self-center ml-2 text-truncate">
-                                        <h6 className="my-0 font-weight-normal text-dark">Your order is placed</h6>
-                                        <small className="text-muted mb-0">It is a long established fact that a reader.</small>
-                                    </div>{/*end media-body*/}
-                                </div>{/*end media*/}
-                            </a>{/*end-item*/}
-                            {/* item*/}
-                            <a href="#" className="dropdown-item py-3">
-                                <small className="float-right text-muted pl-2">2 hrs ago</small>
-                                <div className="media">
-                                    <div className="avatar-md bg-info">
-                                        <i className="la la-check-circle text-white" />
-                                    </div>
-                                    <div className="media-body align-self-center ml-2 text-truncate">
-                                        <h6 className="my-0 font-weight-normal text-dark">Payment Successfull</h6>
-                                        <small className="text-muted mb-0">Dummy text of the printing.</small>
-                                    </div>{/*end media-body*/}
-                                </div>{/*end media*/}
-                            </a>{/*end-item*/}
-                        </div>
-                        {/* All*/}
-                        <a href="javascript:void(0);" className="dropdown-item text-center text-primary">
-                            View all <i className="fi-arrow-right" />
-                        </a>
-                    </div>
+                <li className="notification-list ">
+                    <Dropdown>
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components1">
+                            <a
+                                className="nav-link dropdown-toggle arrow-none waves-light waves-effect"
+                                href=""
+                            >
+                                <FaRegBell size={26} />
+                                <Badge bg={notification.length === 0 ? "secondary" : "danger"} className="badge-pill noti-icon-badge">{notification.length}</Badge>
+                            </a>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu >
+                            {
+                                notification.length === 0 ?
+                                    <Dropdown.Item>
+                                        Không có thông báo nào.
+                                    </Dropdown.Item> :
+                                    notification.map((e) => {
+                                        return (
+                                            <Dropdown.Item onClick={(s) => selectItem(e)}>
+                                                <span> Thông báo số {e} </span>
+                                                <span className="ml-2 float-end"> Date {e} </span>
+                                            </Dropdown.Item>);
+                                    })
+                            }
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </li>
                 <li className="dropdown">
-                    <a className="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="../assets/images/users/user-1.png" alt="profile-user" className="rounded-circle" />
-                        <span className="ml-1 nav-user-name hidden-sm">Amelia <i className="mdi mdi-chevron-down" /> </span>
-                    </a>
-                    <div className="dropdown-menu dropdown-menu-right">
-                        <a className="dropdown-item" href="#"><i className="ti-user text-muted mr-2" /> Profile</a>
-                        <a className="dropdown-item" href="#"><i className="ti-wallet text-muted mr-2" /> My Wallet</a>
-                        <a className="dropdown-item" href="#"><i className="ti-settings text-muted mr-2" /> Settings</a>
-                        <a className="dropdown-item" href="#"><i className="ti-lock text-muted mr-2" /> Lock screen</a>
-                        <div className="dropdown-divider mb-0" />
-                        <a className="dropdown-item" href="#"><i className="ti-power-off text-muted mr-2" /> Logout</a>
-                    </div>
-                </li>
-            </ul>{/*end topbar-nav*/}
+                    <Dropdown>
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components5">
+                            <a
+                                className="nav-link dropdown-toggle waves-effect waves-light nav-user"
+                                href=""
+                            >
+                                <img src={logo} alt="profile-user" className="rounded-circle mx-2" />
+                                <span className="ml-1 nav-user-name hidden-sm">ABC</span>
+                                <FaChevronDown size={12} style={{ marginLeft: 5 }} />
+                            </a>
 
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className="me-2">
+                            <Dropdown.Item>
+                                <div>
+                                    <FaRegUser className="text-muted ms-2" />
+                                    <span className="text-muted ms-2"> Profile </span>
+                                </div>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <div>
+                                    <FaWallet className="text-muted ms-2" />
+                                    <span className="text-muted ms-2"> My Wallet </span>
+                                </div>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <div>
+                                    <FaRegSun className="text-muted ms-2" />
+                                    <span className="text-muted ms-2"> Settings </span>
+                                </div>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>
+                                <div>
+                                    <FaPowerOff className="text-muted ms-2" />
+                                    <span className="text-muted ms-2"> Logout </span>
+                                </div>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </li>
+            </ul>
+            <ul className="list-unstyled topbar-nav mb-0">
+                <li>
+                    <button className="nav-link button-menu-mobile waves-effect waves-light">
+                        <FaBars className="nav-icon" />
+                    </button>
+                </li>
+                <li className="hide-phone app-search">
+                    <form role="search" className="">
+                        <input type="text" id="AllCompo" placeholder="Search..." className="form-control" />
+                        <a href=""><FaMagnifyingGlass size={18}/></a>
+                    </form>
+                </li>
+            </ul>
         </nav>
     );
 };
