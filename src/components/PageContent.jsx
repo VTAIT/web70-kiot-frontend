@@ -98,8 +98,8 @@ const PageContent = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {productList.map((item) => (
-                          <Item item={item} />
+                        {productList.map((item,index) => (
+                          <Item item={item} key={index} />
                         ))}
                       </tbody>
                     </table>

@@ -5,13 +5,14 @@ import AppState from "./contexts/AppContext/AppState";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthState from "./contexts/AuthContext/AuthState";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
     <AppState>
       <AuthState>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<PrivateRoute component={Home} />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
         </Routes>

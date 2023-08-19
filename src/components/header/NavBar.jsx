@@ -91,9 +91,9 @@ const NavBar = () => {
                                     <Dropdown.Item>
                                         Không có thông báo nào.
                                     </Dropdown.Item> :
-                                    notification.map((e) => {
+                                    notification.map((e,index) => {
                                         return (
-                                            <Dropdown.Item onClick={(s) => selectItem(e)}>
+                                            <Dropdown.Item key={index} onClick={(s) => selectItem(e)}>
                                                 <span> Thông báo số {e} </span>
                                                 <span className="ml-2 float-end"> Date {e} </span>
                                             </Dropdown.Item>);

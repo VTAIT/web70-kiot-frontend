@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001/api/v1";
+const BASE_URL = "http://localhost:5001/api/v1";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -12,7 +12,6 @@ axiosInstance.interceptors.request.use((config) => {
   if (accessToken) {
     config.headers["x-access-token"] = accessToken;
   }
-  console.log('config.headers["x-access-token"]',config.headers["x-access-token"]);
   return config;
 });
 
