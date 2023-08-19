@@ -1,44 +1,44 @@
 //
 // Account Pages
-//
+// 
 
-.account-body {
+.account-body{
   background-color: $card-bg;
-  .auth-page {
+  .auth-page{
     max-width: 460px;
     position: relative;
     margin: 0 auto;
   }
-  .auth-card {
+  .auth-card{
     border-radius: 20px;
-    .auth-logo-box {
+    .auth-logo-box{
       position: absolute;
       left: 0;
       right: 0;
       top: -25px;
       text-align: center;
-      .auth-logo {
+      .auth-logo{
         border-radius: 50%;
         background-color: $white;
         padding: 4px;
         box-shadow: 0px 0px 0px 2.25px $gray-200;
       }
     }
-    .auth-logo-text {
+    .auth-logo-text{
       font-family: $font-secondary;
-      h4 {
+      h4{
         font-weight: 600;
         color: $gray-700;
         font-size: 22px;
       }
-    }
+    }  
   }
-  .auth-form {
-    .form-control {
+  .auth-form{
+    .form-control{
       border-radius: 30px;
       padding-right: 40px;
     }
-    .auth-form-icon {
+    .auth-form-icon{
       width: 32px;
       height: 32px;
       background-color: $gray-200;
@@ -48,24 +48,20 @@
       position: absolute;
       right: 3px;
       z-index: 100;
-      top: 3px;
-      color: $info;
-    }
+      top: 3px; 
+      color: $info;     
+    }    
   }
   &.accountbg {
-    background: linear-gradient(
-      0deg,
-      rgba(247, 247, 247, 1) 0%,
-      rgba(252, 222, 222, 1) 55%
-    );
+    background: linear-gradient(0deg, rgba(247,247,247,1) 0%, rgba(252,222,222,1) 55%);
     width: 100%;
     height: 100vh;
-    .account-title {
+    .account-title{
       width: 500px;
       position: relative;
       display: block;
       margin: 0 auto;
-      h1 {
+      h1{
         font-size: 60px;
         font-weight: 700;
         margin: 30px 0;
@@ -74,7 +70,7 @@
   }
 
   .account-social {
-    h6 {
+    h6{
       color: darken($gray-500, 10%);
     }
     h6:after {
@@ -95,8 +91,8 @@
       background-color: #fdc3c3;
       width: 110px;
     }
-
-    a {
+    
+    a{
       i {
         width: 36px;
         height: 36px;
@@ -106,28 +102,28 @@
         border-radius: 50%;
         font-size: 14px;
         z-index: 5;
-        &.facebook {
+        &.facebook{
           background-color: $primary;
           color: $white;
         }
-        &.twitter {
+        &.twitter{
           background-color: $secondary;
           color: $white;
         }
-        &.google {
+        &.google{
           background-color: $pink;
-          color: $white;
+        color: $white;
         }
       }
-      &:hover .facebook {
+      &:hover .facebook{
         color: $white;
         background-color: lighten($primary, 5%);
       }
-      &:hover .twitter {
+      &:hover .twitter{
         color: $white;
         background-color: lighten($secondary, 5%);
       }
-      &:hover .google {
+      &:hover .google{
         color: $white;
         background-color: lighten($pink, 5%);
       }
@@ -136,7 +132,10 @@
 }
 
 @media (max-width: 768px) {
-  .auth-card {
+  .auth-card{
     margin-top: 34px;
   }
 }
+
+
+

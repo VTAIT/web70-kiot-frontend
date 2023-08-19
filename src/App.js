@@ -15,8 +15,9 @@ function App() {
     <AppState>
       <AuthState>
         <div className="page-wrapper">
-          <Header />
-          <LeftSideBar />
+          <Header/>
+          <LeftSideBar/>
+
           <Routes>
             <Route path="/" element={<PrivateRoute component={Home} />}></Route>
             <Route
