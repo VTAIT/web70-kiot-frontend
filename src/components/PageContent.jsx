@@ -1,10 +1,64 @@
 import React from "react";
-import {
-    FaRegPenToSquare,
-    FaRegTrashCan,
-} from 'react-icons/fa6'
+import Item from "./Item";
 
-const productList = [{}];
+const productList = [
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+  {
+    product_name: "Apple Watch",
+    description: "Size-05 (Model 2019)",
+    category: "Sports",
+    pics: 32,
+    price: 39,
+    active: "Đang bán",
+  },
+];
 
 const PageContent = () => {
   return (
@@ -44,41 +98,9 @@ const PageContent = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <img
-                              src="../assets/images/products/img-2.png"
-                              alt=""
-                              height={52}
-                            />
-                            <p className="d-inline-block align-middle mb-0">
-                              <a
-                                href
-                                className="d-inline-block align-middle mb-0 product-name"
-                              >
-                                Apple Watch
-                              </a>
-                              <br />
-                              <span className="text-muted font-13">
-                                Size-05 (Model 2019)
-                              </span>
-                            </p>
-                          </td>
-                          <td>Sports</td>
-                          <td>32</td>
-                          <td>$39</td>
-                          <td>
-                            Đang bán
-                          </td>
-                          <td>
-                            <a href>
-                              <FaRegPenToSquare className="text-info ms-2" />
-                            </a>
-                            <a href>
-                              <FaRegTrashCan className="text-danger ms-2" />
-                            </a>
-                          </td>
-                        </tr>
+                        {productList.map((item,index) => (
+                          <Item item={item} key={index} />
+                        ))}
                       </tbody>
                     </table>
                   </div>
