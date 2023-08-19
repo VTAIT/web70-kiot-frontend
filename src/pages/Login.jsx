@@ -1,13 +1,18 @@
 import axios from "axios";
-// import { response } from "express";
+import { FaRightToBracket } from "react-icons/fa6";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstance";
+import AuthContext from "../contexts/AuthContext/AuthContext";
+import authAPI from "../apis/authAPI";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { handleLogin } = useContext(AuthContext);
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -17,14 +22,12 @@ const Login = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.post(
-          "http://localhost:3001/api/v1/auth/login",
-          {
-            username: values.username,
-            password: values.userpassword,
-          }
-        );
+        const response = await authAPI.login( {
+          username: values.username,
+          password: values.userpassword,
+        });
         localStorage.setItem("accessToken", response.data.accessToken);
+        handleLogin();
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -142,7 +145,7 @@ const Login = () => {
                           type="submit"
                         >
                           {loading ? "Loading" : "Login"}
-                          <i className="fas fa-sign-in-alt ml-1" />
+                          <FaRightToBracket className="fas fa-sign-in-alt ml-1" />
                         </button>
                       </div>
                       {/*end col*/}

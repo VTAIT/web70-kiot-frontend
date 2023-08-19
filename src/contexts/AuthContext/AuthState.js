@@ -13,6 +13,7 @@ const AuthState = ({ children }) => {
   //   2. Update auth state
   const handleLogin = async () => {
     try {
+      console.log(auth)
       const response = await authAPI.authInfo();
       const data = response.data;
 

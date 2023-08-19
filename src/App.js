@@ -4,15 +4,18 @@ import Header from "./components/header/Header";
 import AppState from "./contexts/AppContext/AppState";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AuthState from "./contexts/AuthContext/AuthState";
 
 function App() {
   return (
     <AppState>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-      </Routes>
+      <AuthState>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+        </Routes>
+      </AuthState>
     </AppState>
   );
 }
