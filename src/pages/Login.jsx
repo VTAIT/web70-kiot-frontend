@@ -3,7 +3,6 @@ import { FaRightToBracket } from "react-icons/fa6";
 import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import axiosInstance from "../apis/axiosInstance";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import authAPI from "../apis/authAPI";
 
@@ -46,7 +45,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container account-body">
       <div className="row vh-100 ">
         <div className="col-12 align-self-center">
           <div className="auth-page">
