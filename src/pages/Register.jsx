@@ -106,9 +106,43 @@ const Register = () => {
                           type="text"
                           className="form-control"
                           id="username"
-                          placeholder="Enter username"
+                          placeholder="Enter Username"
                           onChange={handleChange}
                           value={values.username}
+                        />
+                      </div>
+                    </div>
+                    {/*end form-group*/}
+                    <div className="form-group">
+                      <label htmlFor="full_name">Full Name</label>
+                      <div className="input-group mb-3">
+                        <span className="auth-form-icon">
+                          <FaUser />
+                        </span>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="full_name"
+                          placeholder="Enter Full Name"
+                          onChange={handleChange}
+                          value={values.full_name}
+                        />
+                      </div>
+                    </div>
+                    {/*end form-group*/}
+                    <div className="form-group">
+                      <label htmlFor="address">Address</label>
+                      <div className="input-group mb-3">
+                        <span className="auth-form-icon">
+                          <FaEnvelope />
+                        </span>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="address"
+                          placeholder="Enter Address"
+                          onChange={handleChange}
+                          value={values.address}
                         />
                       </div>
                     </div>
@@ -140,7 +174,7 @@ const Register = () => {
                           type="password"
                           className="form-control"
                           id="userpassword"
-                          placeholder="Enter password"
+                          placeholder="Enter Password"
                           onChange={handleChange}
                           value={values.userpassword}
                         />
