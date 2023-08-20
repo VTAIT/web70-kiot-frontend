@@ -1,13 +1,15 @@
 import axios from "axios";
-import { FaRightToBracket } from "react-icons/fa6";
+import { FaLock, FaRightToBracket, FaUser } from "react-icons/fa6";
 import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import axiosInstance from "../apis/axiosInstance";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import authAPI from "../apis/authAPI";
 
 const Login = () => {
+
+const logo =
+"https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container account-body">
       <div className="row vh-100 ">
         <div className="col-12 align-self-center">
           <div className="auth-page">
@@ -59,7 +61,7 @@ const Login = () => {
                       className="logo logo-admin"
                     >
                       <img
-                        src="../assets/images/logo-sm.png"
+                        src={logo}
                         height={55}
                         alt="logo"
                         className="auth-logo"
@@ -85,7 +87,7 @@ const Login = () => {
                       <label htmlFor="username">Username</label>
                       <div className="input-group mb-3">
                         <span className="auth-form-icon">
-                          <i className="dripicons-user" />
+                          <FaUser />
                         </span>
                         <input
                           type="text"
@@ -102,7 +104,7 @@ const Login = () => {
                       <label htmlFor="userpassword">Password</label>
                       <div className="input-group mb-3">
                         <span className="auth-form-icon">
-                          <i className="dripicons-lock" />
+                          <FaLock />
                         </span>
                         <input
                           type="password"
@@ -164,12 +166,9 @@ const Login = () => {
                 <div className="m-3 text-center text-muted">
                   <p className>
                     Don't have an account ?{" "}
-                    <a
-                      href="../authentication/auth-register.html"
-                      className="text-primary ml-2"
-                    >
+                    <NavLink to="/register" className="text-primary ml-2">
                       Free Resister
-                    </a>
+                    </NavLink>
                   </p>
                 </div>
               </div>

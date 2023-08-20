@@ -5,11 +5,10 @@ import Header from "../components/header/Header";
 
 const Home = () => {
   return (
-    <div className="page-wrapper">
-      <Header />
-      <LeftSideBar />
-      <PageContent />
-    </div>
+    <></>
+    // <div className="page-wrapper">
+     
+    // </div>
   );
 };
 
