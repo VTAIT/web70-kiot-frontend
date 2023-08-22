@@ -9,7 +9,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
-  console.log("accessToken:",accessToken)
   if (accessToken) {
     config.headers["accept-token"] = accessToken;
   }

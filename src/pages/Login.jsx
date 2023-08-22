@@ -28,7 +28,7 @@ const logo =
           username: values.username,
           password: values.userpassword,
         });
-        localStorage.setItem("accessToken", response.data.token);
+        localStorage.setItem("accessToken", response.data.accessToken);
 
         await handleLogin();
         navigate("/");

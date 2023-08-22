@@ -1,17 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import AppState from "./contexts/AppContext/AppState";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import routes from "./config.js";
 import AuthState from "./contexts/AuthContext/AuthState";
 import PrivateRoute from "./PrivateRoute";
 import NotAuthRoute from "./NotAuthRoute";
-import ProductList from "./pages/ProductList";
-import Customers from "./pages/Customers";
 import Header from "./components/header/Header";
 import LeftSideBar from "./components/LeftSideBar";
-import Accounts from "./pages/Accounts";
 
 function App() {
   return (
