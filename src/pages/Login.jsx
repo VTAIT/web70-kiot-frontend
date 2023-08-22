@@ -1,4 +1,3 @@
-import axios from "axios";
 import { FaLock, FaRightToBracket, FaUser } from "react-icons/fa6";
 import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
@@ -29,7 +28,7 @@ const logo =
           username: values.username,
           password: values.userpassword,
         });
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("accessToken", response.data.token);
 
         await handleLogin();
         navigate("/");

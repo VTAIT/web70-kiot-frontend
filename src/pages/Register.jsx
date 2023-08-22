@@ -5,7 +5,6 @@ import {
   FaEnvelope,
   FaLock,
   FaLockOpen,
-  FaPhone,
   FaPhoneFlip,
   FaRightToBracket,
   FaUser,

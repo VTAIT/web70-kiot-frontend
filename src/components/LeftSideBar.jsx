@@ -66,6 +66,19 @@ const LeftSideBar = () => {
               Customers
             </NavLink>
           </li>
+          <li className={select === 4 ? "mm-active" : ""}>
+            <NavLink
+              to="/accounts"
+              className="nav-link"
+              onClick={(e) => {
+                // e.preventDefault();
+                selectItem(4);
+              }}
+            >
+              <i className="ti-control-record" />
+              Accounts
+            </NavLink>
+          </li>
         </ul>
       </div>
     )
