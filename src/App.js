@@ -3,8 +3,10 @@ import Home from "./pages/Home";
 import AppState from "./contexts/AppContext/AppState";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import routes from "./config.js";
 import AuthState from "./contexts/AuthContext/AuthState";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
+import NotAuthRoute from "./NotAuthRoute";
 import ProductList from "./pages/ProductList";
 import Customers from "./pages/Customers";
 import Header from "./components/header/Header";
@@ -19,7 +21,7 @@ function App() {
           <Header />
           <LeftSideBar />
 
-          <Routes>
+          {/* <Routes>
             <Route path="/" element={<PrivateRoute component={Home} />}></Route>
             <Route
               path="/productList"
@@ -35,6 +37,26 @@ function App() {
             ></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+          </Routes> */}
+          <Routes>
+            {routes.map((route, index) => {
+              const { path, component, isPrivate, notAuth } = route;
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  element={
+                    isPrivate ? (
+                      <PrivateRoute component={component} />
+                    ) : notAuth ? (
+                      <NotAuthRoute component={component} />
+                    ) : (
+                      component
+                    )
+                  }
+                />
+              );
+            })}
           </Routes>
         </div>
       </AuthState>
