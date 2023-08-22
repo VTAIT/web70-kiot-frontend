@@ -1,66 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Account from "../components/Account";
+import accountAPI from "../apis/accountAPI";
 
 const Accounts = () => {
-  const productList = [
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-    {
-      product_name: "Apple Watch",
-      description: "Size-05 (Model 2019)",
-      category: "Sports",
-      pics: 32,
-      price: 39,
-      active: "Đang bán",
-    },
-  ];
-  const accountList = [];
+  const [registeredUsers, setRegisteredUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    fetchRegisterUser();
+  }, []);
+
+  const fetchRegisterUser = async () => {
+    try {
+      setLoading(true);
+      const response = await accountAPI.getAllAccept();
+      setRegisteredUsers(response.data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  console.log("registeredUsers",registeredUsers)
   return (
     <div>
       <div className="page-content">
@@ -86,17 +46,17 @@ const Accounts = () => {
                         <thead>
                           <tr>
                             <th>User Name</th>
-                            <th>Category</th>
-                            <th>Pics</th>
-                            <th>Price</th>
-                            <th>Active</th>
-                            <th>Action</th>
+                            <th>Full Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {accountList.map((account, index) => (
-                            <Account account={account} key={index} />
-                          ))}
+                          {registeredUsers.map((account, index) => {
+                            return <Account account={account} key={index} />;
+                          })}
                         </tbody>
                       </table>
                     </div>
