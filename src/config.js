@@ -1,6 +1,6 @@
 import Accounts from "./pages/Accounts.jsx";
 import Customers from "./pages/Customers.jsx";
-import Home from "./pages/Home.jsx";
+import Products from "./pages/Products.jsx";
 import Login from "./pages/Login.jsx";
 import ProductList from "./pages/ProductList.jsx";
 import Register from "./pages/Register.jsx";
@@ -8,7 +8,7 @@ import Register from "./pages/Register.jsx";
 export const routes = [
   {
     path: "/",
-    component: <Home />,
+    component: <Products />,
     isPrivate: true,
   },
   {
