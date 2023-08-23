@@ -1,21 +1,18 @@
-import axios from "axios";
 import { FaLock, FaRightToBracket, FaUser } from "react-icons/fa6";
 import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import authAPI from "../apis/authAPI";
 
 const Login = () => {
-
-const logo =
-"https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
+  const logo =
+    "https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { handleLogin } = useContext(AuthContext);
-  const { auth } = useContext(AuthContext);
-  const { isAuthenticated } = auth;
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -42,10 +39,6 @@ const logo =
     },
   });
   const { handleSubmit, handleChange, values } = formik;
-
-  if (isAuthenticated) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <div className="container account-body">

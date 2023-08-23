@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AppContext from "./AppContext";
-
 
 const AppState = ({ children }) => {
   const [select, setSelect] = useState(0);
 
   const selectItem = (select) => {
-    console.log('LeftSideBar', select);
+    console.log("LeftSideBar", select);
     setSelect(select);
   };
 
@@ -14,7 +13,7 @@ const AppState = ({ children }) => {
     <AppContext.Provider
       value={{
         select,
-        selectItem
+        selectItem,
       }}
     >
       {children}

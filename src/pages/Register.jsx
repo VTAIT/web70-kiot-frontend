@@ -5,7 +5,6 @@ import {
   FaEnvelope,
   FaLock,
   FaLockOpen,
-  FaPhone,
   FaPhoneFlip,
   FaRightToBracket,
   FaUser,
@@ -37,11 +36,12 @@ const Register = () => {
           username: values.username,
           password: values.userpassword,
           email: values.useremail,
-          full_name: values.full_name,
+          fullName: values.full_name,
           phone: values.mo_number,
           address: values.address,
+          active:false
         });
-        if (response.status === 200) {
+        if (response.status === 201) {
           navigate("/login");
         }
       } catch (error) {

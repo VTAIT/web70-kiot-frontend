@@ -5,7 +5,6 @@ import { Dropdown, Badge } from "react-bootstrap";
 import {
   FaChevronDown,
   FaRegBell,
-  FaBellSlash,
   FaRegUser,
   FaWallet,
   FaRegSun,

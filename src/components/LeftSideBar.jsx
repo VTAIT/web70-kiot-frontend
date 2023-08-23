@@ -7,7 +7,7 @@ const LeftSideBar = () => {
   const [select, setSelect] = useState(1);
 
   const selectItem = (select) => {
-    console.log("LeftSideBar", select);
+    // console.log("LeftSideBar", select);
     setSelect(select);
   };
 
@@ -19,12 +19,12 @@ const LeftSideBar = () => {
         <NavLink
             className="nav-link "
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               selectItem(0);
             }}
           >
             <i className="ti-control-record" />
-            Analytics
+            Products
           </NavLink>
         </li> */}
           <li className={select === 1 ? "mm-active" : ""}>
@@ -64,6 +64,19 @@ const LeftSideBar = () => {
             >
               <i className="ti-control-record" />
               Customers
+            </NavLink>
+          </li>
+          <li className={select === 4 ? "mm-active" : ""}>
+            <NavLink
+              to="/accounts"
+              className="nav-link"
+              onClick={(e) => {
+                // e.preventDefault();
+                selectItem(4);
+              }}
+            >
+              <i className="ti-control-record" />
+              Accounts
             </NavLink>
           </li>
         </ul>
