@@ -41,7 +41,7 @@ const Register = () => {
           address: values.address,
           active:false
         });
-        if (response.status === 201) {
+        if (response.status === 200) {
           navigate("/login");
         }
       } catch (error) {
