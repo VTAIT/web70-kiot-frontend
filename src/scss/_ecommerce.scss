@@ -105,6 +105,7 @@
 
 .e-co-product{
   background-color: lighten($gray-300, 4%);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 8px;
   a{
     text-align: center !important;
     padding-top: 30px;
@@ -377,6 +378,9 @@ hr.thick {
     color: $gray-700;
     font-weight: 500;
   }
+  button {
+
+  }
 }
 .cart-promo{
   padding: 90px;
@@ -537,7 +541,75 @@ hr.thick {
     }
   }
 }
+
+.cart{
+  color: rgb(85, 85, 85);
+  .shopping-cart {
+    button {
+      background-color: rgb(255, 0, 0, 0.7);
+      border: none;
+      padding: 0 2;
+      border-radius: 5px;
+      margin: 0;
+      color:white
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+    a{
+      text-decoration: none;
+    }
+    td {
+
+      color: rgb(85, 85, 85);
+      font-weight: 500;
+    }
+    th {
+      color: rgb(85, 85, 85);
+      font-weight: 700;
+    }
+    .table-container {
+      overflow-y: scroll;
+      height: 50vh;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+        &::-webkit-scrollbar-thumb {
+        background-color: #888; 
+        border-radius: 5px; 
+      }
+        &::-webkit-scrollbar-track {
+        background-color: #f1f1f1; 
+      }
+    }
+  }
+}
+
 .w-30 {
   width: 30%;
   height: auto;
+}
+.h-80vh{
+  height: 80vh;
+}
+.over-flow-scroll{
+  overflow-y: scroll;
+}
+
+.scrollbar-small{
+  &::-webkit-scrollbar {
+  width: 5px;
+}
+  &::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 5px; 
+}
+  &::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+}
+
+}
+.category {
+  box-shadow: rgba(5, 1, 255, 0.1) 0px 10px 15px -3px, rgba(5, 1, 255, 0.05) 0px 4px 6px -2px;
 }

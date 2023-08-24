@@ -1,50 +1,59 @@
-import React from "react";
+import React, { useContext } from "react";
 import Star from "./Star";
+import cartContext from "../../contexts/CartContext/CartContext";
+import { caculatePromotionPrice } from "../../utils/cartUtils";
 
-const ProductCart = ({ data }) => {
+const ProductCart = ({ product }) => {
+    const { addProduct } = useContext(cartContext);
     return (
-        <div className="card e-co-product w-30 m-2 p-2">
+        <div
+            className="card e-co-product w-30 m-2 "
+            onClick={() => addProduct(product)}
+        >
             <a href>
-                <img src={data.image} alt={data.name} className="img-fluid " />
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="img-fluid "
+                />
             </a>
-            {data.promotion && (
+            {product.promotion && (
                 <div className="ribbon ribbon-pink">
-                    <span>{data.promotion_rate}% OFF</span>
+                    <span>{product.promotion_rate}% OFF</span>
                 </div>
             )}
             <div className="card-body product-info rounded-2">
                 <div className="w-100 d-flex justify-content-start">
                     <a href className="product-title">
-                        {data.product_name}
+                        {product.product_name}
                     </a>
                 </div>
 
                 <div className="d-flex justify-content-between my-2">
-                    {data.promotion ? (
+                    {product.promotion ? (
                         <p className="product-price">
                             $
-                            {(
-                                data.price -
-                                (data.price * data.promotion_rate) / 100
-                            ).toFixed(2)}
+                            {caculatePromotionPrice(
+                                product.price,
+                                product.promotion_rate
+                            )}
                             <span className="ml-2">
                                 {"   "}
-                                <del>${data.price}</del>
+                                <del>${product.price}</del>
                             </span>
                         </p>
                     ) : (
-                        <p className="product-price">${data.price}</p>
+                        <p className="product-price">${product.price}</p>
                     )}
 
                     <ul className="list-inline mb-0 product-review align-self-center">
-                        <Star customer_rate={data.customer_rate} />
+                        <Star customer_rate={product.customer_rate} />
                     </ul>
                 </div>
-                <div className="py-1 px-2 rounded mb-2 bg-primary text-white waves-effect waves-light">
-                    {data.category}
+                <div className="category px-3 rounded mb-2 bg-primary text-white waves-effect waves-light">
+                    {product.category}
                 </div>
             </div>
-            {/*end card-body*/}
         </div>
     );
 };

@@ -11,8 +11,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 17,
-  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3
 }, {
   "id": "f80bbc98-ec80-4f7a-a987-8f2d803c665e",
   "kiot_id": "c0f429c1-2cfe-4a8b-91de-fce747b3aa2e",
@@ -56,7 +55,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 16,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "4cd01862-8ece-4228-b1df-f1d654da0a5f",
@@ -71,7 +70,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 19,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "9a12103d-1e2b-4bc5-9deb-d955af195160",
@@ -191,7 +190,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 29,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "f24d2b93-f26c-4fc9-83b2-5827e57f3436",
@@ -251,8 +250,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 2,
-  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3
 }, {
   "id": "4cde419d-e122-4904-a8c5-3f04d124afe0",
   "kiot_id": "bf426537-e274-4b5c-9311-7e35207c3ff6",
@@ -266,7 +264,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 18,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "669dabc8-def6-46ff-94ab-730e86e1d46c",
@@ -281,7 +279,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 16,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "ebeb6ee4-bc0a-4911-8493-fb55575fdb57",
@@ -296,7 +294,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 21,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "da802038-42f4-4730-95f2-cb073c065b65",
@@ -311,7 +309,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 16,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "e0e707a0-333f-47f0-b585-ee65b088f4a3",
@@ -341,7 +339,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 17,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "0fcf2a85-9737-4a4c-a26b-b702bf49d90b",
@@ -386,8 +384,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 3,
-  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2
 }, {
   "id": "2079c2cc-301f-45ae-9628-5328e087cae7",
   "kiot_id": "c4a914ac-c016-4e21-b340-dbbf4e71b378",
@@ -401,7 +398,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 10,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "f2831969-dc3e-4ff9-b80e-b7d1c06f1805",
@@ -461,7 +458,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 15,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "34955761-8870-49a4-b9ba-da44e56e4c6a",
@@ -491,7 +488,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 30,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "a6922dc9-d366-4788-86bd-58ce0a9edeab",
@@ -506,7 +503,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "OC",
   "promotion": false,
-  "promotion_rate": 27,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "c6888b72-0179-4d2c-b373-eb09b7f6215f",
@@ -521,7 +518,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 10,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "fd9b3edd-afa5-4d71-b3ba-a9fd234f3307",
@@ -536,7 +533,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 13,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "6edacf2c-47d1-468a-a3f2-24de2acd589a",
@@ -551,7 +548,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "SA",
   "promotion": false,
-  "promotion_rate": 24,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "d6d76190-4e35-406b-9830-0f41d10af6eb",
@@ -581,8 +578,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 5,
-  "customer_rate": 5
+  "promotion_rate": 0,  "customer_rate": 5
 }, {
   "id": "e883cabb-9991-43ec-a02b-69118e0bae43",
   "kiot_id": "d17e9dbc-d100-4004-a2e6-0fb72e31f7b9",
@@ -596,7 +592,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 28,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "b72831d3-58c3-4eef-a83b-05a6b8d619fd",
@@ -656,8 +652,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 4,
-  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3
 }, {
   "id": "7292694c-5469-4140-98e1-ccc5d7a789ec",
   "kiot_id": "7fe84107-46ba-4e9d-bfc1-bbf76c002352",
@@ -686,8 +681,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 4,
-  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2
 }, {
   "id": "d424bbea-556d-4ea5-beda-4da7dd849bc5",
   "kiot_id": "ab95c21c-4230-4a0e-9f07-c585e25c6233",
@@ -701,7 +695,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 23,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "526b1684-f09e-492f-bd48-dd3aab23595d",
@@ -731,7 +725,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 26,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "4b456f56-4577-4642-b7fb-4b6f7f3e1761",
@@ -746,7 +740,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 27,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "1f46f25a-bd1e-4584-8329-044b8935d1a0",
@@ -806,7 +800,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 15,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "febca4d3-efa8-4750-a166-f1de8478f563",
@@ -821,7 +815,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "OC",
   "promotion": false,
-  "promotion_rate": 14,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "aa000d9f-47f3-40fb-94c6-76fc31b5a356",
@@ -836,7 +830,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "OC",
   "promotion": false,
-  "promotion_rate": 11,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "1c718a9f-ec9f-4b5f-b83e-bd8966265dbe",
@@ -851,7 +845,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 10,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "bc68f8f3-cb89-4fb5-ac63-4eda160be7e3",
@@ -881,7 +875,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 21,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "c31a802a-9b98-4165-9efa-c2423bff9d38",
@@ -896,7 +890,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 11,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "09076363-1e99-48d7-9f85-8da73712bc46",
@@ -926,7 +920,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 19,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "4dff57cf-d8b2-45fc-8921-ee0828d8003d",
@@ -941,7 +935,7 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 30,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "a1e3076c-a6e4-4995-bd91-aa167503b084",
@@ -986,7 +980,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 30,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "bad404e1-b9ab-4a3a-95bc-913aa651418d",
@@ -1001,8 +995,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 4,
-  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2
 }, {
   "id": "914b7f22-cf8e-4153-b7b3-1a0112643920",
   "kiot_id": "66638746-6353-4dfb-a0d2-12d9136ef3c6",
@@ -1031,7 +1024,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 25,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "977aeb78-46fe-4679-a6d2-51770891c317",
@@ -1061,7 +1054,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 11,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "bdaf4269-380e-48e7-9ae7-aceb2bca16e5",
@@ -1106,7 +1099,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 10,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "a4716336-603b-4129-9719-c3708f00daf3",
@@ -1121,7 +1114,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 13,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "da86fb1f-1b41-4487-94cf-26951d60e731",
@@ -1136,7 +1129,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "OC",
   "promotion": false,
-  "promotion_rate": 13,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "af082f16-f7f1-44ac-97d8-64ceef0e8888",
@@ -1151,8 +1144,7 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 6,
-  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2
 }, {
   "id": "52dd919f-b5d7-47b4-a3d6-f47be9c2320a",
   "kiot_id": "4e3927e7-99f1-4a70-865d-9b920cf79633",
@@ -1196,7 +1188,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 24,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "a4d3a8e8-ce36-41bc-bfa0-79932c55af54",
@@ -1271,7 +1263,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 30,
+  "promotion_rate": 0,
   "customer_rate": 4
 }, {
   "id": "bcf83bc9-00ac-4af0-8fab-e20485f8c2b8",
@@ -1301,7 +1293,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "SA",
   "promotion": false,
-  "promotion_rate": 23,
+  "promotion_rate": 0,
   "customer_rate": 5
 }, {
   "id": "7435143f-730e-42c0-82d5-6fc1740d5312",
@@ -1346,8 +1338,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 5,
-  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3
 }, {
   "id": "75b4914c-1d92-4267-9e39-f15f5464ff27",
   "kiot_id": "ddb5c509-6f53-4bd5-8c8c-f5b099c50109",
@@ -1361,8 +1352,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 3,
-  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3
 }, {
   "id": "900f245e-e754-468f-bd48-d12c987c6322",
   "kiot_id": "af18314f-d6d3-460e-808b-22e5b8fb9e31",
@@ -1376,7 +1366,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "SA",
   "promotion": false,
-  "promotion_rate": 21,
+  "promotion_rate": 0,
   "customer_rate": 2
 }, {
   "id": "b9ae7ec4-3edc-4d87-b1c2-fdc6986c2ad5",
@@ -1391,7 +1381,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "OC",
   "promotion": false,
-  "promotion_rate": 13,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "111932a6-0fd5-49c0-ade4-64950a04f70f",
@@ -1421,8 +1411,7 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 2,
-  "customer_rate": 5
+  "promotion_rate": 0,  "customer_rate": 5
 }, {
   "id": "d0c1dd3d-438a-420f-b62a-16dae5a340fe",
   "kiot_id": "5c3b764d-9e15-46dc-b4e6-b515dd5286f2",
@@ -1451,7 +1440,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 21,
+  "promotion_rate": 0,
   "customer_rate": 3
 }, {
   "id": "69629f81-4095-4d64-a53b-02d5912012f5",
@@ -1481,8 +1470,7 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "SA",
   "promotion": false,
-  "promotion_rate": 3,
-  "customer_rate": 4
+  "promotion_rate": 0,  "customer_rate": 4
 }, {
   "id": "afa1b496-0aca-4709-9fbe-a5737ada88f7",
   "kiot_id": "e58f3f5f-a64e-491b-8071-c2ab24f3b566",
