@@ -160,8 +160,8 @@ const NavBar = () => {
               <Dropdown.Divider />
               <Dropdown.Item>
                 <div>
-                  <FaPowerOff className="text-muted ms-2" />
-                  <button onClick={onHandleLogout} className="text-muted ms-2">
+                  <FaPowerOff className="text-muted ms-2 text-danger" />
+                  <button onClick={onHandleLogout} className="text-muted ms-2 btn btn-danger">
                     {" "}
                     Logout{" "}
                   </button>
