@@ -133,7 +133,8 @@ const Login = () => {
                           href="auth-recover-pw.html"
                           className="text-muted font-13"
                         >
-                          <i className="dripicons-lock" /> Forgot password?
+                          <FaLock className="dripicons-lock me-1 mb-1" />
+                          Forgot password?
                         </a>
                       </div>
                       {/*end col*/}
