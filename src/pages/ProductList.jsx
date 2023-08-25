@@ -1,24 +1,11 @@
 import React, { useState } from "react";
 import TableList from "../components/productListComponents/TableList";
-import productData from "../mocks/products.data.json";
-import ReactPaginate from "react-paginate";
+import productMockData from "../mocks/products.data.json";
+import Pagination from "../components/Pagination";
+import Search from "../components/searchComponents/Search";
 
 const ProductList = () => {
-    //Pagination:
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const itemsPerPage = 15;
-
-    const pageCount = Math.ceil(productData.length / itemsPerPage);
-
-    const currentProductData = productData.slice(
-        currentPage * itemsPerPage - itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
-    const handlePageClick = (e) => {
-        setCurrentPage(+e.selected + 1);
-    };
+    const [products, setProducts] = useState([]);
 
     return (
         <div className="page-content">
@@ -34,19 +21,12 @@ const ProductList = () => {
                                             <h4 className="mt-0 header-title">
                                                 Product List
                                             </h4>
-                                            <TableList
-                                                data={currentProductData}
-                                            />
+                                            <Search />
+                                            <TableList data={products} />
                                         </>
-                                        <ReactPaginate
-                                            breakLabel="..."
-                                            nextLabel="next >"
-                                            onPageChange={handlePageClick}
-                                            pageRangeDisplayed={5}
-                                            pageCount={pageCount}
-                                            previousLabel="< previous"
-                                            renderOnZeroPageCount={null}
-                                            className="pagination"
+                                        <Pagination
+                                            data={productMockData}
+                                            setProducts={setProducts}
                                         />
                                     </div>
                                 </div>

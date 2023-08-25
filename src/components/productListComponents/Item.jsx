@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 const Item = (props) => {
     const item = props.item;
     return (
@@ -40,9 +41,9 @@ const Item = (props) => {
                 )}
             </td>
             <td>
-                <a href>
+                <Link to={`/productList/${item.id}`}>
                     <FaRegPenToSquare className="text-info ms-2" />
-                </a>
+                </Link>
                 <a href>
                     <FaRegTrashCan className="text-danger ms-2" />
                 </a>

@@ -1,37 +1,23 @@
 import React, { useState } from "react";
 import ProductCart from "../components/productComponents/ProductCart";
 import CartProvider from "../contexts/CartContext/CartProvider";
-import productData from "../mocks/products.data.json";
+import productMockData from "../mocks/products.data.json";
 import Cart from "../components/productComponents/Cart";
-import ReactPaginate from "react-paginate";
+import Pagination from "../components/Pagination";
+import Search from "../components/searchComponents/Search";
 
 const Products = () => {
-    //Pagination:
-    const [currentPage, setCurrentPage] = useState(1);
+    const [products, setProducts] = useState([]);
 
-    const itemsPerPage = 15;
-
-    const pageCount = Math.ceil(productData.length / itemsPerPage);
-
-    const currentProductData = productData.slice(
-        currentPage * itemsPerPage - itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
-    const handlePageClick = (e) => {
-        setCurrentPage(+e.selected + 1);
-    };
     return (
         <CartProvider>
             <div className="page-content">
                 <div className="container-fluid">
+                    <Search />
                     <div className="row">
-                        <div className=" col-lg-8 d-flex flex-column align-items-center pt-2 ">
-                            <div className="w-100 d-flex justify-content-center align-items-center border-bottom border-secondary">
-                                <h4>Products</h4>
-                            </div>
+                        <div className="position-relative col-lg-8 d-flex flex-column align-items-center px-2 h-90vh ">
                             <div className="d-flex justify-content-evenly flex-wrap h-80vh over-flow-scroll scrollbar-small">
-                                {currentProductData.map((item) => {
+                                {products.map((item) => {
                                     return (
                                         <ProductCart
                                             product={item}
@@ -39,23 +25,14 @@ const Products = () => {
                                         />
                                     );
                                 })}
-                                <ReactPaginate
-                                    breakLabel="..."
-                                    nextLabel="next >"
-                                    onPageChange={handlePageClick}
-                                    pageRangeDisplayed={5}
-                                    pageCount={pageCount}
-                                    previousLabel="< previous"
-                                    renderOnZeroPageCount={null}
-                                    className="pagination"
+                                <Pagination
+                                    data={productMockData}
+                                    setProducts={setProducts}
                                 />
                             </div>
                         </div>
 
-                        <div className="col-lg-4 d-flex flex-column align-items-center pt-2 ">
-                            <div className="w-100 d-flex justify-content-center align-items-center border-bottom border-secondary">
-                                <h4>Selected Products</h4>
-                            </div>
+                        <div className="col-lg-4 d-flex flex-column align-items-center pt-2 h-90vh">
                             <Cart />
                         </div>
                     </div>

@@ -619,21 +619,101 @@ hr.thick {
 }
 
 .pagination {
-  display: flex;
   position: absolute;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  li {
-    padding: 5px 10px;
-    border-top: 1px solid rgba($gray-500, 0.25);
-    border-bottom: 1px solid rgba($gray-500, 0.25);
-  }
-  .selected{
-    background-color: $primary;
-    border-top: 1px solid rgba($gray-500, 0.25);
-    border-bottom: 1px solid rgba($gray-500, 0.25);
-    color: white;
 
+}
+
+.search-form{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 10px 0px;
+  background-color: rgb(237, 240, 245);
+  font-size: 16px;
+  color: gray;
+  border-radius: 10px;
+  .search-input{
+    display: flex;
+    align-items: center ;
+    padding: 2px 4px;
+    background-color: white;
+    border-radius: 10px;
+  }
+  label{
+    font-size: 16px;
+    line-height: 0;
+  }
+  input {
+    border: none;
+    outline: none;
+    background-color: white;
+    padding: 5px;
+    color: gray;
+    &:focus{
+      border: none;
+      outline: none;
+    }
+  }
+  .select-input{
+    flex: 1 1 auto;
+    margin: 0px 20px;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    .selection-container{
+      background-color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: white;
+      color: gray;
+      display: flex;
+      align-items: center;
+      padding: 0px 10px;
+      height: fit-content;
+      label {
+        font-size: 20px;
+        background-color: white;
+        border-radius: 50%;
+        margin: 5px;
+      }
+
+      select{
+        width: fit-content;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: white;
+        color: gray;
+        &:focus{
+          border: none;
+          outline: none;
+        }
+      }
+    }
+    .date-selection{
+      display: flex;
+      gap: 20px;
+      label {
+        font-size: 16px;
+        border-left: 1px solid gray;
+        height: fit-content;
+      }
+    }
+  }
+  
+  .search-btn{
+    color:white;
+    background-color: rgb(37, 106, 253);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
   }
 }
