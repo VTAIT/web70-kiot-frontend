@@ -41,7 +41,7 @@ const Register = () => {
           address: values.address,
           active:false
         });
-        if (response.status === 201) {
+        if (response.status === 200) {
           navigate("/login");
         }
       } catch (error) {
@@ -241,7 +241,7 @@ const Register = () => {
                     <div className="form-group mb-0 row">
                       <div className="col-12 mt-2">
                         <button
-                          className="btn btn-primary btn-round btn-block waves-effect waves-light"
+                          className="btn btn-gradient-primary btn-round btn-block waves-effect waves-light"
                           type="submit"
                         >
                           {loading ? "Loading" : "Register"}

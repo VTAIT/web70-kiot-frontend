@@ -1,32 +1,23 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
+import AppContext from "../contexts/AppContext/AppContext";
 
 const LeftSideBar = () => {
   const { auth } = useContext(AuthContext);
+  const { isAuthenticated, user } = auth;
   const [select, setSelect] = useState(1);
-
+  const { leftSideBarOpen } = useContext(AppContext);
   const selectItem = (select) => {
     // console.log("LeftSideBar", select);
     setSelect(select);
   };
 
   return (
-    auth.isAuthenticated && (
+    isAuthenticated &&
+    leftSideBarOpen && (
       <div className="left-sidenav mm-active">
         <ul className="metismenu left-sidenav-menu mm-show">
-          {/* <li className={select === 0 ? "mm-active" : ""}>
-        <NavLink
-            className="nav-link "
-            onClick={(e) => {
-              // e.preventDefault();
-              selectItem(0);
-            }}
-          >
-            <i className="ti-control-record" />
-            Products
-          </NavLink>
-        </li> */}
           <li className={select === 1 ? "mm-active" : ""}>
             <NavLink
               to="/"
@@ -66,19 +57,36 @@ const LeftSideBar = () => {
               Customers
             </NavLink>
           </li>
-          <li className={select === 4 ? "mm-active" : ""}>
-            <NavLink
-              to="/accounts"
-              className="nav-link"
-              onClick={(e) => {
-                // e.preventDefault();
-                selectItem(4);
-              }}
-            >
-              <i className="ti-control-record" />
-              Accounts
-            </NavLink>
-          </li>
+          {user.username === "admin" && (
+            <>
+              <li className={select === 4 ? "mm-active" : ""}>
+                <NavLink
+                  to="/pending-accounts"
+                  className="nav-link"
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    selectItem(4);
+                  }}
+                >
+                  <i className="ti-control-record" />
+                  Pending Accounts
+                </NavLink>
+              </li>
+              <li className={select === 5 ? "mm-active" : ""}>
+                <NavLink
+                  to="/accounts"
+                  className="nav-link"
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    selectItem(5);
+                  }}
+                >
+                  <i className="ti-control-record" />
+                  Accounts
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     )

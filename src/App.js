@@ -3,6 +3,7 @@ import AppState from "./contexts/AppContext/AppState";
 import routes from "./config.js";
 import AuthState from "./contexts/AuthContext/AuthState";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import NotAuthRoute from "./NotAuthRoute";
 import Header from "./components/header/Header";
 import LeftSideBar from "./components/LeftSideBar";
@@ -14,39 +15,32 @@ function App() {
         <div className="page-wrapper">
           <Header />
           <LeftSideBar />
-
-          {/* <Routes>
-            <Route path="/" element={<PrivateRoute component={Home} />}></Route>
-            <Route
-              path="/productList"
-              element={<PrivateRoute component={ProductList} />}
-            ></Route>
-            <Route
-              path="/customers"
-              element={<PrivateRoute component={Customers} />}
-            ></Route>
-            <Route
-              path="/accounts"
-              element={<PrivateRoute component={Accounts} />}
-            ></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-          </Routes> */}
           <Routes>
             {routes.map((route, index) => {
-              const { path, component, isPrivate, notAuth } = route;
+              const { path, component, isPrivate, notAuth ,isAdmin} = route;
               return (
                 <Route
                   key={index}
                   path={path}
                   element={
                     isPrivate ? (
-                      <PrivateRoute component={component} />
+                      isAdmin ? (
+                        <AdminRoute component={component} />
+                      ) : (
+                        <PrivateRoute component={component} />
+                      )
                     ) : notAuth ? (
                       <NotAuthRoute component={component} />
                     ) : (
                       component
                     )
+                    // isPrivate ? (
+                    //   <PrivateRoute component={component} />
+                    // ) : notAuth ? (
+                    //   <NotAuthRoute component={component} />
+                    // ) : (
+                    //   component
+                    // )
                   }
                 />
               );

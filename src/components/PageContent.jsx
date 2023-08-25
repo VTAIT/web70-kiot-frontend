@@ -66,18 +66,16 @@ const PageContent = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-12">
-            <div className="page-title-box">
+            {/* <div className="page-title-box">
               <h4 className="page-title">Product List</h4>
-            </div>
+            </div> */}
             {/* product list */}
             <div className="row">
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="mt-0 header-title">Product Stock</h4>
-                    <p className="text-muted mb-4 font-13">
-                      Available all products.
-                    </p>
+                    <h4 className="mt-0 header-title">Product List</h4>
+                   
                     <table
                       id="datatable"
                       className="table table-bordered dt-responsive nowrap"
