@@ -102,7 +102,7 @@ const TablePrice = () => {
                                             changeQuantity(el.product, 0)
                                         }
                                     >
-                                        x
+                                        X
                                     </button>
                                 </td>
                             </tr>

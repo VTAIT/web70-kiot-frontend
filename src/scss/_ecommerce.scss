@@ -207,7 +207,7 @@
     color: $white;    
     &:before {
       position: absolute;
-      top: 35px;
+      top: 32px;
       left: 0;
       content: "";
       border: 3px solid transparent;
@@ -551,7 +551,8 @@ hr.thick {
       padding: 0 2;
       border-radius: 5px;
       margin: 0;
-      color:white
+      color:white;
+      line-height: 1.4;
     }
     img {
       width: 50px;
@@ -593,6 +594,9 @@ hr.thick {
 .h-80vh{
   height: 80vh;
 }
+.h-90vh{
+  height: 90vh;
+}
 .over-flow-scroll{
   overflow-y: scroll;
 }
@@ -612,4 +616,24 @@ hr.thick {
 }
 .category {
   box-shadow: rgba(5, 1, 255, 0.1) 0px 10px 15px -3px, rgba(5, 1, 255, 0.05) 0px 4px 6px -2px;
+}
+
+.pagination {
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  li {
+    padding: 5px 10px;
+    border-top: 1px solid rgba($gray-500, 0.25);
+    border-bottom: 1px solid rgba($gray-500, 0.25);
+  }
+  .selected{
+    background-color: $primary;
+    border-top: 1px solid rgba($gray-500, 0.25);
+    border-bottom: 1px solid rgba($gray-500, 0.25);
+    color: white;
+
+  }
 }
