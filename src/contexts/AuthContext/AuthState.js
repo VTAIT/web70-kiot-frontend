@@ -18,7 +18,7 @@ const AuthState = ({ children }) => {
 
       setAuth({
         isAuthenticated: true,
-        user: data.userInfo,
+        user: data.data,
       });
     } catch (error) {
       console.log(error);

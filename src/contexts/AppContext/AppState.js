@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import AppContext from "./AppContext";
 
 const AppState = ({ children }) => {
-  const [select, setSelect] = useState(0);
+  const [leftSideBarOpen, setLeftSideBarOpen] = useState(true);
 
-  const selectItem = (select) => {
-    console.log("LeftSideBar", select);
-    setSelect(select);
+  const handleLeftSideBarStatus = (select) => {
+    setLeftSideBarOpen(select);
   };
 
   return (
     <AppContext.Provider
       value={{
-        select,
-        selectItem,
+        leftSideBarOpen,
+        handleLeftSideBarStatus,
       }}
     >
       {children}

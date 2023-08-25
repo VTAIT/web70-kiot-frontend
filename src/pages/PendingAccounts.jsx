@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import Account from "../components/Account";
 import accountAPI from "../apis/accountAPI";
 
-const Accounts = () => {
-  const [users, setUsers] = useState([]);
+const PendingAccounts = () => {
+  const [registeredUsers, setRegisteredUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchUsers();
+    fetchRegisterUser();
   }, []);
 
-  const fetchUsers = async () => {
+  const fetchRegisterUser = async () => {
     try {
       setLoading(true);
-      const response = await accountAPI.getAll();
-      setUsers(response.data.data);
+      const response = await accountAPI.getAllAccept();
+      console.log(response);
+      setRegisteredUsers(response.data.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -32,7 +33,9 @@ const Accounts = () => {
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="mt-0 header-title">Account List</h4>
+                    <h4 className="mt-0 header-title">
+                      Registered Account List
+                    </h4>
 
                     <table
                       id="datatable"
@@ -51,17 +54,18 @@ const Accounts = () => {
                           <th>Email</th>
                           <th>Address</th>
                           <th>Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {users &&
-                          users.length > 0 &&
-                          users.map((account, index) => {
+                        {registeredUsers &&
+                          registeredUsers.length > 0 &&
+                          registeredUsers.map((account, index) => {
                             return (
                               <Account
                                 account={account}
                                 key={index}
-                                updateList={fetchUsers}
+                                updateList={fetchRegisterUser}
                               />
                             );
                           })}
@@ -78,4 +82,4 @@ const Accounts = () => {
   );
 };
 
-export default Accounts;
+export default PendingAccounts;
