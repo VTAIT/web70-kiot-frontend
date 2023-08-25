@@ -9,7 +9,6 @@ const LeftSideBar = () => {
   const [select, setSelect] = useState(1);
   const { leftSideBarOpen } = useContext(AppContext);
   const selectItem = (select) => {
-    // console.log("LeftSideBar", select);
     setSelect(select);
   };
 

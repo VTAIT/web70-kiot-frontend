@@ -26,7 +26,8 @@ const Login = () => {
           username: values.username,
           password: values.userpassword,
         });
-        localStorage.setItem("accessToken", response.data.accessToken);
+        console.log(response.data)
+        localStorage.setItem("accessToken", response.data.data);
 
         await handleLogin();
         navigate("/");
