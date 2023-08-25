@@ -28,50 +28,51 @@ const PendingAccounts = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-12">
-            {/* account list */}
             <div className="row">
               <div className="col-12">
                 <div className="card">
-                  <div className="card-body">
-                    <h4 className="mt-0 header-title">
-                      Registered Account List
-                    </h4>
+                  {loading ? <h2>Loading ... </h2> :
+                    <div className="card-body">
+                      <h4 className="mt-0 header-title">
+                        Registered Account List
+                      </h4>
 
-                    <table
-                      id="datatable"
-                      className="table table-bordered dt-responsive nowrap"
-                      style={{
-                        borderCollapse: "collapse",
-                        borderSpacing: 0,
-                        width: "100%",
-                      }}
-                    >
-                      <thead>
-                        <tr>
-                          <th>User Name</th>
-                          <th>Full Name</th>
-                          <th>Phone</th>
-                          <th>Email</th>
-                          <th>Address</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {registeredUsers &&
-                          registeredUsers.length > 0 &&
-                          registeredUsers.map((account, index) => {
-                            return (
-                              <Account
-                                account={account}
-                                key={index}
-                                updateList={fetchRegisterUser}
-                              />
-                            );
-                          })}
-                      </tbody>
-                    </table>
-                  </div>
+                      <table
+                        id="datatable"
+                        className="table table-bordered dt-responsive nowrap"
+                        style={{
+                          borderCollapse: "collapse",
+                          borderSpacing: 0,
+                          width: "100%",
+                        }}
+                      >
+                        <thead>
+                          <tr style={{textAlign:"center"}}>
+                            <th>User Name</th>
+                            <th>Full Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {registeredUsers &&
+                            registeredUsers.length > 0 &&
+                            registeredUsers.map((account, index) => {
+                              return (
+                                <Account
+                                  account={account}
+                                  key={index}
+                                  updateList={fetchRegisterUser}
+                                />
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
