@@ -1,4 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import us_flag from "../../images/flags/us_flag.png";
 import vn_flag from "../../images/flags/vn_flag.png";
 import { Dropdown, Badge } from "react-bootstrap";
@@ -14,6 +20,7 @@ import {
 } from "react-icons/fa6";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../../contexts/AppContext/AppContext";
 
 const logo =
   "https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
@@ -33,7 +40,11 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 const NavBar = () => {
   const [titleDropdown, setTitleDropdown] = useState("English");
   const [notification, setNotification] = useState([1, 2, 3]);
-  const { handleLogout,auth:{user} } = useContext(AuthContext);
+  const {
+    handleLogout,
+    auth: { user },
+  } = useContext(AuthContext);
+  const { leftSideBarOpen, handleLeftSideBarStatus } = useContext(AppContext);
   const selectItem = (select) => {
     console.log(select);
     if (select === "1") setTitleDropdown("English");
@@ -44,6 +55,10 @@ const NavBar = () => {
     localStorage.removeItem("accessToken");
     handleLogout();
     navigate("/login");
+  };
+
+  const handleNavBarOpen = () => {
+    handleLeftSideBarStatus(!leftSideBarOpen);
   };
   return (
     <nav className="navbar-custom">
@@ -133,7 +148,9 @@ const NavBar = () => {
                   alt="profile-user"
                   className="rounded-circle mx-2"
                 />
-                <span className="ml-1 nav-user-name hidden-sm">{user.username}</span>
+                <span className="ml-1 nav-user-name hidden-sm">
+                  {user.username}
+                </span>
                 <FaChevronDown size={12} style={{ marginLeft: 5 }} />
               </a>
             </Dropdown.Toggle>
@@ -161,7 +178,10 @@ const NavBar = () => {
               <Dropdown.Item>
                 <div>
                   <FaPowerOff className="text-muted ms-2 text-danger" />
-                  <button onClick={onHandleLogout} className="text-muted ms-2 btn btn-danger">
+                  <button
+                    onClick={onHandleLogout}
+                    className="text-muted ms-2 btn btn-danger"
+                  >
                     {" "}
                     Logout{" "}
                   </button>
@@ -173,7 +193,10 @@ const NavBar = () => {
       </ul>
       <ul className="list-unstyled topbar-nav mb-0">
         <li>
-          <button className="nav-link button-menu-mobile waves-effect waves-light">
+          <button
+            onClick={handleNavBarOpen}
+            className="nav-link button-menu-mobile waves-effect waves-light"
+          >
             <FaBars className="nav-icon" />
           </button>
         </li>

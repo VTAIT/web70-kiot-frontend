@@ -1,19 +1,21 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
+import AppContext from "../contexts/AppContext/AppContext";
 
 const LeftSideBar = () => {
   const { auth } = useContext(AuthContext);
   const { isAuthenticated, user } = auth;
   const [select, setSelect] = useState(1);
-
+  const { leftSideBarOpen } = useContext(AppContext);
   const selectItem = (select) => {
     // console.log("LeftSideBar", select);
     setSelect(select);
   };
 
   return (
-    isAuthenticated && (
+    isAuthenticated &&
+    leftSideBarOpen && (
       <div className="left-sidenav mm-active">
         <ul className="metismenu left-sidenav-menu mm-show">
           <li className={select === 1 ? "mm-active" : ""}>
