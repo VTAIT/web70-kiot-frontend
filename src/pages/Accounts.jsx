@@ -23,8 +23,8 @@ const Accounts = () => {
   };
 
   return (
-    <div className="page-content">
-      <div className="container-fluid">
+    // <div className="page-content">
+      <div className="container-fluid mt-4">
         <div className="row">
           <div className="col-sm-12">
             {/* account list */}
@@ -74,7 +74,7 @@ const Accounts = () => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
