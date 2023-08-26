@@ -29,7 +29,7 @@ const ProductCart = ({ product }) => {
                     </a>
                 </div>
 
-                <div className="d-flex justify-content-between my-2">
+                <div className="d-flex flex-column justify-content-between my-2">
                     {product.promotion ? (
                         <p className="product-price">
                             $

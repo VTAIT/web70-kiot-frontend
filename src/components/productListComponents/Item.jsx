@@ -41,12 +41,12 @@ const Item = (props) => {
                 )}
             </td>
             <td>
-                <Link to={`/productList/${item.id}`}>
+                <span>
                     <FaRegPenToSquare className="text-info ms-2" />
-                </Link>
-                <a href>
+                </span>
+                <span>
                     <FaRegTrashCan className="text-danger ms-2" />
-                </a>
+                </span>
             </td>
         </tr>
     );

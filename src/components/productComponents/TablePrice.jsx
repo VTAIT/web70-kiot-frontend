@@ -22,7 +22,7 @@ const TablePrice = () => {
     }, [cart]);
 
     return (
-        <table className="table w-100 mb-0 h-50">
+        <table className="table w-100 mb-0">
             <thead>
                 <tr>
                     <th>Product</th>

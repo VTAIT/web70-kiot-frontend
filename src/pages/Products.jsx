@@ -15,8 +15,8 @@ const Products = () => {
                 <div className="container-fluid">
                     <Search />
                     <div className="row">
-                        <div className="position-relative col-lg-8 d-flex flex-column align-items-center px-2 h-90vh ">
-                            <div className="d-flex justify-content-evenly flex-wrap h-80vh over-flow-scroll scrollbar-small">
+                        <div className="position-relative col-lg-8 d-flex flex-column align-items-center px-2 h-70vh ">
+                            <div className="d-flex flex-wrap h-70vh over-flow-scroll scrollbar-small">
                                 {products.map((item) => {
                                     return (
                                         <ProductCart
@@ -28,11 +28,12 @@ const Products = () => {
                                 <Pagination
                                     data={productMockData}
                                     setProducts={setProducts}
+                                    PerPage={16}
                                 />
                             </div>
                         </div>
 
-                        <div className="col-lg-4 d-flex flex-column align-items-center pt-2 h-90vh">
+                        <div className="col-lg-4 d-flex flex-column align-items-center pt-2  h-70vh">
                             <Cart />
                         </div>
                     </div>

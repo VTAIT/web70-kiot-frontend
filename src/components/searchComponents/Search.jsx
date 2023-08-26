@@ -16,6 +16,7 @@ const Search = (props) => {
                     placeholder="Product name, id,..."
                 />
             </div>
+
             <div className="select-input">
                 <div className="selection-container">
                     <label htmlFor="price">
@@ -42,18 +43,21 @@ const Search = (props) => {
                         <option value="sa">SA</option>
                     </select>
                 </div>
-                <div className="selection-container date-selection">
-                    <div>Create date:</div>
-                    <div class="border-start">
-                        <label htmlFor="fromdate">From:</label>
-                        <input type="date" id="fromdate" name="fromdate" />
-                    </div>
-                    <div class="border-start">
-                        <label htmlFor="todate">To:</label>
-                        <input type="date" id="todate" name="todate" />
-                    </div>
+            </div>
+            <div className="selection-container date-selection">
+                {/* <p>
+                    <span>Date:</span>
+                </p> */}
+                <div className="date-item">
+                    <label htmlFor="fromdate">From:</label>
+                    <input type="date" id="fromdate" name="fromdate" />
+                </div>
+                <div className="date-item">
+                    <label htmlFor="todate">To:</label>
+                    <input type="date" id="todate" name="todate" />
                 </div>
             </div>
+
             <button className="search-btn">Search</button>
         </form>
     );

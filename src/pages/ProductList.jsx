@@ -15,21 +15,17 @@ const ProductList = () => {
                         {/* product list */}
                         <div className="row">
                             <div className="col-12">
-                                <div className="card">
-                                    <div className="card-body position-relative h-90vh ">
-                                        <>
-                                            <h4 className="mt-0 header-title">
-                                                Product List
-                                            </h4>
-                                            <Search />
-                                            <TableList data={products} />
-                                        </>
-                                        <Pagination
-                                            data={productMockData}
-                                            setProducts={setProducts}
-                                        />
-                                    </div>
+                                <div className="card-body position-relative h-90vh ">
+                                    <>
+                                        <Search />
+                                        <TableList data={products} />
+                                    </>
                                 </div>
+                                <Pagination
+                                    data={productMockData}
+                                    setProducts={setProducts}
+                                    PerPage={12}
+                                />
                             </div>
                         </div>
                         {/* end product list */}
