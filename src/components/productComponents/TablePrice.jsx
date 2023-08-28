@@ -47,12 +47,9 @@ const TablePrice = () => {
                                             alt={el.product.product_name}
                                         />
                                         <p className="d-inline-block align-middle mb-0">
-                                            <a
-                                                href
-                                                className="d-inline-block align-middle mb-0 product-name"
-                                            >
+                                            <div className="d-inline-block align-middle mb-0 product-name">
                                                 {el.product.product_name}
-                                            </a>
+                                            </div>
                                             <br />
                                         </p>
                                     </div>

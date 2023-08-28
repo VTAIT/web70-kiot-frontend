@@ -18,8 +18,8 @@ const TableList = ({ data }) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((item, index) => (
-                    <Item item={item} key={index} />
+                {data.map((item) => (
+                    <Item item={item} key={item._id} />
                 ))}
             </tbody>
         </table>

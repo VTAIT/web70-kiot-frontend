@@ -2,6 +2,8 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
 
+const categories = ["All category", "EU", "NA", "OC", "AF", "AS", "SA"];
+
 const Search = (props) => {
     return (
         <form className="search-form">
@@ -34,13 +36,11 @@ const Search = (props) => {
                         <MdCategory />
                     </label>
                     <select id="category" name="category">
-                        <option value="all">All category</option>
-                        <option value="eu">EU</option>
-                        <option value="na">NA</option>
-                        <option value="oc">OC</option>
-                        <option value="af">AF</option>
-                        <option value="as">AS</option>
-                        <option value="sa">SA</option>
+                        {categories.map((item) => (
+                            <option key={item} value={item}>
+                                {item ? item : "All category"}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>

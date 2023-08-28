@@ -10,13 +10,12 @@ const ProductCart = ({ product }) => {
             className="card e-co-product w-30 m-2 "
             onClick={() => addProduct(product)}
         >
-            <a href>
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="img-fluid "
-                />
-            </a>
+            <img
+                src={product.image}
+                alt={product.name}
+                className="img-fluid "
+            />
+
             {product.promotion && (
                 <div className="ribbon ribbon-pink">
                     <span>{product.promotion_rate}% OFF</span>
@@ -24,9 +23,7 @@ const ProductCart = ({ product }) => {
             )}
             <div className="card-body product-info rounded-2">
                 <div className="w-100 d-flex justify-content-start">
-                    <a href className="product-title">
-                        {product.product_name}
-                    </a>
+                    <div className="product-title">{product.product_name}</div>
                 </div>
 
                 <div className="d-flex flex-column justify-content-between my-2">
@@ -46,7 +43,7 @@ const ProductCart = ({ product }) => {
                         <p className="product-price">${product.price}</p>
                     )}
 
-                    <ul className="list-inline mb-0 product-review align-self-center">
+                    <ul className="list-inline mb-0 product-review">
                         <Star customer_rate={product.customer_rate} />
                     </ul>
                 </div>

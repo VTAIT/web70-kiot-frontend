@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import productData from "../mocks/products.data.json";
 
 const Pagination = ({ data, setProducts, PerPage }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = PerPage;
-    const pageCount = Math.ceil(productData.length / itemsPerPage);
+    const pageCount = Math.ceil(data.length / itemsPerPage);
 
     useEffect(() => {
         const handlePagination = () => {
