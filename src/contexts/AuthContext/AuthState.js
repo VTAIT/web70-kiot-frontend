@@ -15,10 +15,10 @@ const AuthState = ({ children }) => {
     try {
       const response = await authAPI.authInfo();
       const data = response.data;
-
+console.log("response.data:",response.data)
       setAuth({
         isAuthenticated: true,
-        user: data.data,
+        user: data.data.userInfo,
       });
     } catch (error) {
       console.log(error);

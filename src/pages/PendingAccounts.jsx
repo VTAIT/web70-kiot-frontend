@@ -15,7 +15,7 @@ const PendingAccounts = () => {
       setLoading(true);
       const response = await accountAPI.getAllAccept();
       console.log(response);
-      setRegisteredUsers(response.data.data);
+      setRegisteredUsers(response.data.data.accountList);
     } catch (error) {
       console.log(error);
     } finally {
@@ -61,6 +61,7 @@ const PendingAccounts = () => {
                           {registeredUsers &&
                             registeredUsers.length > 0 &&
                             registeredUsers.map((account, index) => {
+                             
                               return (
                                 <Account
                                   account={account}
