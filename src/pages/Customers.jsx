@@ -19,7 +19,7 @@ const Customers = () => {
     try {
       setLoading(true);
       const response = await customerAPI.getAll();
-      setCustomers(response.data.data);
+      setCustomers(response.data.data.customerList);
     } catch (error) {
       console.log(error);
     } finally {

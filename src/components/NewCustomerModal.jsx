@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import { useFormik } from "formik";
 import customerAPI from "../apis/customerAPI";
 import { useNavigate } from "react-router";
@@ -12,26 +11,32 @@ const NewCustomerModal = ({
   onUpdateCustomer,
   editedCustomer,
 }) => {
-  console.log("editedCustomer:", editedCustomer);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const { user } = auth;
+
+  const [submittingStatus, setSubmittingStatus] = useState({});
   const formik = useFormik({
     enableReinitialize: true,
     initialValues:
       editedCustomer && editedCustomer.fullName
         ? {
             fullName: editedCustomer.fullName,
-            gender: editedCustomer.gender,
+            gender:
+              editedCustomer.gender === 1
+                ? "male"
+                : editedCustomer.gender === 2
+                ? "female"
+                : "other",
             phone: editedCustomer.phone,
             email: editedCustomer.email,
             address: editedCustomer.address,
             rank: editedCustomer.rank,
           }
         : {
-            fullName: "123",
+            fullName: "",
             gender: "",
             phone: "",
             email: "",
@@ -44,20 +49,41 @@ const NewCustomerModal = ({
         setLoading(true);
         setError(null);
         editedCustomer && editedCustomer.fullName
-          ? await customerAPI.update({
-              username: user.username,
-              fullName: values.fullName,
-              phone: values.phone,
-              email: values.email,
-              address: values.address,
-              gender:
-                values.gender === "Male"
-                  ? 1
-                  : values.gender === "Female"
-                  ? 2
-                  : 3,
-              kiot_id: user.kiot_id,
-            })
+          ? await customerAPI
+              .update({
+                customerId: editedCustomer._id,
+                email: values.email ? values.email : editedCustomer.email,
+                fullName: values.fullName
+                  ? values.fullName
+                  : editedCustomer.fullName,
+                phone: values.phone ? values.phone : editedCustomer.phone,
+                address: values.address
+                  ? values.address
+                  : editedCustomer.address,
+                gender: values.gender
+                  ? values.gender === "male"
+                    ? 1
+                    : values.gender === "female"
+                    ? 2
+                    : values.gender === "other" && 3
+                  : editedCustomer.gender,
+                transaction: editedCustomer.transaction,
+                rank: values.rank ? values.rank : editedCustomer.rank,
+              })
+              .then((res) => {
+                if (res.status === 200) {
+                  setSubmittingStatus({
+                    sent: true,
+                    msg: "Customer has been updated successfully!",
+                  });
+                }
+              })
+              .catch((err) => {
+                setSubmittingStatus({
+                  sent: false,
+                  msg: `${err}`,
+                });
+              })
           : await customerAPI.create({
               username: user.username,
               fullName: values.fullName,
@@ -65,9 +91,9 @@ const NewCustomerModal = ({
               email: values.email,
               address: values.address,
               gender:
-                values.gender === "Male"
+                values.gender === "male"
                   ? 1
-                  : values.gender === "Female"
+                  : values.gender === "female"
                   ? 2
                   : 3,
               kiot_id: user.kiot_id,
@@ -82,19 +108,32 @@ const NewCustomerModal = ({
       }
     },
   });
-  const { handleSubmit, handleChange, values } = formik;
-  console.log("values:", values);
+  const { handleSubmit, handleChange, values, resetForm } = formik;
   return (
     <BootstrapModal show={show} onHide={handleClose}>
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>New Customer</BootstrapModal.Title>
       </BootstrapModal.Header>
       <BootstrapModal.Body>
-        {loading && <p className="text-info">Adding Customer ....</p>}
+        {loading &&
+          (editedCustomer && editedCustomer.fullName ? (
+            <p className="text-info">Editting Customer ....</p>
+          ) : (
+            <p className="text-info">Adding Customer ....</p>
+          ))}
         <form
           onSubmit={handleSubmit}
           className="form-horizontal auth-form my-4"
         >
+          {submittingStatus && submittingStatus.msg && (
+            <p
+              classname={`alert ${
+                submittingStatus.sent ? "alert-success" : "alert-error"
+              }`}
+            >
+              {submittingStatus.msg}
+            </p>
+          )}
           <div className="form-group">
             <label htmlFor="fullName">Fullname</label>
             <div className="input-group mb-3">
