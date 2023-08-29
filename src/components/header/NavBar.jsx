@@ -25,6 +25,10 @@ import AppContext from "../../contexts/AppContext/AppContext";
 const logo =
   "https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
 
+const handleSeachAll = (data) => {
+
+}
+
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <div
     ref={ref}
@@ -208,7 +212,7 @@ const NavBar = () => {
               placeholder="Search..."
               className="form-control"
             />
-            <a href="">
+            <a href="" onClick={e => e.preventDefault()}>
               <FaMagnifyingGlass size={18} />
             </a>
           </form>
