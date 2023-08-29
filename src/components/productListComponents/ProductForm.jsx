@@ -49,7 +49,7 @@ const ProductFrom = ({ setShow, product }) => {
     useEffect(() => {
         const getKiots = async () => {
             const res = await kiotAPI.getKiot();
-            setKiots((pre) => [...pre, ...res.data.data]);
+            setKiots((pre) => [...pre, ...res.data.data.kiotList]);
         };
         getKiots();
     }, []);
@@ -116,7 +116,7 @@ const ProductFrom = ({ setShow, product }) => {
                     )}
                 </Form.Group>
             </Row>
-
+            {console.log(auth)}
             {auth.user.role_id === 1 && (
                 <Row>
                     <Form.Group as={Col} controlId="kiot_id">
