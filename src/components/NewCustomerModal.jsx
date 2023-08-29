@@ -1,43 +1,105 @@
 import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import { useFormik } from "formik";
 import customerAPI from "../apis/customerAPI";
 import { useNavigate } from "react-router";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 
-const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
+const NewCustomerModal = ({
+  show,
+  handleClose,
+  onUpdateCustomer,
+  editedCustomer,
+}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const { user } = auth;
+
+  const [submittingStatus, setSubmittingStatus] = useState({});
   const formik = useFormik({
-    initialValues: {
-      username: "",
-      fullName: "",
-      gender: "",
-      phone: "",
-      email: "",
-      address: "",
-      rank: "",
-    },
-    onSubmit: async (formsData) => {
+    enableReinitialize: true,
+    initialValues:
+      editedCustomer && editedCustomer.fullName
+        ? {
+            fullName: editedCustomer.fullName,
+            gender:
+              editedCustomer.gender === 1
+                ? "male"
+                : editedCustomer.gender === 2
+                ? "female"
+                : "other",
+            phone: editedCustomer.phone,
+            email: editedCustomer.email,
+            address: editedCustomer.address,
+            rank: editedCustomer.rank,
+          }
+        : {
+            fullName: "",
+            gender: "",
+            phone: "",
+            email: "",
+            address: "",
+            rank: "",
+          },
+
+    onSubmit: async (values) => {
       try {
         setLoading(true);
         setError(null);
-        const response = await customerAPI.create({
-          username: values.username,
-          fullName: values.fullName,
-          phone: values.phone,
-          email: values.email,
-          address: values.address,
-          gender: values.gender,
-          kiot_id: user.kiot_id,
-        });
-        console.log(response.data);
+        editedCustomer && editedCustomer.fullName
+          ? await customerAPI
+              .update({
+                customerId: editedCustomer._id,
+                email: values.email ? values.email : editedCustomer.email,
+                fullName: values.fullName
+                  ? values.fullName
+                  : editedCustomer.fullName,
+                phone: values.phone ? values.phone : editedCustomer.phone,
+                address: values.address
+                  ? values.address
+                  : editedCustomer.address,
+                gender: values.gender
+                  ? values.gender === "male"
+                    ? 1
+                    : values.gender === "female"
+                    ? 2
+                    : values.gender === "other" && 3
+                  : editedCustomer.gender,
+                transaction: editedCustomer.transaction,
+                rank: values.rank ? values.rank : editedCustomer.rank,
+              })
+              .then((res) => {
+                if (res.status === 200) {
+                  setSubmittingStatus({
+                    sent: true,
+                    msg: "Customer has been updated successfully!",
+                  });
+                }
+              })
+              .catch((err) => {
+                setSubmittingStatus({
+                  sent: false,
+                  msg: `${err}`,
+                });
+              })
+          : await customerAPI.create({
+              username: user.username,
+              fullName: values.fullName,
+              phone: values.phone,
+              email: values.email,
+              address: values.address,
+              gender:
+                values.gender === "male"
+                  ? 1
+                  : values.gender === "female"
+                  ? 2
+                  : 3,
+              kiot_id: user.kiot_id,
+            });
+
         onUpdateCustomer();
-        navigate("/customers");
       } catch (error) {
         console.log(error);
         setError(error.response.data.message);
@@ -46,33 +108,32 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
       }
     },
   });
-  const { handleSubmit, handleChange, values } = formik;
+  const { handleSubmit, handleChange, values, resetForm } = formik;
   return (
     <BootstrapModal show={show} onHide={handleClose}>
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>New Customer</BootstrapModal.Title>
       </BootstrapModal.Header>
       <BootstrapModal.Body>
-        {loading && <p className="text-info">Adding Customer ....</p>}
+        {loading &&
+          (editedCustomer && editedCustomer.fullName ? (
+            <p className="text-info">Editting Customer ....</p>
+          ) : (
+            <p className="text-info">Adding Customer ....</p>
+          ))}
         <form
           onSubmit={handleSubmit}
           className="form-horizontal auth-form my-4"
         >
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                placeholder="Enter username"
-                onChange={handleChange}
-                value={values.username}
-              />
-            </div>
-          </div>
-          {/*end form-group*/}
-
+          {submittingStatus && submittingStatus.msg && (
+            <p
+              classname={`alert ${
+                submittingStatus.sent ? "alert-success" : "alert-error"
+              }`}
+            >
+              {submittingStatus.msg}
+            </p>
+          )}
           <div className="form-group">
             <label htmlFor="fullName">Fullname</label>
             <div className="input-group mb-3">
@@ -80,6 +141,7 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
                 type="text"
                 className="form-control"
                 id="fullName"
+                name="fullName"
                 placeholder="Enter FullName"
                 onChange={handleChange}
                 value={values.fullName}
@@ -89,14 +151,27 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
           <div className="form-group">
             <label htmlFor="gender">Gender</label>
             <div className="input-group mb-3">
-              <input
+              {/* <input
                 type="text"
                 className="form-control"
                 id="gender"
                 placeholder="Enter Gender"
                 onChange={handleChange}
                 value={values.gender}
-              />
+              /> */}
+
+              <select
+                class="form-select"
+                id="gender"
+                name="gender"
+                onChange={handleChange}
+                value={values.gender}
+              >
+                <option selected>Please choose the gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
             </div>
           </div>
           <div className="form-group">
@@ -106,6 +181,7 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
                 type="text"
                 className="form-control"
                 id="phone"
+                name="phone"
                 placeholder="Enter Phone"
                 onChange={handleChange}
                 value={values.phone}
@@ -119,6 +195,7 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
                 type="text"
                 className="form-control"
                 id="email"
+                name="email"
                 placeholder="Enter Email"
                 onChange={handleChange}
                 value={values.email}
@@ -132,6 +209,7 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
                 type="text"
                 className="form-control"
                 id="address"
+                name="address"
                 placeholder="Enter Address"
                 onChange={handleChange}
                 value={values.address}
@@ -145,6 +223,7 @@ const NewCustomerModal = ({ show, handleClose, onUpdateCustomer }) => {
                 type="text"
                 className="form-control"
                 id="rank"
+                name="rank"
                 placeholder="Enter rank for customer"
                 onChange={handleChange}
                 value={values.rank}
