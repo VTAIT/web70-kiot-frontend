@@ -9,8 +9,16 @@ const Cart = () => {
         <>
             <div className="cart w-100 d-flex align-items-center flex-column  justify-content-between">
                 <div className="table-responsive w-100 shopping-cart d-flex flex-column">
-                    <div className="table-container w-100">
-                        <TablePrice />
+                    <div className="position-relative table-container w-100">
+                        {cart.length ? (
+                            <TablePrice />
+                        ) : (
+                            <div className="position-absolute top-50 start-50 translate-middle">
+                                <h6 className="text-primary">
+                                    Please choose product
+                                </h6>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="col w-75 h-50 m-0">

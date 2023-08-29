@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ProductCart from "../components/productComponents/ProductCart";
 import CartProvider from "../contexts/CartContext/CartProvider";
-import productMockData from "../mocks/products.data.json";
 import Cart from "../components/productComponents/Cart";
 import Pagination from "../components/Pagination";
 import Search from "../components/searchComponents/Search";
@@ -23,7 +22,9 @@ const Products = () => {
                 setDataServer(res.data.data.productList);
             } catch (error) {
                 console.log(error);
-                setError(error.data.message);
+                setError(
+                    `${error.response.data.messege}, ${error.response.data.error}`
+                );
             } finally {
                 setIsLoading(false);
             }

@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import ProductFrom from "./ProductForm";
 
-export default function AddProductModal() {
+export default function AddProductModal({ handleGetAllProduct }) {
     const [show, setShow] = useState(false);
 
     return (
@@ -31,7 +31,10 @@ export default function AddProductModal() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ProductFrom setShow={setShow} />
+                    <ProductFrom
+                        setShow={setShow}
+                        handleGetAllProduct={handleGetAllProduct}
+                    />
                 </Modal.Body>
             </Modal>
         </>

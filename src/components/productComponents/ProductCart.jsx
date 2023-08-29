@@ -7,13 +7,13 @@ const ProductCart = ({ product }) => {
     const { addProduct } = useContext(cartContext);
     return (
         <div
-            className="card e-co-product w-30 m-2 "
+            className="card e-co-product w-cart m-2 "
             onClick={() => addProduct(product)}
         >
             <img
                 src={product.image}
                 alt={product.name}
-                className="img-fluid "
+                className="img-fluid img-cart"
             />
 
             {product.promotion && (

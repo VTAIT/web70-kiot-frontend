@@ -1,5 +1,4 @@
 import React from "react";
-import { GiSightDisabled } from "react-icons/gi";
 import EditProductModal from "./EditProductModal";
 
 const Item = (props) => {
@@ -40,11 +39,6 @@ const Item = (props) => {
             </td>
             <td>
                 <EditProductModal product={item} />
-                {item.active && (
-                    <span>
-                        <GiSightDisabled className="text-danger ms-2" />
-                    </span>
-                )}
             </td>
         </tr>
     );
