@@ -38,6 +38,7 @@ export const routes = [
     path: "/accounts",
     component: <Accounts />,
     isPrivate: true,
+    isAdmin: true,
   },
   {
     path: "/login",
