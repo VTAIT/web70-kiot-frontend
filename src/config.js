@@ -18,11 +18,6 @@ export const routes = [
     isPrivate: true,
   },
   {
-    path: "/productList/:productId",
-    component: <EditProduct />,
-    isPrivate: true,
-  },
-  {
     path: "/customers",
     component: <Customers />,
     isPrivate: true,
