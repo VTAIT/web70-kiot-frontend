@@ -1,7 +1,6 @@
 [{
-  "id": "a11301c8-c620-49c6-8c49-767d35fc8079",
   "kiot_id": "00766cc2-d43f-447b-bfe4-dd9bb2156c02",
-  "account_id": "347de80c-7272-43d9-aa19-8e81d3b09164",
+  "user_id": "347de80c-7272-43d9-aa19-8e81d3b09164",
   "product_code": "LYS",
   "active": true,
   "create_at": "15/07/2023",
@@ -11,11 +10,11 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "f80bbc98-ec80-4f7a-a987-8f2d803c665e",
   "kiot_id": "c0f429c1-2cfe-4a8b-91de-fce747b3aa2e",
-  "account_id": "f719cbd6-1c4c-4ec3-835e-17077ca8fdf1",
+  "user_id": "f719cbd6-1c4c-4ec3-835e-17077ca8fdf1",
   "product_code": "SVO",
   "active": false,
   "create_at": "16/07/2023",
@@ -26,11 +25,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 29,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "1159f454-5653-4d08-8613-4359aba23b69",
   "kiot_id": "b4cac8b8-4bd5-4b16-b3fa-823494d74175",
-  "account_id": "ad0112ce-8baf-473c-8204-5887132153c5",
+  "user_id": "ad0112ce-8baf-473c-8204-5887132153c5",
   "product_code": "CER",
   "active": false,
   "create_at": "18/07/2023",
@@ -41,11 +40,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 19,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "8eebe788-8d4f-4f90-a44e-532c1bc8b61b",
   "kiot_id": "c085c02b-2062-4615-88e3-97d253288137",
-  "account_id": "ad16aea8-0e32-4105-b741-4f4bf643b096",
+  "user_id": "ad16aea8-0e32-4105-b741-4f4bf643b096",
   "product_code": "BJI",
   "active": true,
   "create_at": "25/07/2023",
@@ -56,11 +55,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "4cd01862-8ece-4228-b1df-f1d654da0a5f",
   "kiot_id": "0bab2efb-3073-4a20-9665-d37e241f2bbb",
-  "account_id": "f52c2044-38ad-4258-adba-46546a38e1db",
+  "user_id": "f52c2044-38ad-4258-adba-46546a38e1db",
   "product_code": "GGG",
   "active": true,
   "create_at": "06/07/2023",
@@ -71,11 +70,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "9a12103d-1e2b-4bc5-9deb-d955af195160",
   "kiot_id": "748adc9c-54cc-47a7-b5f2-9741b8c5f7f4",
-  "account_id": "97480259-a293-467c-b38a-9a8625338099",
+  "user_id": "97480259-a293-467c-b38a-9a8625338099",
   "product_code": "SPH",
   "active": true,
   "create_at": "02/07/2023",
@@ -86,11 +85,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 20,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "b698fde8-8a4b-4596-91bb-8f6d8c2e4db7",
   "kiot_id": "8402eee1-a1d5-47b4-9954-7080f9c25c5f",
-  "account_id": "ad9fbe60-2f3e-42b9-b1c9-7d421aa5b6b0",
+  "user_id": "ad9fbe60-2f3e-42b9-b1c9-7d421aa5b6b0",
   "product_code": "LEK",
   "active": false,
   "create_at": "25/07/2023",
@@ -101,11 +100,11 @@
   "category": "AF",
   "promotion": true,
   "promotion_rate": 6,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "16c9719d-f841-45d9-9a8c-e04d3c351e5d",
   "kiot_id": "a998adf9-3218-4cb2-b87d-295f640bbc36",
-  "account_id": "96b77558-0d26-49c3-b41a-6b51e4817154",
+  "user_id": "96b77558-0d26-49c3-b41a-6b51e4817154",
   "product_code": "MJK",
   "active": true,
   "create_at": "28/07/2023",
@@ -116,11 +115,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 7,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "b2fadb0a-4e95-412f-a40e-b14ae509a2a6",
   "kiot_id": "36ebb876-56d1-4c6d-a6d9-ad7de5ae3fc3",
-  "account_id": "c72e8786-87be-4609-b5da-a942a90828a4",
+  "user_id": "c72e8786-87be-4609-b5da-a942a90828a4",
   "product_code": "RAW",
   "active": false,
   "create_at": "07/07/2023",
@@ -131,11 +130,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 3,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "9da6e756-83ba-40ed-957f-1d9a2b7869c3",
   "kiot_id": "f21f7516-aa09-4b20-aebd-5369636433ff",
-  "account_id": "54b53bfa-7be8-4ae8-95bb-9e50fdefa88f",
+  "user_id": "54b53bfa-7be8-4ae8-95bb-9e50fdefa88f",
   "product_code": "BYT",
   "active": true,
   "create_at": "12/07/2023",
@@ -146,11 +145,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 12,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "85195ba5-ac6c-4a21-88f7-ba0b2df4839b",
   "kiot_id": "39c78df7-f6b3-41e9-96ed-b1dc49e6d7e7",
-  "account_id": "5c2b5c2f-57b2-4d59-9c36-55a22fa2fe6b",
+  "user_id": "5c2b5c2f-57b2-4d59-9c36-55a22fa2fe6b",
   "product_code": "CEK",
   "active": true,
   "create_at": "23/07/2023",
@@ -161,11 +160,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 27,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "d34132e3-6cfa-4398-aae3-3c7ccb6f4938",
   "kiot_id": "4a51df64-b09b-4911-9575-3ccd02bf4816",
-  "account_id": "2d13ddc6-d658-452e-b390-eb6d426bea40",
+  "user_id": "2d13ddc6-d658-452e-b390-eb6d426bea40",
   "product_code": "LKK",
   "active": true,
   "create_at": "08/07/2023",
@@ -176,11 +175,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 17,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "f82fd564-9dc4-4178-8dd5-8211bb747fe0",
   "kiot_id": "4486c3d2-5aa6-4815-bbe9-6edfa684909d",
-  "account_id": "faa54d0f-697f-4343-97a8-6c0b68202250",
+  "user_id": "faa54d0f-697f-4343-97a8-6c0b68202250",
   "product_code": "WOE",
   "active": true,
   "create_at": "31/07/2023",
@@ -191,11 +190,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "f24d2b93-f26c-4fc9-83b2-5827e57f3436",
   "kiot_id": "186da136-4e84-459b-a8a5-0ee45538fb7c",
-  "account_id": "937e8a27-734a-4393-a357-df27cfe75fb9",
+  "user_id": "937e8a27-734a-4393-a357-df27cfe75fb9",
   "product_code": "FYJ",
   "active": true,
   "create_at": "19/07/2023",
@@ -206,11 +205,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 17,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "684af797-e5ac-4fd4-a626-fee3a609eed6",
   "kiot_id": "65c4aeca-8538-4e0d-bf3e-0f4bed8ac36c",
-  "account_id": "c8a4920d-8d21-4b56-91a2-e5fc9e2d530a",
+  "user_id": "c8a4920d-8d21-4b56-91a2-e5fc9e2d530a",
   "product_code": "AZS",
   "active": false,
   "create_at": "17/07/2023",
@@ -221,11 +220,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 14,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "20c38e9f-9796-44e1-9556-b3b9a1f8bc41",
   "kiot_id": "56172929-9a9a-4760-9e20-7c6451cbf87b",
-  "account_id": "9996dd4d-ad52-4294-80ec-8f5931f0c4aa",
+  "user_id": "9996dd4d-ad52-4294-80ec-8f5931f0c4aa",
   "product_code": "RAW",
   "active": false,
   "create_at": "10/07/2023",
@@ -236,11 +235,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 26,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "b870c22d-84a6-48ca-937b-5e012c22a89d",
   "kiot_id": "67538693-850f-4f7a-90ab-2e01dba2eaa8",
-  "account_id": "83da3199-17fc-4d6b-bd3a-4e8efdc64148",
+  "user_id": "83da3199-17fc-4d6b-bd3a-4e8efdc64148",
   "product_code": "FSN",
   "active": false,
   "create_at": "07/07/2023",
@@ -250,11 +249,11 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "4cde419d-e122-4904-a8c5-3f04d124afe0",
   "kiot_id": "bf426537-e274-4b5c-9311-7e35207c3ff6",
-  "account_id": "57758a31-03a6-4557-95e3-912d23492835",
+  "user_id": "57758a31-03a6-4557-95e3-912d23492835",
   "product_code": "HTT",
   "active": true,
   "create_at": "04/07/2023",
@@ -265,11 +264,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "669dabc8-def6-46ff-94ab-730e86e1d46c",
   "kiot_id": "1f3cc0dc-14ab-47de-8d3b-83b4899aa02e",
-  "account_id": "ca29f162-0176-4e42-9f1f-1b8ee5759124",
+  "user_id": "ca29f162-0176-4e42-9f1f-1b8ee5759124",
   "product_code": "IXJ",
   "active": true,
   "create_at": "21/07/2023",
@@ -280,11 +279,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "ebeb6ee4-bc0a-4911-8493-fb55575fdb57",
   "kiot_id": "d89744d2-d424-4c6b-bb5e-3c1624cb9932",
-  "account_id": "5c91896f-00ce-469c-8775-84c6a34d4b61",
+  "user_id": "5c91896f-00ce-469c-8775-84c6a34d4b61",
   "product_code": "QEF",
   "active": false,
   "create_at": "30/07/2023",
@@ -295,11 +294,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "da802038-42f4-4730-95f2-cb073c065b65",
   "kiot_id": "84f95770-b996-485e-a4c6-13215e52bd08",
-  "account_id": "b0c046b5-37fe-469b-9353-890f70887ec0",
+  "user_id": "b0c046b5-37fe-469b-9353-890f70887ec0",
   "product_code": "RNZ",
   "active": true,
   "create_at": "22/07/2023",
@@ -310,11 +309,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "e0e707a0-333f-47f0-b585-ee65b088f4a3",
   "kiot_id": "891f328b-3887-403a-a111-18709296728b",
-  "account_id": "7e9864d3-6843-4ece-a902-43e02cc14678",
+  "user_id": "7e9864d3-6843-4ece-a902-43e02cc14678",
   "product_code": "TGH",
   "active": true,
   "create_at": "16/07/2023",
@@ -325,11 +324,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 18,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "0d12be11-58fb-457a-ac80-b54e26727e7b",
   "kiot_id": "4c155dcf-4bd7-4c11-b6ce-d2db074cfad9",
-  "account_id": "a1c57857-fef7-4bf4-84c4-593bd016404d",
+  "user_id": "a1c57857-fef7-4bf4-84c4-593bd016404d",
   "product_code": "MSM",
   "active": false,
   "create_at": "04/07/2023",
@@ -340,11 +339,11 @@
   "category": "AF",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "0fcf2a85-9737-4a4c-a26b-b702bf49d90b",
   "kiot_id": "d65b79e7-8074-4a7b-9074-2b075e45add7",
-  "account_id": "81691f16-5dca-43dc-a8eb-f5dd72720f6d",
+  "user_id": "81691f16-5dca-43dc-a8eb-f5dd72720f6d",
   "product_code": "XAB",
   "active": false,
   "create_at": "16/07/2023",
@@ -355,11 +354,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 22,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "58d41c1f-f3ca-45e5-822a-9bf55c77d5f0",
   "kiot_id": "df2f3512-124b-45a0-8e61-5dc8f3dd656e",
-  "account_id": "37e27a55-ca01-4510-bb9a-f68a925757f6",
+  "user_id": "37e27a55-ca01-4510-bb9a-f68a925757f6",
   "product_code": "OSZ",
   "active": false,
   "create_at": "13/07/2023",
@@ -370,11 +369,11 @@
   "category": "EU",
   "promotion": true,
   "promotion_rate": 14,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "172a5aa2-8c50-4564-a87f-ed6deb8664b2",
   "kiot_id": "c7a52653-0c29-4351-9bc5-b07f9b0f43b6",
-  "account_id": "f98278b6-d098-4361-899a-0dd0eadb596e",
+  "user_id": "f98278b6-d098-4361-899a-0dd0eadb596e",
   "product_code": "SPY",
   "active": true,
   "create_at": "01/07/2023",
@@ -384,11 +383,11 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "2079c2cc-301f-45ae-9628-5328e087cae7",
   "kiot_id": "c4a914ac-c016-4e21-b340-dbbf4e71b378",
-  "account_id": "a089d3f7-6316-45dd-9649-fc4a73d1b022",
+  "user_id": "a089d3f7-6316-45dd-9649-fc4a73d1b022",
   "product_code": "PGK",
   "active": true,
   "create_at": "25/07/2023",
@@ -399,11 +398,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "f2831969-dc3e-4ff9-b80e-b7d1c06f1805",
   "kiot_id": "a016f6e5-2baf-4780-9c1d-0d21aa475c59",
-  "account_id": "bd010725-f964-42bc-83b7-a6e2a4b08985",
+  "user_id": "bd010725-f964-42bc-83b7-a6e2a4b08985",
   "product_code": "INC",
   "active": false,
   "create_at": "12/07/2023",
@@ -414,11 +413,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 30,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "2baa2598-5d73-430d-b5d2-f6be8d442aff",
   "kiot_id": "55004d2d-d5eb-4480-823d-9c611ccd62e7",
-  "account_id": "31f5d224-802d-41c5-8b79-a2f40db1d467",
+  "user_id": "31f5d224-802d-41c5-8b79-a2f40db1d467",
   "product_code": "YPO",
   "active": true,
   "create_at": "31/07/2023",
@@ -429,11 +428,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 2,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "3ddf52c8-81cb-4b8b-a811-79d0867889ae",
   "kiot_id": "d0745c97-aa29-4f64-b621-61f395641859",
-  "account_id": "5339df57-6b7e-4c40-8aa2-e6e6d9e7d197",
+  "user_id": "5339df57-6b7e-4c40-8aa2-e6e6d9e7d197",
   "product_code": "SRQ",
   "active": false,
   "create_at": "10/07/2023",
@@ -444,11 +443,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 10,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "6e3b435d-2e74-467b-85c0-71d5de77b868",
   "kiot_id": "5929d438-9cb3-43fb-b696-05f773091cba",
-  "account_id": "1f443948-2715-46b8-9889-e8e6b427a30c",
+  "user_id": "1f443948-2715-46b8-9889-e8e6b427a30c",
   "product_code": "YTY",
   "active": true,
   "create_at": "22/07/2023",
@@ -459,11 +458,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "34955761-8870-49a4-b9ba-da44e56e4c6a",
   "kiot_id": "95a939ee-5486-4064-b6a5-64674c34bb85",
-  "account_id": "6118c5f3-1dbe-47a0-be68-136d7c866bc2",
+  "user_id": "6118c5f3-1dbe-47a0-be68-136d7c866bc2",
   "product_code": "0",
   "active": false,
   "create_at": "25/07/2023",
@@ -474,11 +473,11 @@
   "category": "SA",
   "promotion": true,
   "promotion_rate": 25,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "56f59ffb-1238-43f2-bbf3-7b95dca43cee",
   "kiot_id": "e64bbefe-44a9-4e0c-89a8-107a59bb867a",
-  "account_id": "73d58076-6416-482e-b8b1-20579e29e3ab",
+  "user_id": "73d58076-6416-482e-b8b1-20579e29e3ab",
   "product_code": "EME",
   "active": true,
   "create_at": "07/07/2023",
@@ -489,11 +488,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "a6922dc9-d366-4788-86bd-58ce0a9edeab",
   "kiot_id": "d606669f-25c5-4a8a-8299-e5e6ea127e52",
-  "account_id": "cf0c05cd-196e-4831-8c3d-c0a43f6ea95e",
+  "user_id": "cf0c05cd-196e-4831-8c3d-c0a43f6ea95e",
   "product_code": "CRJ",
   "active": true,
   "create_at": "30/07/2023",
@@ -504,11 +503,11 @@
   "category": "OC",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "c6888b72-0179-4d2c-b373-eb09b7f6215f",
   "kiot_id": "e5862da5-e7d1-4e41-91d4-72e6e6d3c265",
-  "account_id": "91585495-120f-4d4e-b19e-c8d7c756ef0c",
+  "user_id": "91585495-120f-4d4e-b19e-c8d7c756ef0c",
   "product_code": "LKC",
   "active": true,
   "create_at": "22/07/2023",
@@ -519,11 +518,11 @@
   "category": "AF",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "fd9b3edd-afa5-4d71-b3ba-a9fd234f3307",
   "kiot_id": "830018c0-ef28-42fa-b774-b401cbe7c1f8",
-  "account_id": "31301cb7-4354-4359-92e2-4b6dc9808744",
+  "user_id": "31301cb7-4354-4359-92e2-4b6dc9808744",
   "product_code": "BLI",
   "active": true,
   "create_at": "17/07/2023",
@@ -534,11 +533,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "6edacf2c-47d1-468a-a3f2-24de2acd589a",
   "kiot_id": "0bf37fd3-2644-4da4-af05-60fbe155662b",
-  "account_id": "26170f9d-5352-4aed-aeb7-677f7d2a00cc",
+  "user_id": "26170f9d-5352-4aed-aeb7-677f7d2a00cc",
   "product_code": "AQP",
   "active": true,
   "create_at": "25/07/2023",
@@ -549,11 +548,11 @@
   "category": "SA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "d6d76190-4e35-406b-9830-0f41d10af6eb",
   "kiot_id": "b18761d1-a1b4-4b00-8067-5f9109dd0b25",
-  "account_id": "0ee68f9f-61d0-4e60-8733-d1e226613e31",
+  "user_id": "0ee68f9f-61d0-4e60-8733-d1e226613e31",
   "product_code": "MDX",
   "active": true,
   "create_at": "03/07/2023",
@@ -564,11 +563,11 @@
   "category": "SA",
   "promotion": true,
   "promotion_rate": 7,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "d26f1455-771e-4865-81d9-fb317fe37bb0",
   "kiot_id": "ac319ef2-db10-48c1-9576-c2a35936b703",
-  "account_id": "310d0b41-8b78-47ae-81bf-f12d7919153a",
+  "user_id": "310d0b41-8b78-47ae-81bf-f12d7919153a",
   "product_code": "BBY",
   "active": true,
   "create_at": "11/07/2023",
@@ -578,11 +577,11 @@
   "image": "http://dummyimage.com/420x420.png/ff4444/ffffff",
   "category": "AF",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 5
+  "promotion_rate": 0,  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "e883cabb-9991-43ec-a02b-69118e0bae43",
   "kiot_id": "d17e9dbc-d100-4004-a2e6-0fb72e31f7b9",
-  "account_id": "23af48ff-970a-4361-85e7-20e01a91c26b",
+  "user_id": "23af48ff-970a-4361-85e7-20e01a91c26b",
   "product_code": "TGU",
   "active": false,
   "create_at": "13/07/2023",
@@ -593,11 +592,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "b72831d3-58c3-4eef-a83b-05a6b8d619fd",
   "kiot_id": "f8fa4c67-b42b-4e08-bf0b-69afc906d98e",
-  "account_id": "6cefa985-916b-4888-b8d5-42c9e4f492e6",
+  "user_id": "6cefa985-916b-4888-b8d5-42c9e4f492e6",
   "product_code": "CVH",
   "active": false,
   "create_at": "20/07/2023",
@@ -608,11 +607,11 @@
   "category": "SA",
   "promotion": true,
   "promotion_rate": 11,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "b265136e-4b83-4e06-8443-a06886ec1ab7",
   "kiot_id": "d1ed69cc-71d5-477b-8d5f-574ad96c9ddc",
-  "account_id": "442f437e-c6e3-49e3-9e91-997b9ff89cd9",
+  "user_id": "442f437e-c6e3-49e3-9e91-997b9ff89cd9",
   "product_code": "AHI",
   "active": true,
   "create_at": "18/07/2023",
@@ -623,11 +622,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 11,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "c40e831a-4b72-4238-9b44-21d82d257850",
   "kiot_id": "a2a8fe8d-f235-41d5-8a65-5310a3ad149d",
-  "account_id": "46264e9c-5a34-490a-aad3-301a55f3f796",
+  "user_id": "46264e9c-5a34-490a-aad3-301a55f3f796",
   "product_code": "APY",
   "active": false,
   "create_at": "20/07/2023",
@@ -638,11 +637,11 @@
   "category": "SA",
   "promotion": true,
   "promotion_rate": 9,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "66bd07d3-3620-4319-80a9-35f2d346e1ce",
   "kiot_id": "9c843ef4-3492-40a8-9802-5db8a30676eb",
-  "account_id": "e93faa47-028d-4255-bb94-132efec37d2d",
+  "user_id": "e93faa47-028d-4255-bb94-132efec37d2d",
   "product_code": "CIV",
   "active": false,
   "create_at": "30/07/2023",
@@ -652,11 +651,11 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "7292694c-5469-4140-98e1-ccc5d7a789ec",
   "kiot_id": "7fe84107-46ba-4e9d-bfc1-bbf76c002352",
-  "account_id": "4e60269e-60e5-4f9c-a279-eb2c3ddffd05",
+  "user_id": "4e60269e-60e5-4f9c-a279-eb2c3ddffd05",
   "product_code": "WGY",
   "active": false,
   "create_at": "02/07/2023",
@@ -667,11 +666,11 @@
   "category": "AF",
   "promotion": true,
   "promotion_rate": 10,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "e363f7e6-329c-482e-a273-0e222f71f6d1",
   "kiot_id": "b0cc3a20-434c-4a83-b0f7-3931a85081db",
-  "account_id": "f7c4047f-a741-4924-8c8b-f55305ba94c6",
+  "user_id": "f7c4047f-a741-4924-8c8b-f55305ba94c6",
   "product_code": "YLE",
   "active": false,
   "create_at": "30/07/2023",
@@ -681,11 +680,11 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "d424bbea-556d-4ea5-beda-4da7dd849bc5",
   "kiot_id": "ab95c21c-4230-4a0e-9f07-c585e25c6233",
-  "account_id": "e58db9a8-8a5a-4d05-9182-4128393ebc3a",
+  "user_id": "e58db9a8-8a5a-4d05-9182-4128393ebc3a",
   "product_code": "DJN",
   "active": false,
   "create_at": "10/07/2023",
@@ -696,11 +695,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "526b1684-f09e-492f-bd48-dd3aab23595d",
   "kiot_id": "1455f145-e6d1-4b56-bb88-2717b4623119",
-  "account_id": "90f033bc-45ac-4d7b-a634-2495daa6a73d",
+  "user_id": "90f033bc-45ac-4d7b-a634-2495daa6a73d",
   "product_code": "YDQ",
   "active": false,
   "create_at": "25/07/2023",
@@ -711,11 +710,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 20,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "071f8af2-0561-40ba-a0f1-ea921f3e5321",
   "kiot_id": "c7fad128-f739-44ed-9229-060b980952ba",
-  "account_id": "397dc6eb-f1ac-4100-9ece-b97c6df84dad",
+  "user_id": "397dc6eb-f1ac-4100-9ece-b97c6df84dad",
   "product_code": "TSZ",
   "active": true,
   "create_at": "28/07/2023",
@@ -726,11 +725,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "4b456f56-4577-4642-b7fb-4b6f7f3e1761",
   "kiot_id": "49f5e893-61f8-48d9-9095-386a326a06d1",
-  "account_id": "3e2240cb-7633-4550-aa25-8614f517aceb",
+  "user_id": "3e2240cb-7633-4550-aa25-8614f517aceb",
   "product_code": "BHH",
   "active": false,
   "create_at": "26/07/2023",
@@ -741,11 +740,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "1f46f25a-bd1e-4584-8329-044b8935d1a0",
   "kiot_id": "dd2d405b-0276-4961-b704-3cae78f16c51",
-  "account_id": "7fdd912b-34fe-4cdb-af99-49467e69dcab",
+  "user_id": "7fdd912b-34fe-4cdb-af99-49467e69dcab",
   "product_code": "TPQ",
   "active": false,
   "create_at": "06/07/2023",
@@ -756,11 +755,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 7,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "1d86433e-5e30-4a14-b813-82c817515a1d",
   "kiot_id": "04d2067f-ba51-4fb2-a000-9cdbd5e88fbc",
-  "account_id": "e7fbf2e3-1f59-4be6-847a-9f8d52da6d58",
+  "user_id": "e7fbf2e3-1f59-4be6-847a-9f8d52da6d58",
   "product_code": "EDR",
   "active": false,
   "create_at": "30/07/2023",
@@ -771,11 +770,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 6,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "90175b18-a173-40e0-b248-c3b8c5e0f552",
   "kiot_id": "45c27721-3d5d-4b8a-ab9c-de255aed7cce",
-  "account_id": "82d4c6b7-4e70-4070-b56c-69e8887329ff",
+  "user_id": "82d4c6b7-4e70-4070-b56c-69e8887329ff",
   "product_code": "DWR",
   "active": false,
   "create_at": "17/07/2023",
@@ -786,11 +785,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 15,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "b3e42aca-d67d-4a1b-ab06-8a2d9797fb60",
   "kiot_id": "14d33cc7-686e-4dd7-b757-2ecca2fd3050",
-  "account_id": "307ac71d-7e01-482a-b7f0-685b2c589530",
+  "user_id": "307ac71d-7e01-482a-b7f0-685b2c589530",
   "product_code": "ODJ",
   "active": true,
   "create_at": "26/07/2023",
@@ -801,11 +800,11 @@
   "category": "AF",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "febca4d3-efa8-4750-a166-f1de8478f563",
   "kiot_id": "2c90f79b-94ee-437d-9006-90a9d05fea6c",
-  "account_id": "68670c05-b315-48a5-b09a-076656d6893c",
+  "user_id": "68670c05-b315-48a5-b09a-076656d6893c",
   "product_code": "BWB",
   "active": true,
   "create_at": "13/07/2023",
@@ -816,11 +815,11 @@
   "category": "OC",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "aa000d9f-47f3-40fb-94c6-76fc31b5a356",
   "kiot_id": "eb165a27-6646-491c-85af-33999da41634",
-  "account_id": "86c69eba-5630-4fb5-bf24-d698f3a4daa8",
+  "user_id": "86c69eba-5630-4fb5-bf24-d698f3a4daa8",
   "product_code": "VAO",
   "active": true,
   "create_at": "17/07/2023",
@@ -831,11 +830,11 @@
   "category": "OC",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "1c718a9f-ec9f-4b5f-b83e-bd8966265dbe",
   "kiot_id": "e811805a-da8d-4e9a-839d-b11fbfc037ff",
-  "account_id": "e4021ad8-7520-4aa4-96f1-c34077e292d4",
+  "user_id": "e4021ad8-7520-4aa4-96f1-c34077e292d4",
   "product_code": "NEV",
   "active": true,
   "create_at": "25/07/2023",
@@ -846,11 +845,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "bc68f8f3-cb89-4fb5-ac63-4eda160be7e3",
   "kiot_id": "f9734b9a-4570-46d9-9324-31a33e04271d",
-  "account_id": "62ff5cda-d49e-4325-958d-2308dcf92c86",
+  "user_id": "62ff5cda-d49e-4325-958d-2308dcf92c86",
   "product_code": "RLA",
   "active": true,
   "create_at": "05/07/2023",
@@ -861,11 +860,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 23,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "2b3a53fa-f7e6-4cdd-9c53-137195e10563",
   "kiot_id": "b02a33ce-47e5-426e-ba28-6c06e0d2c63a",
-  "account_id": "fe5b0a04-42d1-4264-af78-a0f3d0078bf0",
+  "user_id": "fe5b0a04-42d1-4264-af78-a0f3d0078bf0",
   "product_code": "WWD",
   "active": true,
   "create_at": "28/07/2023",
@@ -876,11 +875,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "c31a802a-9b98-4165-9efa-c2423bff9d38",
   "kiot_id": "fd43f95c-6fcf-4287-96f9-3ae9422b7349",
-  "account_id": "92e4e2f5-437f-4a16-a43d-428d5608ee70",
+  "user_id": "92e4e2f5-437f-4a16-a43d-428d5608ee70",
   "product_code": "BNJ",
   "active": false,
   "create_at": "24/07/2023",
@@ -891,11 +890,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "09076363-1e99-48d7-9f85-8da73712bc46",
   "kiot_id": "a97ce5d7-5796-4772-81a1-7052977ece33",
-  "account_id": "dfbef1f3-f1c0-4361-9158-15f6787ab6ce",
+  "user_id": "dfbef1f3-f1c0-4361-9158-15f6787ab6ce",
   "product_code": "HCJ",
   "active": true,
   "create_at": "31/07/2023",
@@ -906,11 +905,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 2,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "e81d6d80-6a29-47dc-9143-393effa8e5ad",
   "kiot_id": "c02b7235-3b23-43a0-a59d-0d9d5d425126",
-  "account_id": "e24810be-b740-4654-9d15-ac7e4b0662a3",
+  "user_id": "e24810be-b740-4654-9d15-ac7e4b0662a3",
   "product_code": "HHN",
   "active": true,
   "create_at": "31/07/2023",
@@ -921,11 +920,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "4dff57cf-d8b2-45fc-8921-ee0828d8003d",
   "kiot_id": "8d798b85-0d0c-4fdc-94cf-95dc0f57996c",
-  "account_id": "daaf5628-cbd1-4c78-a561-cdec73c8915b",
+  "user_id": "daaf5628-cbd1-4c78-a561-cdec73c8915b",
   "product_code": "GAM",
   "active": false,
   "create_at": "06/07/2023",
@@ -936,11 +935,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "a1e3076c-a6e4-4995-bd91-aa167503b084",
   "kiot_id": "9213e472-5531-48db-af7e-a0eb41c8818a",
-  "account_id": "e51c8643-2e9f-4551-944b-c089f6c7b095",
+  "user_id": "e51c8643-2e9f-4551-944b-c089f6c7b095",
   "product_code": "ROL",
   "active": true,
   "create_at": "01/07/2023",
@@ -951,11 +950,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 4,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "36c2d4da-0a11-409d-bfec-7c80e0393b57",
   "kiot_id": "2a97bcb1-6303-4971-b59f-e9e98873734c",
-  "account_id": "ccfc25ac-d182-433a-8e3b-eefb99a18e15",
+  "user_id": "ccfc25ac-d182-433a-8e3b-eefb99a18e15",
   "product_code": "ISM",
   "active": true,
   "create_at": "28/07/2023",
@@ -966,11 +965,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 13,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "b24d10a9-5bcc-48a5-bd7b-4dabd3ebf9fa",
   "kiot_id": "58c48beb-42c6-45d0-905a-7981cd758c54",
-  "account_id": "b334e38b-22f6-4969-b664-2cd9ae14cd73",
+  "user_id": "b334e38b-22f6-4969-b664-2cd9ae14cd73",
   "product_code": "ESO",
   "active": true,
   "create_at": "11/07/2023",
@@ -981,11 +980,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "bad404e1-b9ab-4a3a-95bc-913aa651418d",
   "kiot_id": "4707a843-5546-45fd-9bcc-e7bc9ac8eb93",
-  "account_id": "4d0a1644-7095-43b4-be1b-16f89e2fb02a",
+  "user_id": "4d0a1644-7095-43b4-be1b-16f89e2fb02a",
   "product_code": "CBE",
   "active": true,
   "create_at": "11/07/2023",
@@ -995,11 +994,11 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "914b7f22-cf8e-4153-b7b3-1a0112643920",
   "kiot_id": "66638746-6353-4dfb-a0d2-12d9136ef3c6",
-  "account_id": "c74a99b8-fd57-412d-b6ec-00deaac3c3d7",
+  "user_id": "c74a99b8-fd57-412d-b6ec-00deaac3c3d7",
   "product_code": "SVA",
   "active": true,
   "create_at": "09/07/2023",
@@ -1010,11 +1009,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 2,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "a8f566ec-fe07-4510-a310-171913e9503c",
   "kiot_id": "72c77371-d4ee-465b-8286-611292945463",
-  "account_id": "9e88999e-300d-4c6c-a1c1-2f5db996cf9c",
+  "user_id": "9e88999e-300d-4c6c-a1c1-2f5db996cf9c",
   "product_code": "PPD",
   "active": false,
   "create_at": "30/07/2023",
@@ -1025,11 +1024,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "977aeb78-46fe-4679-a6d2-51770891c317",
   "kiot_id": "03b82be4-346e-4a6b-803e-f27d069059a0",
-  "account_id": "bb69f0fa-d6e8-4936-b2c2-6275fe5f9e5d",
+  "user_id": "bb69f0fa-d6e8-4936-b2c2-6275fe5f9e5d",
   "product_code": "HAZ",
   "active": false,
   "create_at": "28/07/2023",
@@ -1040,11 +1039,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 13,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "87e67105-0d37-4f5d-af76-6f5c057dacbe",
   "kiot_id": "009844fe-3f43-4293-8366-8d0dbed3c2fd",
-  "account_id": "911b4294-12e3-4109-b9b1-183b1d65f815",
+  "user_id": "911b4294-12e3-4109-b9b1-183b1d65f815",
   "product_code": "LAH",
   "active": true,
   "create_at": "24/07/2023",
@@ -1055,11 +1054,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "bdaf4269-380e-48e7-9ae7-aceb2bca16e5",
   "kiot_id": "ad2cdc89-0a11-40a8-a259-60a711d9bce0",
-  "account_id": "79c686ef-db66-48d1-acdc-c5429a37eb41",
+  "user_id": "79c686ef-db66-48d1-acdc-c5429a37eb41",
   "product_code": "WNN",
   "active": true,
   "create_at": "13/07/2023",
@@ -1070,11 +1069,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 14,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "7d1737a7-a893-44c8-a1b8-a1c1eea0e61a",
   "kiot_id": "1941f8d2-a653-4b83-9305-56a793e7fc03",
-  "account_id": "88e3592f-ebe5-48a1-8022-a2f181daafc2",
+  "user_id": "88e3592f-ebe5-48a1-8022-a2f181daafc2",
   "product_code": "YYA",
   "active": false,
   "create_at": "01/07/2023",
@@ -1085,11 +1084,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 23,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "5284f9e8-2a45-4807-b501-162efbb9dd3f",
   "kiot_id": "51316f7c-4ff3-44f7-ae34-a71b1fd999e2",
-  "account_id": "627ca195-7b88-4143-b815-c3ace6a33ccc",
+  "user_id": "627ca195-7b88-4143-b815-c3ace6a33ccc",
   "product_code": "IDR",
   "active": true,
   "create_at": "01/07/2023",
@@ -1100,11 +1099,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "a4716336-603b-4129-9719-c3708f00daf3",
   "kiot_id": "091ba1fe-971c-4bb4-b6f8-4de4e2dd33da",
-  "account_id": "594136be-38b8-4fd0-9039-6400bdf32f46",
+  "user_id": "594136be-38b8-4fd0-9039-6400bdf32f46",
   "product_code": "CVT",
   "active": true,
   "create_at": "04/07/2023",
@@ -1115,11 +1114,11 @@
   "category": "EU",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "da86fb1f-1b41-4487-94cf-26951d60e731",
   "kiot_id": "2e8f2d58-ba24-4d06-be9f-90d977376947",
-  "account_id": "e26807e1-2c10-4b68-af35-6e0a23ceef36",
+  "user_id": "e26807e1-2c10-4b68-af35-6e0a23ceef36",
   "product_code": "KUQ",
   "active": false,
   "create_at": "23/07/2023",
@@ -1130,11 +1129,11 @@
   "category": "OC",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "af082f16-f7f1-44ac-97d8-64ceef0e8888",
   "kiot_id": "ff69d2ec-8718-4da1-9f08-fdfbf455141c",
-  "account_id": "79329b6e-4b54-4fee-9069-a18843b7868b",
+  "user_id": "79329b6e-4b54-4fee-9069-a18843b7868b",
   "product_code": "YIW",
   "active": false,
   "create_at": "03/07/2023",
@@ -1144,11 +1143,11 @@
   "image": "http://dummyimage.com/420x420.png/cc0000/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 2
+  "promotion_rate": 0,  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "52dd919f-b5d7-47b4-a3d6-f47be9c2320a",
   "kiot_id": "4e3927e7-99f1-4a70-865d-9b920cf79633",
-  "account_id": "e2501d67-9990-4c2b-aa49-42d343ba317b",
+  "user_id": "e2501d67-9990-4c2b-aa49-42d343ba317b",
   "product_code": "XKS",
   "active": true,
   "create_at": "10/07/2023",
@@ -1159,11 +1158,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 18,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "10176657-cd31-45ec-a827-1410e0b0285e",
   "kiot_id": "9846ad26-b658-4f48-a0dc-d822aafc6e55",
-  "account_id": "d42f7a9b-eee9-4cbf-9040-dac4177f741f",
+  "user_id": "d42f7a9b-eee9-4cbf-9040-dac4177f741f",
   "product_code": "KCM",
   "active": false,
   "create_at": "21/07/2023",
@@ -1174,11 +1173,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 18,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "f0812429-c63e-4cf2-82f8-2abeeea7a120",
   "kiot_id": "0883a182-f378-49d0-ad26-2bd788e02697",
-  "account_id": "0e46c7f4-ae20-45e6-b2ee-a1e6f56eb8cb",
+  "user_id": "0e46c7f4-ae20-45e6-b2ee-a1e6f56eb8cb",
   "product_code": "CBO",
   "active": false,
   "create_at": "13/07/2023",
@@ -1189,11 +1188,11 @@
   "category": "AS",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "a4d3a8e8-ce36-41bc-bfa0-79932c55af54",
   "kiot_id": "9f2e002c-d722-46cf-9f59-bb485a2be924",
-  "account_id": "7fe45828-3846-47f4-a731-ba48fd1c08e7",
+  "user_id": "7fe45828-3846-47f4-a731-ba48fd1c08e7",
   "product_code": "OTK",
   "active": true,
   "create_at": "26/07/2023",
@@ -1204,11 +1203,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 22,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "83ffc0bf-afb7-4b18-9e06-76ece2a5b32b",
   "kiot_id": "0e5baddc-d5ee-4c7a-a7cc-9f1225edfa51",
-  "account_id": "05f7076f-043d-46ed-ab21-d6ac35509315",
+  "user_id": "05f7076f-043d-46ed-ab21-d6ac35509315",
   "product_code": "FMN",
   "active": true,
   "create_at": "17/07/2023",
@@ -1219,11 +1218,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 30,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "72b4d334-3abb-47da-93d5-cdaaacb8ba2e",
   "kiot_id": "db7ec589-64c7-47ab-b38c-b5191d0547f0",
-  "account_id": "21245434-d86d-4fad-b794-c8cf51fa2894",
+  "user_id": "21245434-d86d-4fad-b794-c8cf51fa2894",
   "product_code": "LOE",
   "active": true,
   "create_at": "24/07/2023",
@@ -1234,11 +1233,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 20,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "e08edfda-ebf4-4aea-b480-7a4ee4a12a2c",
   "kiot_id": "5299eae3-277c-4cdc-ab8d-508a22cbe97f",
-  "account_id": "7416b6e0-2a7e-4763-a7b3-5309203b306b",
+  "user_id": "7416b6e0-2a7e-4763-a7b3-5309203b306b",
   "product_code": "GXX",
   "active": false,
   "create_at": "12/07/2023",
@@ -1249,11 +1248,11 @@
   "category": "AF",
   "promotion": true,
   "promotion_rate": 28,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "603f9f37-3e20-404b-81f4-2ce48a94f700",
   "kiot_id": "ace036ca-3232-47b1-a467-29760890b2b1",
-  "account_id": "33a67668-5ec0-4cb1-b79a-c524467028bf",
+  "user_id": "33a67668-5ec0-4cb1-b79a-c524467028bf",
   "product_code": "GCD",
   "active": true,
   "create_at": "06/07/2023",
@@ -1264,11 +1263,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "bcf83bc9-00ac-4af0-8fab-e20485f8c2b8",
   "kiot_id": "3e7645de-e828-4ffb-8f5f-0033c7a68233",
-  "account_id": "aad2afea-e2da-48cf-93eb-2cc549ee600c",
+  "user_id": "aad2afea-e2da-48cf-93eb-2cc549ee600c",
   "product_code": "JNA",
   "active": true,
   "create_at": "31/07/2023",
@@ -1279,11 +1278,11 @@
   "category": "SA",
   "promotion": true,
   "promotion_rate": 28,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "237e792b-e66a-4ac1-bba5-2956da097039",
   "kiot_id": "dbc39373-d376-46a4-bf84-5c3dcb77ed83",
-  "account_id": "b6e4c4a8-56b9-47f5-968c-1d43282eab85",
+  "user_id": "b6e4c4a8-56b9-47f5-968c-1d43282eab85",
   "product_code": "QGP",
   "active": false,
   "create_at": "23/07/2023",
@@ -1294,11 +1293,11 @@
   "category": "SA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 5
+  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "7435143f-730e-42c0-82d5-6fc1740d5312",
   "kiot_id": "92ce508b-16da-47c6-af04-5259b9a02341",
-  "account_id": "c1732bc6-e6ab-4b53-a754-d5b56addbbfb",
+  "user_id": "c1732bc6-e6ab-4b53-a754-d5b56addbbfb",
   "product_code": "BXZ",
   "active": true,
   "create_at": "02/07/2023",
@@ -1309,11 +1308,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 26,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "1656a783-3ced-4930-b7a0-b14dc7f1df22",
   "kiot_id": "b1ed6427-5e79-436f-89ae-1b8648f0a46f",
-  "account_id": "c3cd74af-d511-4859-ba1f-44ff9e7eff86",
+  "user_id": "c3cd74af-d511-4859-ba1f-44ff9e7eff86",
   "product_code": "CUQ",
   "active": false,
   "create_at": "09/07/2023",
@@ -1324,11 +1323,11 @@
   "category": "OC",
   "promotion": true,
   "promotion_rate": 14,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "6b597eff-7bd8-4576-ae7a-1113db67cd7a",
   "kiot_id": "0b41895d-1290-4604-82c4-b9af9261d135",
-  "account_id": "ae08ae18-f9ba-4954-b0d6-09b5ed482958",
+  "user_id": "ae08ae18-f9ba-4954-b0d6-09b5ed482958",
   "product_code": "LUI",
   "active": false,
   "create_at": "31/07/2023",
@@ -1338,11 +1337,11 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "NA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "75b4914c-1d92-4267-9e39-f15f5464ff27",
   "kiot_id": "ddb5c509-6f53-4bd5-8c8c-f5b099c50109",
-  "account_id": "01863187-a478-47d5-90f6-b596a010604a",
+  "user_id": "01863187-a478-47d5-90f6-b596a010604a",
   "product_code": "UNR",
   "active": true,
   "create_at": "16/07/2023",
@@ -1352,11 +1351,11 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "AS",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 3
+  "promotion_rate": 0,  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "900f245e-e754-468f-bd48-d12c987c6322",
   "kiot_id": "af18314f-d6d3-460e-808b-22e5b8fb9e31",
-  "account_id": "adba6a6c-2df9-4984-8607-365c096216f9",
+  "user_id": "adba6a6c-2df9-4984-8607-365c096216f9",
   "product_code": "MOC",
   "active": false,
   "create_at": "15/07/2023",
@@ -1367,11 +1366,11 @@
   "category": "SA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 2
+  "customer_rate": 2,
+  "description": "abc"
 }, {
-  "id": "b9ae7ec4-3edc-4d87-b1c2-fdc6986c2ad5",
   "kiot_id": "bb4babc7-a266-4ab7-a884-ff1d84efe5d2",
-  "account_id": "53bb3dfd-8880-4243-8c2b-3e542f8cd65c",
+  "user_id": "53bb3dfd-8880-4243-8c2b-3e542f8cd65c",
   "product_code": "MFN",
   "active": true,
   "create_at": "07/07/2023",
@@ -1382,11 +1381,11 @@
   "category": "OC",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "111932a6-0fd5-49c0-ade4-64950a04f70f",
   "kiot_id": "a6047f92-01d8-41e2-ba14-f6fb0306fe74",
-  "account_id": "34ab51ee-f061-46dd-aa3c-fce822643030",
+  "user_id": "34ab51ee-f061-46dd-aa3c-fce822643030",
   "product_code": "YDN",
   "active": true,
   "create_at": "31/07/2023",
@@ -1397,11 +1396,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 29,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "4146c0d2-f0ee-4692-9bb5-264c511baa97",
   "kiot_id": "9b4c6a01-c434-4665-9cb1-71ef5a97b724",
-  "account_id": "b71752df-0d9a-4916-a136-99f7521aea01",
+  "user_id": "b71752df-0d9a-4916-a136-99f7521aea01",
   "product_code": "LDG",
   "active": true,
   "create_at": "27/07/2023",
@@ -1411,11 +1410,11 @@
   "image": "http://dummyimage.com/420x420.png/5fa2dd/ffffff",
   "category": "EU",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 5
+  "promotion_rate": 0,  "customer_rate": 5,
+  "description": "abc"
 }, {
-  "id": "d0c1dd3d-438a-420f-b62a-16dae5a340fe",
   "kiot_id": "5c3b764d-9e15-46dc-b4e6-b515dd5286f2",
-  "account_id": "3ce51ea6-db2b-4ebd-9bd9-7e961cf7535f",
+  "user_id": "3ce51ea6-db2b-4ebd-9bd9-7e961cf7535f",
   "product_code": "TCN",
   "active": false,
   "create_at": "16/07/2023",
@@ -1426,11 +1425,11 @@
   "category": "NA",
   "promotion": true,
   "promotion_rate": 12,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "43b077ea-5047-43d1-a3ee-79c1a0954afe",
   "kiot_id": "3444195f-3429-4bcb-b121-14d2cc471aa0",
-  "account_id": "27b17d31-5e35-4c6a-89e5-df6666626b7a",
+  "user_id": "27b17d31-5e35-4c6a-89e5-df6666626b7a",
   "product_code": "FLX",
   "active": false,
   "create_at": "05/07/2023",
@@ -1441,11 +1440,11 @@
   "category": "NA",
   "promotion": false,
   "promotion_rate": 0,
-  "customer_rate": 3
+  "customer_rate": 3,
+  "description": "abc"
 }, {
-  "id": "69629f81-4095-4d64-a53b-02d5912012f5",
   "kiot_id": "d923e47d-e30a-4ca6-9905-71bb426e316e",
-  "account_id": "ef090752-dc89-4c2c-b2bf-683b055eb7cc",
+  "user_id": "ef090752-dc89-4c2c-b2bf-683b055eb7cc",
   "product_code": "DBA",
   "active": true,
   "create_at": "27/07/2023",
@@ -1456,11 +1455,11 @@
   "category": "AS",
   "promotion": true,
   "promotion_rate": 12,
-  "customer_rate": 4
+  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "6d6b49b8-2fae-46e3-9ea1-dead9f7f1beb",
   "kiot_id": "ac9eca58-d2c8-443d-b89d-2b87c44cf519",
-  "account_id": "5ee17d82-fca0-4598-ae9b-c826c3245bb5",
+  "user_id": "5ee17d82-fca0-4598-ae9b-c826c3245bb5",
   "product_code": "GMS",
   "active": true,
   "create_at": "08/07/2023",
@@ -1470,11 +1469,11 @@
   "image": "http://dummyimage.com/420x420.png/dddddd/000000",
   "category": "SA",
   "promotion": false,
-  "promotion_rate": 0,  "customer_rate": 4
+  "promotion_rate": 0,  "customer_rate": 4,
+  "description": "abc"
 }, {
-  "id": "afa1b496-0aca-4709-9fbe-a5737ada88f7",
   "kiot_id": "e58f3f5f-a64e-491b-8071-c2ab24f3b566",
-  "account_id": "729fdc35-bb77-48c9-a738-714dbbb42da9",
+  "user_id": "729fdc35-bb77-48c9-a738-714dbbb42da9",
   "product_code": "CBG",
   "active": true,
   "create_at": "15/07/2023",

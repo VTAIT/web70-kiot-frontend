@@ -14,13 +14,10 @@ File: Leftbar
     box-shadow: $shadow;
     transition: .3s;
     padding: 24px;
-    position: fixed;
     overflow-y: auto;
     z-index: 10;
     bottom: 0;
     top: 0;   
-    margin-top: 70px;  
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .page-wrapper {
     flex: 1;
@@ -28,12 +25,9 @@ File: Leftbar
     display: flex;
     margin-top: $topbar-height;
     .page-content {
-        
         width: 100%;
         position: relative;
         min-height: 70vh;
-        // padding: 0 15px 60px 15px;
-        margin-left: 270px;
         h4{
             color: rgb(85, 85, 85);
 

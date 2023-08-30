@@ -2,6 +2,8 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
 
+const categories = ["All category", "EU", "NA", "OC", "AF", "AS", "SA"];
+
 const Search = (props) => {
     return (
         <form className="search-form">
@@ -16,6 +18,7 @@ const Search = (props) => {
                     placeholder="Product name, id,..."
                 />
             </div>
+
             <div className="select-input">
                 <div className="selection-container">
                     <label htmlFor="price">
@@ -33,27 +36,28 @@ const Search = (props) => {
                         <MdCategory />
                     </label>
                     <select id="category" name="category">
-                        <option value="all">All category</option>
-                        <option value="eu">EU</option>
-                        <option value="na">NA</option>
-                        <option value="oc">OC</option>
-                        <option value="af">AF</option>
-                        <option value="as">AS</option>
-                        <option value="sa">SA</option>
+                        {categories.map((item) => (
+                            <option key={item} value={item}>
+                                {item ? item : "All category"}
+                            </option>
+                        ))}
                     </select>
                 </div>
-                <div className="selection-container date-selection">
-                    <div>Create date:</div>
-                    <div class="border-start">
-                        <label htmlFor="fromdate">From:</label>
-                        <input type="date" id="fromdate" name="fromdate" />
-                    </div>
-                    <div class="border-start">
-                        <label htmlFor="todate">To:</label>
-                        <input type="date" id="todate" name="todate" />
-                    </div>
+            </div>
+            <div className="selection-container date-selection">
+                {/* <p>
+                    <span>Date:</span>
+                </p> */}
+                <div className="date-item">
+                    <label htmlFor="fromdate">From:</label>
+                    <input type="date" id="fromdate" name="fromdate" />
+                </div>
+                <div className="date-item">
+                    <label htmlFor="todate">To:</label>
+                    <input type="date" id="todate" name="todate" />
                 </div>
             </div>
+
             <button className="search-btn">Search</button>
         </form>
     );

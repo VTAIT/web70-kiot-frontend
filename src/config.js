@@ -5,7 +5,6 @@ import ProductList from "./pages/ProductList.jsx";
 import Register from "./pages/Register.jsx";
 import PendingAccounts from "./pages/PendingAccounts.jsx";
 import Accounts from "./pages/Accounts.jsx";
-import EditProduct from "./components/productListComponents/EditProduct.jsx";
 
 export const routes = [
   {
@@ -38,7 +37,6 @@ export const routes = [
     path: "/accounts",
     component: <Accounts />,
     isPrivate: true,
-    isAdmin: true,
   },
   {
     path: "/login",
