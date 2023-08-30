@@ -1,48 +1,49 @@
 import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 import { useFormik } from "formik";
-import customerAPI from "../apis/customerAPI";
+import customerAPI from "../../apis/customerAPI";
 import { useNavigate } from "react-router";
-import AuthContext from "../contexts/AuthContext/AuthContext";
+import AuthContext from "../../contexts/AuthContext/AuthContext";
+import ConfirmModal from "./ConfirmModal";
 
-const NewCustomerModal = ({
+const CustomerModal = ({
   show,
   handleClose,
   onUpdateCustomer,
   editedCustomer,
+  isAddMode,
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const { user } = auth;
 
   const [submittingStatus, setSubmittingStatus] = useState({});
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues:
-      editedCustomer && editedCustomer.fullName
-        ? {
-            fullName: editedCustomer.fullName,
-            gender:
-              editedCustomer.gender === 1
-                ? "male"
-                : editedCustomer.gender === 2
-                ? "female"
-                : "other",
-            phone: editedCustomer.phone,
-            email: editedCustomer.email,
-            address: editedCustomer.address,
-            rank: editedCustomer.rank,
-          }
-        : {
-            fullName: "",
-            gender: "",
-            phone: "",
-            email: "",
-            address: "",
-            rank: "",
-          },
+    initialValues: isAddMode
+      ? {
+          fullName: "",
+          gender: "",
+          phone: "",
+          email: "",
+          address: "",
+          rank: "",
+        }
+      : editedCustomer &&
+        editedCustomer.fullName && {
+          fullName: editedCustomer.fullName,
+          gender:
+            editedCustomer.gender === 1
+              ? "male"
+              : editedCustomer.gender === 2
+              ? "female"
+              : "other",
+          phone: editedCustomer.phone,
+          email: editedCustomer.email,
+          address: editedCustomer.address,
+          rank: editedCustomer.rank,
+        },
 
     onSubmit: async (values) => {
       try {
@@ -76,6 +77,7 @@ const NewCustomerModal = ({
                     sent: true,
                     msg: "Customer has been updated successfully!",
                   });
+                  handleClose();
                 }
               })
               .catch((err) => {
@@ -109,10 +111,14 @@ const NewCustomerModal = ({
     },
   });
   const { handleSubmit, handleChange, values, resetForm } = formik;
+
+  const confirmSave = () => {
+    return <ConfirmModal onConfirm={handleSubmit} />;
+  };
   return (
     <BootstrapModal show={show} onHide={handleClose}>
       <BootstrapModal.Header closeButton>
-        <BootstrapModal.Title>New Customer</BootstrapModal.Title>
+        <BootstrapModal.Title>Customer</BootstrapModal.Title>
       </BootstrapModal.Header>
       <BootstrapModal.Body>
         {loading &&
@@ -151,15 +157,6 @@ const NewCustomerModal = ({
           <div className="form-group">
             <label htmlFor="gender">Gender</label>
             <div className="input-group mb-3">
-              {/* <input
-                type="text"
-                className="form-control"
-                id="gender"
-                placeholder="Enter Gender"
-                onChange={handleChange}
-                value={values.gender}
-              /> */}
-
               <select
                 class="form-select"
                 id="gender"
@@ -241,7 +238,11 @@ const NewCustomerModal = ({
             >
               Close
             </button>
-            <button type="submit" class="col btn btn-primary">
+            <button
+              type="submit"
+              class="col btn btn-primary"
+              // onClick={confirmSave}
+            >
               Save
             </button>
           </div>
@@ -252,4 +253,4 @@ const NewCustomerModal = ({
   );
 };
 
-export default NewCustomerModal;
+export default CustomerModal;

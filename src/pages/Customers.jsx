@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import customerAPI from "../apis/customerAPI";
-import Customer from "../components/Customer";
-import NewCustomerModal from "../components/NewCustomerModal";
-
+import Customer from "../components/customerComponents/Customer";
+import CustomerModal from "../components/customerComponents/CustomerModal";
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [newCustomerModalOpen, setNewCustomerModalOpen] = useState(false);
-  // const [show, setShow] = useState(false);
-  const handleClose = () => setNewCustomerModalOpen(false);
-  const handleShow = () => setNewCustomerModalOpen(true);
-  const [editedCustomer, setEditedCustomer] = useState()
+  const [customerModalOpen, setCustomerModalOpen] = useState(false);
+  const [isAddMode, setIsAddMode] = useState(true);
+  const handleClose = () => setCustomerModalOpen(false);
+  const handleShow = () => {
+    setIsAddMode(true);
+    setCustomerModalOpen(true);
+  };
+  const [editedCustomer, setEditedCustomer] = useState();
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -28,11 +30,12 @@ const Customers = () => {
   };
 
   // const openCustomerModal = () => {
-  //   setNewCustomerModalOpen(true);
+  //   setCustomerModalOpen(true);
   // };
   const handleEditCustomer = (customer) => {
+    setIsAddMode(false);
     setEditedCustomer(customer);
-    setNewCustomerModalOpen(true);
+    setCustomerModalOpen(true);
   };
   return (
     <div className="container-fluid mt-4">
@@ -105,11 +108,12 @@ const Customers = () => {
               </div>
             </div>
           </div>
-          <NewCustomerModal
-            show={newCustomerModalOpen}
+          <CustomerModal
+            show={customerModalOpen}
             handleClose={handleClose}
             onUpdateCustomer={fetchCustomers}
             editedCustomer={editedCustomer}
+            isAddMode={isAddMode}
           />
         </>
       )}
