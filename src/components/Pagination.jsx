@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import productData from "../mocks/products.data.json";
 
-const Pagination = ({ data, setProducts }) => {
+const Pagination = ({ data, setProducts, PerPage }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 15;
-    const pageCount = Math.ceil(productData.length / itemsPerPage);
+    const itemsPerPage = PerPage;
+    const pageCount = Math.ceil(data.length / itemsPerPage);
 
     useEffect(() => {
         const handlePagination = () => {
@@ -38,7 +37,7 @@ const Pagination = ({ data, setProducts }) => {
             nextLinkClassName="page-link"
             breakClassName="page-item"
             breakLinkClassName="page-link"
-            marginPagesDisplayed={2}
+            marginPagesDisplayed={1}
             containerClassName="pagination"
             activeClassName="active"
         />

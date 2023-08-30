@@ -6,7 +6,6 @@ import Register from "./pages/Register.jsx";
 import PendingAccounts from "./pages/PendingAccounts.jsx";
 import Account from "./components/Account.jsx";
 import Accounts from "./pages/Accounts.jsx";
-import EditProduct from "./components/productListComponents/EditProduct.jsx";
 
 export const routes = [
     {
@@ -19,11 +18,7 @@ export const routes = [
         component: <ProductList />,
         isPrivate: true,
     },
-    {
-        path: "/productList/:productId",
-        component: <EditProduct />,
-        isPrivate: true,
-    },
+
     {
         path: "/customers",
         component: <Customers />,
