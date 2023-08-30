@@ -6,18 +6,20 @@ const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [customerModalOpen, setCustomerModalOpen] = useState(false);
-  const [isAddMode, setIsAddMode] = useState(true);
+  const [actionStatus, setActionStatus] = useState();
   const handleClose = () => setCustomerModalOpen(false);
   const handleShow = () => {
     setIsAddMode(true);
     setCustomerModalOpen(true);
   };
   const [editedCustomer, setEditedCustomer] = useState();
+  const [isAddMode, setIsAddMode] = useState(true);
   useEffect(() => {
-    fetchCustomers();
+    fetchCustomers(actionStatus);
   }, []);
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = async (actionSt) => {
+    setTimeoutAlert(actionSt);
     try {
       setLoading(true);
       const response = await customerAPI.getAll();
@@ -28,21 +30,46 @@ const Customers = () => {
       setLoading(false);
     }
   };
+  const setTimeoutAlert = (actionSt) => {
+    if (actionSt) {
+      setActionStatus(actionSt);
+      setTimeout(() => {
+        setActionStatus();
+      }, 5000);
+    }
+  };
 
-  // const openCustomerModal = () => {
-  //   setCustomerModalOpen(true);
-  // };
   const handleEditCustomer = (customer) => {
     setIsAddMode(false);
     setEditedCustomer(customer);
     setCustomerModalOpen(true);
   };
+  const dismissAlert = () => setActionStatus();
+
   return (
     <div className="container-fluid mt-4">
       {loading ? (
         <p>Loading customers ...</p>
       ) : (
         <>
+          {actionStatus && (
+            <div
+              class={
+                actionStatus.status === 1
+                  ? "alert alert-success alert-dismissible"
+                  : "alert alert-danger alert-dismissible"
+              }
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                onClick={dismissAlert}
+              ></button>
+
+              <strong>{actionStatus.message}</strong>
+            </div>
+          )}
           <div className="row">
             <div className="col-sm-12">
               {/* account list */}

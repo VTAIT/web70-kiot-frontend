@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 import { useFormik } from "formik";
 import customerAPI from "../../apis/customerAPI";
-import { useNavigate } from "react-router";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
 import ConfirmModal from "./ConfirmModal";
 
@@ -19,106 +20,106 @@ const CustomerModal = ({
   const { user } = auth;
 
   const [submittingStatus, setSubmittingStatus] = useState({});
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: isAddMode
-      ? {
-          fullName: "",
-          gender: "",
-          phone: "",
-          email: "",
-          address: "",
-          rank: "",
-        }
-      : editedCustomer &&
-        editedCustomer.fullName && {
-          fullName: editedCustomer.fullName,
-          gender:
-            editedCustomer.gender === 1
-              ? "male"
-              : editedCustomer.gender === 2
-              ? "female"
-              : "other",
-          phone: editedCustomer.phone,
-          email: editedCustomer.email,
-          address: editedCustomer.address,
-          rank: editedCustomer.rank,
-        },
-
-    onSubmit: async (values) => {
-      try {
-        setLoading(true);
-        setError(null);
-        editedCustomer && editedCustomer.fullName
-          ? await customerAPI
-              .update({
-                customerId: editedCustomer._id,
-                email: values.email ? values.email : editedCustomer.email,
-                fullName: values.fullName
-                  ? values.fullName
-                  : editedCustomer.fullName,
-                phone: values.phone ? values.phone : editedCustomer.phone,
-                address: values.address
-                  ? values.address
-                  : editedCustomer.address,
-                gender: values.gender
-                  ? values.gender === "male"
-                    ? 1
-                    : values.gender === "female"
-                    ? 2
-                    : values.gender === "other" && 3
-                  : editedCustomer.gender,
-                transaction: editedCustomer.transaction,
-                rank: values.rank ? values.rank : editedCustomer.rank,
-              })
-              .then((res) => {
-                if (res.status === 200) {
-                  setSubmittingStatus({
-                    sent: true,
-                    msg: "Customer has been updated successfully!",
-                  });
-                  handleClose();
-                }
-              })
-              .catch((err) => {
-                setSubmittingStatus({
-                  sent: false,
-                  msg: `${err}`,
-                });
-              })
-          : await customerAPI.create({
-              username: user.username,
-              fullName: values.fullName,
-              phone: values.phone,
-              email: values.email,
-              address: values.address,
-              gender:
-                values.gender === "male"
-                  ? 1
-                  : values.gender === "female"
-                  ? 2
-                  : 3,
-              kiot_id: user.kiot_id,
-            });
-
-        onUpdateCustomer();
-      } catch (error) {
-        console.log(error);
-        setError(error.response.data.message);
-      } finally {
-        setLoading(false);
+  const initialValues = isAddMode
+    ? {
+        fullName: "",
+        gender: "",
+        phone: "",
+        email: "",
+        address: "",
+        rank: "",
       }
-    },
+    : editedCustomer && {
+        fullName: editedCustomer.fullName,
+        gender:
+          editedCustomer.gender === 1
+            ? "male"
+            : editedCustomer.gender === 2
+            ? "female"
+            : "other",
+        phone: editedCustomer.phone,
+        email: editedCustomer.email,
+        address: editedCustomer.address,
+        rank: editedCustomer.rank,
+      };
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string().required("Full Name is required"),
+    gender: Yup.string().required("Gender is required"),
+    phone: Yup.string().required("Phone is required"),
+    email: Yup.string(),
+    address: Yup.string().required("Address is required"),
+    rank: Yup.number(),
   });
-  const { handleSubmit, handleChange, values, resetForm } = formik;
+  function onSubmit(fields, { setStatus, setSubmitting, resetForm }) {
+    setStatus();
+    if (isAddMode) {
+      createCustomer(fields, setSubmitting, resetForm);
+      onUpdateCustomer();
+    } else {
+      updateCustomer(fields, setSubmitting);
+      onUpdateCustomer();
+    }
+  }
 
-  const confirmSave = () => {
-    return <ConfirmModal onConfirm={handleSubmit} />;
-  };
+  async function createCustomer(fields, setSubmitting, resetForm) {
+    resetForm();
+    const newCustomer = {
+      ...fields,
+      kiot_id: user.kiot_id,
+      username: user.username,
+      gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
+    };
+    console.log(newCustomer);
+    await customerAPI
+      .create(newCustomer)
+      .then(() => {
+        onUpdateCustomer({
+          status: 1,
+          message: "Customer is added successfully!",
+        });
+        handleClose();
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        onUpdateCustomer({ status: 0, message: error.response.data.error });
+        handleClose();
+        console.log(error.response.data.error);
+      });
+  }
+
+  async function updateCustomer(fields, setSubmitting) {
+    const setfields = Object.fromEntries(
+      Object.entries(fields).filter(([_, v]) => v != null)
+    );
+    const updatedFields = {
+      ...editedCustomer,
+      ...setfields,
+      customerId: editedCustomer._id,
+      gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
+    };
+    console.log(updatedFields);
+    await customerAPI
+      .update(updatedFields)
+      .then(() => {
+        handleClose();
+        onUpdateCustomer({
+          status: 1,
+          message: "Customer is editted successfully!",
+        });
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        handleClose();
+        onUpdateCustomer({ status: 0, message: error.response.data.error });
+      });
+  }
+
   return (
     <BootstrapModal show={show} onHide={handleClose}>
       <BootstrapModal.Header closeButton>
-        <BootstrapModal.Title>Customer</BootstrapModal.Title>
+        <BootstrapModal.Title>
+          {editedCustomer ? "Edit Customer" : "Add Customer"}
+        </BootstrapModal.Title>
       </BootstrapModal.Header>
       <BootstrapModal.Body>
         {loading &&
@@ -127,126 +128,156 @@ const CustomerModal = ({
           ) : (
             <p className="text-info">Adding Customer ....</p>
           ))}
-        <form
-          onSubmit={handleSubmit}
-          className="form-horizontal auth-form my-4"
+        <Formik
+          enableReinitialize
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
         >
-          {submittingStatus && submittingStatus.msg && (
-            <p
-              classname={`alert ${
-                submittingStatus.sent ? "alert-success" : "alert-error"
-              }`}
-            >
-              {submittingStatus.msg}
-            </p>
-          )}
-          <div className="form-group">
-            <label htmlFor="fullName">Fullname</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="fullName"
-                name="fullName"
-                placeholder="Enter FullName"
-                onChange={handleChange}
-                value={values.fullName}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="gender">Gender</label>
-            <div className="input-group mb-3">
-              <select
-                class="form-select"
-                id="gender"
-                name="gender"
-                onChange={handleChange}
-                value={values.gender}
-              >
-                <option selected>Please choose the gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="phone">Phone</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="phone"
-                name="phone"
-                placeholder="Enter Phone"
-                onChange={handleChange}
-                value={values.phone}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="email"
-                name="email"
-                placeholder="Enter Email"
-                onChange={handleChange}
-                value={values.email}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                name="address"
-                placeholder="Enter Address"
-                onChange={handleChange}
-                value={values.address}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="rank">Rank</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="rank"
-                name="rank"
-                placeholder="Enter rank for customer"
-                onChange={handleChange}
-                value={values.rank}
-              />
-            </div>
-          </div>
+          {({ errors, touched, isSubmitting, setFieldValue }) => {
+            return (
+              <Form>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Fullname</label>
+                    <Field
+                      name="fullName"
+                      type="text"
+                      className={
+                        "form-control" +
+                        (errors.fullName && touched.fullName
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="fullName"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Gender</label>
+                    <Field
+                      name="gender"
+                      as="select"
+                      className={
+                        "form-control" +
+                        (errors.gender && touched.gender ? " is-invalid" : "")
+                      }
+                    >
+                      <option value=""></option>
+                      <option value="male">male</option>
+                      <option value="female">female</option>
+                      <option value="other">other</option>
+                    </Field>
+                    <ErrorMessage
+                      name="gender"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
 
-          {error && <p className="text-danger">{error}</p>}
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Email</label>
+                    <Field
+                      name="email"
+                      type="text"
+                      className={
+                        "form-control" +
+                        (errors.email && touched.email ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
 
-          <div class="row col-6 mx-auto mt-5">
-            <button
-              type="button"
-              class="col btn btn-secondary me-2"
-              onClick={handleClose}
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              class="col btn btn-primary"
-              // onClick={confirmSave}
-            >
-              Save
-            </button>
-          </div>
-        </form>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Phone</label>
+                    <Field
+                      name="phone"
+                      type="text"
+                      className={
+                        "form-control" +
+                        (errors.phone && touched.phone ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="phone"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Address</label>
+                    <Field
+                      name="address"
+                      type="text"
+                      className={
+                        "form-control" +
+                        (errors.address && touched.address ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="address"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label>Rank</label>
+                    <Field
+                      name="rank"
+                      type="text"
+                      className={
+                        "form-control" +
+                        (errors.rank && touched.rank ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="rank"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group text-center">
+                  <button
+                    type="button"
+                    onClick={handleClose}
+                    className="btn btn-secondary me-2"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn btn-primary"
+                  >
+                    {isSubmitting && (
+                      <span className="spinner-border spinner-border-sm mr-1"></span>
+                    )}
+                    Save
+                  </button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
       </BootstrapModal.Body>
       {/* <BootstrapModal.Footer></BootstrapModal.Footer> */}
     </BootstrapModal>

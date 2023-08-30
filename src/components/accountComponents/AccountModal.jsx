@@ -4,7 +4,6 @@ import accountAPI from "../../apis/accountAPI";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-
 const AccountModal = ({
   show,
   handleClose,
@@ -64,16 +63,20 @@ const AccountModal = ({
 
   async function createUser(fields, setSubmitting, resetForm) {
     resetForm();
+    const newUser = {
+      ...fields,
+      role_id: fields.role === "owner" ? 2 : "employee" && 3,
+    };
+    console.log(newUser)
     await accountAPI
-      .create(fields)
+      .create(newUser)
       .then(() => {
         onUpdateAccount({ status: 1, message: "User is added successfully!" });
         handleClose();
       })
       .catch((error) => {
         setSubmitting(false);
-        onUpdateAccount({ status: 0, message: "Error in adding user!" });
-        // handleClose()
+        onUpdateAccount({ status: 0, message: error.response.data.error });
         console.log(error);
       });
   }
@@ -98,7 +101,7 @@ const AccountModal = ({
       })
       .catch((error) => {
         setSubmitting(false);
-        onUpdateAccount({ status: 0, message: "Error in editting user!" });
+        onUpdateAccount({ status: 0, message: error.response.data.error });
       });
   }
 
