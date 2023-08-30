@@ -6,11 +6,6 @@ const Item = (props) => {
     return (
         <tr>
             <td>
-                <img
-                    src="../assets/images/products/img-2.png"
-                    alt=""
-                    height={52}
-                />
                 <p className="d-inline-block align-middle mb-0">
                     <div className="d-inline-block align-middle mb-0 product-name">
                         {item.product_name}

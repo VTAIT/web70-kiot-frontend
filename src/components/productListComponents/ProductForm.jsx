@@ -11,18 +11,17 @@ import { useEffect } from "react";
 import kiotAPI from "../../apis/kiotAPI";
 import productAPI from "../../apis/productAPI";
 import { productListContext } from "../../pages/ProductList";
+import imageAPI from "../../apis/imageAPI";
 
 const categories = ["Choose", "EU", "NA", "OC", "AF", "AS", "SA"];
 
 const ProductFrom = ({ setShow, product }) => {
     const { handleGetAllProduct, setAlert } = useContext(productListContext);
+    const { auth } = useContext(AuthContext);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-
-    const { auth } = useContext(AuthContext);
 
     const [kiots, setKiots] = useState([{ _id: "", username: "" }]);
 
@@ -32,31 +31,51 @@ const ProductFrom = ({ setShow, product }) => {
         setShowConfirmModal(false);
 
         const formData = new FormData();
-
-        formData.append("product_name", dataInForm.product_name);
-        formData.append("category", dataInForm.category);
-        formData.append("price", dataInForm.price);
+        formData.append("name_file", dataInForm.product_name);
         formData.append("image", dataInForm.image);
-        formData.append("description", dataInForm.description);
         formData.append("kiot_id", dataInForm.kiot_id);
-        formData.append("active", dataInForm.active);
 
         try {
             setIsLoading(true);
             if (product) {
-                formData.append("productId", product._id);
+                //for update product, because create and update modal use a form together
+                let dataForUpdateProduct;
 
-                const res = await productAPI.updateProduct(formData);
+                if (dataInForm.image) {
+                    const resImage = await imageAPI.createImage(formData);
+                    const srcImage = resImage.data.data.imageInfo.src;
 
-                console.log(res.data.messege);
+                    dataForUpdateProduct = {
+                        ...dataInForm,
+                        image: srcImage,
+                        productId: product._id,
+                    };
+                }
+                if (!dataInForm.image) {
+                    dataForUpdateProduct = {
+                        ...dataInForm,
+                        image: "",
+                        productId: product._id,
+                    };
+                }
 
+                const resProduct = await productAPI.updateProduct(
+                    dataForUpdateProduct
+                );
+
+                console.log(resProduct.data.data.messege);
                 setAlert(true);
                 handleGetAllProduct();
             } else {
-                const res = await productAPI.createProduct(formData);
+                const resImage = await imageAPI.createImage(formData);
+                const srcImage = resImage.data.data.imageInfo.src;
 
-                console.log(res.data.messege);
+                const dataForCreateProduct = { ...dataInForm, image: srcImage };
+                const resProduct = await productAPI.createProduct(
+                    dataForCreateProduct
+                );
 
+                console.log(resProduct.data.data.messege);
                 setAlert(true);
                 handleGetAllProduct();
             }
@@ -94,7 +113,10 @@ const ProductFrom = ({ setShow, product }) => {
                 ? Yup.mixed().notRequired()
                 : Yup.mixed().required("Image is required"),
             description: Yup.string().required("Description is required"),
-            kiot_id: Yup.string().required("Description is required"),
+            kiot_id:
+                auth.user.role_id === 1
+                    ? Yup.string().required("Description is required")
+                    : Yup.string().notRequired(),
             active: Yup.boolean().required("Active status is required"),
         }),
 
@@ -107,10 +129,12 @@ const ProductFrom = ({ setShow, product }) => {
     useEffect(() => {
         const getKiots = async () => {
             const res = await kiotAPI.getKiot();
-            console.log(res);
             setKiots([{ _id: "", username: "" }, ...res.data.data.kiotList]);
         };
-        getKiots();
+
+        if (auth.user.role_id === 1) {
+            getKiots();
+        }
     }, []);
 
     if (isLoading) {
