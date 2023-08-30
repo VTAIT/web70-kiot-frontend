@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Account from "../components/Account";
+import Account from "../components/accountComponents/Account";
 import accountAPI from "../apis/accountAPI";
 
 const PendingAccounts = () => {

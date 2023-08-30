@@ -56,7 +56,7 @@ const LeftSideBar = () => {
               Customers
             </NavLink>
           </li>
-          {user.username === "admin" && (
+          {user.role_id === 1 && (
             <>
               <li className={select === 4 ? "mm-active" : ""}>
                 <NavLink
@@ -71,20 +71,22 @@ const LeftSideBar = () => {
                   Pending Accounts
                 </NavLink>
               </li>
-              <li className={select === 5 ? "mm-active" : ""}>
-                <NavLink
-                  to="/accounts"
-                  className="nav-link"
-                  onClick={(e) => {
-                    // e.preventDefault();
-                    selectItem(5);
-                  }}
-                >
-                  <i className="ti-control-record" />
-                  Accounts
-                </NavLink>
-              </li>
             </>
+          )}
+          {(user.role_id === 1 || user.role_id === 2) && (
+            <li className={select === 5 ? "mm-active" : ""}>
+              <NavLink
+                to="/accounts"
+                className="nav-link"
+                onClick={(e) => {
+                  // e.preventDefault();
+                  selectItem(5);
+                }}
+              >
+                <i className="ti-control-record" />
+                Accounts
+              </NavLink>
+            </li>
           )}
         </ul>
       </div>
