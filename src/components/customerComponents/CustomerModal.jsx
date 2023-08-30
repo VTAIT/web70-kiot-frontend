@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
-import { useFormik } from "formik";
 import customerAPI from "../../apis/customerAPI";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
-import ConfirmModal from "./ConfirmModal";
+
 
 const CustomerModal = ({
   show,
@@ -15,11 +14,9 @@ const CustomerModal = ({
   isAddMode,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const { auth } = useContext(AuthContext);
   const { user } = auth;
 
-  const [submittingStatus, setSubmittingStatus] = useState({});
   const initialValues = isAddMode
     ? {
         fullName: "",

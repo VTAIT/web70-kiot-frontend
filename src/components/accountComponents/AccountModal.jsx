@@ -11,6 +11,7 @@ const AccountModal = ({
   editedAccount,
   isAddMode,
 }) => {
+  const [loading, setLoading] = useState(false);
   const initialValues = isAddMode
     ? {
         username: "",
@@ -67,7 +68,7 @@ const AccountModal = ({
       ...fields,
       role_id: fields.role === "owner" ? 2 : "employee" && 3,
     };
-    console.log(newUser)
+    console.log(newUser);
     await accountAPI
       .create(newUser)
       .then(() => {
@@ -104,12 +105,6 @@ const AccountModal = ({
         onUpdateAccount({ status: 0, message: error.response.data.error });
       });
   }
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const [user, setUser] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <BootstrapModal show={show} onHide={handleClose}>
