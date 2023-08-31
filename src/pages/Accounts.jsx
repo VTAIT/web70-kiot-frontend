@@ -29,6 +29,7 @@ const Accounts = () => {
       console.log(error);
     } finally {
       setLoading(false);
+      setAccountModalOpen(false)
     }
   };
 

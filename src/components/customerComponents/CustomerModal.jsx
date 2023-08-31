@@ -94,7 +94,7 @@ const CustomerModal = ({
       customerId: editedCustomer._id,
       gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
     };
-    console.log(updatedFields);
+   
     await customerAPI
       .update(updatedFields)
       .then(() => {

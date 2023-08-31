@@ -28,6 +28,7 @@ const Customers = () => {
       console.log(error);
     } finally {
       setLoading(false);
+      setCustomerModalOpen(false)
     }
   };
   const setTimeoutAlert = (actionSt) => {
