@@ -8,7 +8,7 @@ const Item = (props) => {
             <td>
                 <p className="d-inline-block align-middle mb-0">
                     <div className="d-inline-block align-middle mb-0 product-name">
-                        {item.product_name}
+                        {item.name_product}
                     </div>
                     <br />
                     {/* <span className="text-muted font-13">

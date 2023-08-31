@@ -1,32 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import productAPI from "../apis/productAPI";
+import { handleSameItem } from "../utils/arrayUtils";
 
-const Pagination = ({ data, setProducts, PerPage }) => {
+const Pagination = (props) => {
+    const {
+        totalData,
+        setTotalData,
+        setCurrentData,
+        itemsPerPage,
+        defaultCussor,
+    } = props;
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = PerPage;
-    const pageCount = Math.ceil(data.length / itemsPerPage);
+    const [totalPages, setTotalPages] = useState(
+        Math.ceil(totalData.length / itemsPerPage)
+    );
+    const handlePageClick = async (e) => {
+        const newCurrentPage = e.selected + 1;
+        setCurrentPage(newCurrentPage);
 
-    useEffect(() => {
-        const handlePagination = () => {
-            const currentProductData = data.slice(
-                currentPage * itemsPerPage - itemsPerPage,
-                currentPage * itemsPerPage
+        //when client access to the previous of last page, load more 50 items
+        if (newCurrentPage > totalPages - 1) {
+            const res = await productAPI.getAllProduct(
+                totalData.length + defaultCussor
             );
-            setProducts(currentProductData);
-        };
-        handlePagination();
-    }, [currentPage, data]);
 
-    const handlePageClick = (e) => {
-        setCurrentPage(+e.selected + 1);
+            const newLoadedData = handleSameItem(
+                totalData,
+                res.data.data.productList
+            );
+
+            setTotalData(newLoadedData);
+            setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
+            setCurrentData(
+                newLoadedData.slice(
+                    (newCurrentPage - 1) * itemsPerPage,
+                    newCurrentPage * itemsPerPage
+                )
+            );
+        } else {
+            setCurrentData(
+                totalData.slice(
+                    (newCurrentPage - 1) * itemsPerPage,
+                    newCurrentPage * itemsPerPage
+                )
+            );
+        }
     };
     return (
         <ReactPaginate
             breakLabel="..."
             nextLabel=" >"
             onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
+            pageRangeDisplayed={3}
+            pageCount={totalPages}
             previousLabel="< "
             renderOnZeroPageCount={null}
             pageClassName="page-item"

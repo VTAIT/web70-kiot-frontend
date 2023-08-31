@@ -11,15 +11,30 @@ import { Spinner } from "react-bootstrap";
 const Products = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
-    const [dataServer, setDataServer] = useState([]);
-    const [products, setProducts] = useState([]);
+
+    const [totalData, setTotalData] = useState([]);
+    const [currentData, setCurrentData] = useState([]);
+
+    const itemsPerPage = 20;
+    const defaultCussor = 50;
+    const paginationProps = {
+        totalData,
+        setTotalData,
+        currentData,
+        setCurrentData,
+        itemsPerPage,
+        defaultCussor,
+    };
 
     useEffect(() => {
         const handleGetAllProduct = async () => {
             try {
                 setIsLoading(true);
-                const res = await productAPI.getAllProduct();
-                setDataServer(res.data.data.productList);
+                const res = await productAPI.getAllProduct(defaultCussor);
+                const data = res.data.data.productList;
+                setTotalData(data);
+
+                setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData
             } catch (error) {
                 console.log(error);
                 setError(
@@ -56,19 +71,17 @@ const Products = () => {
                     <div className="row">
                         <div className="position-relative col-lg-8 d-flex flex-column align-items-center px-2 h-70vh ">
                             <div className="d-flex justify-content-around flex-wrap h-70vh over-flow-scroll scrollbar-small">
-                                {products.map((item) => {
-                                    return (
-                                        <ProductCart
-                                            product={item}
-                                            key={item._id}
-                                        />
-                                    );
+                                {currentData.map((item) => {
+                                    if (item.active === true) {
+                                        return (
+                                            <ProductCart
+                                                product={item}
+                                                key={item._id}
+                                            />
+                                        );
+                                    }
                                 })}
-                                <Pagination
-                                    data={dataServer}
-                                    setProducts={setProducts}
-                                    PerPage={16}
-                                />
+                                <Pagination {...paginationProps} />
                             </div>
                         </div>
 

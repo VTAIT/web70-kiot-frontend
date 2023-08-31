@@ -31,7 +31,7 @@ const ProductFrom = ({ setShow, product }) => {
         setShowConfirmModal(false);
 
         const formData = new FormData();
-        formData.append("name_file", dataInForm.product_name);
+        formData.append("name_file", dataInForm.name_product);
         formData.append("image", dataInForm.image);
         formData.append("kiot_id", dataInForm.kiot_id);
 
@@ -63,7 +63,6 @@ const ProductFrom = ({ setShow, product }) => {
                     dataForUpdateProduct
                 );
 
-                console.log(resProduct.data.data.messege);
                 setAlert(true);
                 handleGetAllProduct();
             } else {
@@ -75,7 +74,6 @@ const ProductFrom = ({ setShow, product }) => {
                     dataForCreateProduct
                 );
 
-                console.log(resProduct.data.data.messege);
                 setAlert(true);
                 handleGetAllProduct();
             }
@@ -92,7 +90,7 @@ const ProductFrom = ({ setShow, product }) => {
 
     const formik = useFormik({
         initialValues: {
-            product_name: product ? product.product_name : "",
+            name_product: product ? product.name_product : "",
             category: product ? product.category : "",
             price: product ? product.price : "",
             image: "",
@@ -102,7 +100,7 @@ const ProductFrom = ({ setShow, product }) => {
         },
 
         validationSchema: Yup.object({
-            product_name: Yup.string()
+            name_product: Yup.string()
                 .required("Name is required")
                 .min(2, "More than 2 characters"),
             category: Yup.string().required("Category is required"),
@@ -156,17 +154,17 @@ const ProductFrom = ({ setShow, product }) => {
         <>
             <Form onSubmit={formik.handleSubmit}>
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="product_name">
+                    <Form.Group as={Col} controlId="name_product">
                         <Form.Label>Product's Name:</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Product's name"
-                            value={formik.values.product_name}
+                            value={formik.values.name_product}
                             onChange={formik.handleChange}
                         />
-                        {formik.errors.product_name && (
+                        {formik.errors.name_product && (
                             <p className="text-danger">
-                                {formik.errors.product_name}
+                                {formik.errors.name_product}
                             </p>
                         )}
                     </Form.Group>
@@ -296,7 +294,7 @@ const ProductFrom = ({ setShow, product }) => {
                             width: "fit-content",
                             margin: "0px 10px",
                             background:
-                                !formik.errors.product_name &&
+                                !formik.errors.name_product &&
                                 !formik.errors.price &&
                                 !formik.errors.image &&
                                 !formik.errors.category &&

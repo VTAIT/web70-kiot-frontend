@@ -14,14 +14,28 @@ const ProductList = () => {
     const [error, setError] = useState("");
     const [alert, setAlert] = useState(false);
 
-    const [dataServer, setDataServer] = useState([]);
-    const [products, setProducts] = useState([]);
+    const [totalData, setTotalData] = useState([]);
+    const [currentData, setCurrentData] = useState([]);
+
+    const itemsPerPage = 8;
+    const defaultCussor = 50;
+    const paginationProps = {
+        totalData,
+        setTotalData,
+        currentData,
+        setCurrentData,
+        itemsPerPage,
+        defaultCussor,
+    };
 
     const handleGetAllProduct = async () => {
         try {
             setIsLoading(true);
-            const res = await productAPI.getAllProduct();
-            setDataServer(res.data.data.productList);
+            const res = await productAPI.getAllProduct(defaultCussor);
+            const data = res.data.data.productList;
+            setTotalData(data);
+
+            setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData (page1)
         } catch (error) {
             console.log(error);
             setError(
@@ -31,7 +45,6 @@ const ProductList = () => {
             setIsLoading(false);
         }
     };
-
     useEffect(() => {
         handleGetAllProduct();
     }, []);
@@ -65,14 +78,10 @@ const ProductList = () => {
                                         <>
                                             <Search />
                                             <AddProductModal />
-                                            <TableList data={products} />
+                                            <TableList data={currentData} />
                                         </>
                                     </div>
-                                    <Pagination
-                                        data={dataServer}
-                                        setProducts={setProducts}
-                                        PerPage={8}
-                                    />
+                                    <Pagination {...paginationProps} />
                                 </div>
                             </div>
                             {/* end product list */}

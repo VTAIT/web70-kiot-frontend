@@ -23,7 +23,7 @@ const ProductCart = ({ product }) => {
             )}
             <div className="card-body product-info rounded-2">
                 <div className="w-100 d-flex justify-content-start">
-                    <div className="product-title">{product.product_name}</div>
+                    <div className="product-title">{product.name_product}</div>
                 </div>
 
                 <div className="d-flex flex-column justify-content-between my-2">

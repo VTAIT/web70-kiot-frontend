@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
 
-const categories = ["All category", "EU", "NA", "OC", "AF", "AS", "SA"];
+const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 
 const Search = (props) => {
+    const [search, setSearch] = useState("");
+    const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
+    const [date, setDate] = useState({ from: "", to: "" });
+    const [query, setQuery] = useState({
+        search: "",
+        price: "",
+        category: "",
+        date: "",
+    });
+
+    const handleSearch = () => {
+        setQuery({
+            search,
+            price,
+            category,
+            date,
+        });
+        console.log({
+            search,
+            price,
+            category,
+            date,
+        });
+    };
+
     return (
         <form className="search-form">
             <div className="search-input">
@@ -16,6 +42,7 @@ const Search = (props) => {
                     name="search"
                     type="text"
                     placeholder="Product name, id,..."
+                    onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
 
@@ -24,8 +51,12 @@ const Search = (props) => {
                     <label htmlFor="price">
                         <MdOutlineAttachMoney />
                     </label>
-                    <select name="price" id="price">
-                        <option value="all">All price</option>
+                    <select
+                        name="price"
+                        id="price"
+                        onChange={(e) => setPrice(e.target.value)}
+                    >
+                        <option value="">All price</option>
                         <option value="50">less than 50</option>
                         <option value="50-100">50 to 100</option>
                         <option value="100">more than 100</option>
@@ -35,9 +66,13 @@ const Search = (props) => {
                     <label htmlFor="category">
                         <MdCategory />
                     </label>
-                    <select id="category" name="category">
+                    <select
+                        id="category"
+                        name="category"
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
                         {categories.map((item) => (
-                            <option key={item} value={item}>
+                            <option key={item} value={item ? item : ""}>
                                 {item ? item : "All category"}
                             </option>
                         ))}
@@ -50,15 +85,41 @@ const Search = (props) => {
                 </p> */}
                 <div className="date-item">
                     <label htmlFor="fromdate">From:</label>
-                    <input type="date" id="fromdate" name="fromdate" />
+                    <input
+                        type="date"
+                        id="fromdate"
+                        name="fromdate"
+                        onChange={(e) =>
+                            setDate((pre) => {
+                                return { ...pre, from: e.target.value };
+                            })
+                        }
+                    />
                 </div>
                 <div className="date-item">
                     <label htmlFor="todate">To:</label>
-                    <input type="date" id="todate" name="todate" />
+                    <input
+                        type="date"
+                        id="todate"
+                        name="todate"
+                        onChange={(e) =>
+                            setDate((pre) => {
+                                return { ...pre, to: e.target.value };
+                            })
+                        }
+                    />
                 </div>
             </div>
 
-            <button className="search-btn">Search</button>
+            <button
+                className="search-btn"
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleSearch();
+                }}
+            >
+                Search
+            </button>
         </form>
     );
 };

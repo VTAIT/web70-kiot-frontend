@@ -38,11 +38,11 @@ const TablePrice = () => {
                                 <div className="d-flex flex-column">
                                     <img
                                         src={el.product.image}
-                                        alt={el.product.product_name}
+                                        alt={el.product.name_product}
                                     />
                                     <p className="d-inline-block align-middle mb-0">
                                         <div className="d-inline-block align-middle mb-0 product-name">
-                                            {el.product.product_name}
+                                            {el.product.name_product}
                                         </div>
                                         <br />
                                     </p>
