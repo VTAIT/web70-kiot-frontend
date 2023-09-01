@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import AppState from "./contexts/AppContext/AppState";
-import routes from "./config.js";
+import routes from "./global/routes";
 import AuthState from "./contexts/AuthContext/AuthState";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import NotAuthRoute from "./NotAuthRoute";
 import Header from "./components/header/Header";
-import LeftSideBar from "./components/LeftSideBar";
+import LeftSideBar from "./components/leftSideBarComponents/LeftSideBar";
 
 function App() {
   return (

@@ -1,8 +1,5 @@
 import React, {
-  useCallback,
   useContext,
-  useEffect,
-  useMemo,
   useState,
 } from "react";
 import us_flag from "../../images/flags/us_flag.png";

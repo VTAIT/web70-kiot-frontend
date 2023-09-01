@@ -1,11 +1,11 @@
-import Customers from "./pages/Customers.jsx";
-import Products from "./pages/Products.jsx";
-import Login from "./pages/Login.jsx";
-import ProductList from "./pages/ProductList.jsx";
-import Register from "./pages/Register.jsx";
-import PendingAccounts from "./pages/PendingAccounts.jsx";
-import Accounts from "./pages/Accounts.jsx";
-import Kiots from "./pages/Kiots.jsx";
+import Customers from "../pages/Customers.jsx";
+import Products from "../pages/Products.jsx";
+import Login from "../pages/Login.jsx";
+import ProductList from "../pages/ProductList.jsx";
+import Register from "../pages/Register.jsx";
+import PendingAccounts from "../pages/PendingAccounts.jsx";
+import Accounts from "../pages/Accounts.jsx";
+import Kiots from "../pages/Kiots.jsx";
 
 export const routes = [
   {
