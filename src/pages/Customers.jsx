@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import customerAPI from "../apis/customerAPI";
 import Customer from "../components/customerComponents/Customer";
 import CustomerModal from "../components/customerComponents/CustomerModal";
+import { useLocation } from "react-router";
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,9 @@ const Customers = () => {
   };
   const [editedCustomer, setEditedCustomer] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   useEffect(() => {
     fetchCustomers(actionStatus);
   }, []);
@@ -22,13 +26,17 @@ const Customers = () => {
     setTimeoutAlert(actionSt);
     try {
       setLoading(true);
-      const response = await customerAPI.getAll();
+
+      const response = queryParams.get("kiotId")
+        ? await customerAPI.getAllByKiotId(queryParams.get("kiotId"))
+        : await customerAPI.getAll();
+
       setCustomers(response.data.data.customerList);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
-      setCustomerModalOpen(false)
+      setCustomerModalOpen(false);
     }
   };
   const setTimeoutAlert = (actionSt) => {

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Account from "../components/accountComponents/Account";
 import accountAPI from "../apis/accountAPI";
 import AccountModal from "../components/accountComponents/AccountModal";
+import { useLocation } from "react-router";
 
 const Accounts = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [accountModalOpen, setAccountModalOpen] = useState(false);
   const [actionStatus, setActionStatus] = useState();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const handleClose = () => setAccountModalOpen(false);
   const handleShow = () => {
     setIsAddMode(true);
@@ -23,7 +26,9 @@ const Accounts = () => {
     setTimeoutAlert(actionSt);
     try {
       setLoading(true);
-      const response = await accountAPI.getAll();
+      const response = queryParams.get("kiotId")
+        ? await accountAPI.getAllByKiotId(queryParams.get("kiotId"))
+        : await accountAPI.getAll();
       setUsers(response.data.data.accountList);
     } catch (error) {
       console.log(error);

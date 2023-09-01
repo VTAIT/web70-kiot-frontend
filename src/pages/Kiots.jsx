@@ -113,8 +113,8 @@ const Kiots = () => {
                   >
                     <thead>
                       <tr>
-                        <th>User Name</th>
-                        <th>Full Name</th>
+                        <th>Owner</th>
+                        <th>Kiot Name</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
