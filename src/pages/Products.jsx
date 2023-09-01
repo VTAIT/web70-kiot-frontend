@@ -2,49 +2,71 @@ import React, { useState } from "react";
 import ProductCart from "../components/productComponents/ProductCart";
 import CartProvider from "../contexts/CartContext/CartProvider";
 import Cart from "../components/productComponents/Cart";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/productComponents/Pagination";
 import Search from "../components/searchComponents/Search";
 import { useEffect } from "react";
 import productAPI from "../apis/productAPI";
 import { Spinner } from "react-bootstrap";
 
 const Products = () => {
+    const itemsPerPage = 8;
+    const defaultCussor = 50;
+
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const [totalData, setTotalData] = useState([]);
-    const [currentData, setCurrentData] = useState([]);
+    const [totalData, setTotalData] = useState([]); // data in total page
+    const [currentData, setCurrentData] = useState([]); //data to render perpage
+    const [query, setQuery] = useState({
+        cussor: defaultCussor,
+        search: "",
+        price: "",
+        category: "",
+        fromdate: "",
+        todate: "",
+    });
 
-    const itemsPerPage = 20;
-    const defaultCussor = 50;
-    const paginationProps = {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState();
+
+    const handleGetAllProduct = async (query) => {
+        try {
+            setIsLoading(true);
+            const res = await productAPI.getAllProduct(query);
+            const data = res.data.data.productList;
+
+            setTotalData(data);
+
+            setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData
+            setTotalPages(Math.ceil(data.length / itemsPerPage));
+        } catch (error) {
+            console.log(error);
+            setError(
+                `${error.response.data.messege}, ${error.response.data.error}`
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const Props = {
+        setTotalPages,
+        totalPages,
+        setCurrentPage,
+        currentPage,
+        query,
+        setQuery,
+        defaultCussor,
+        handleGetAllProduct,
         totalData,
         setTotalData,
         currentData,
         setCurrentData,
         itemsPerPage,
-        defaultCussor,
     };
 
     useEffect(() => {
-        const handleGetAllProduct = async () => {
-            try {
-                setIsLoading(true);
-                const res = await productAPI.getAllProduct(defaultCussor);
-                const data = res.data.data.productList;
-                setTotalData(data);
-
-                setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData
-            } catch (error) {
-                console.log(error);
-                setError(
-                    `${error.response.data.messege}, ${error.response.data.error}`
-                );
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        handleGetAllProduct();
+        handleGetAllProduct(query);
     }, []);
 
     if (isLoading) {
@@ -67,7 +89,7 @@ const Products = () => {
         <CartProvider>
             <div className="page-content">
                 <div className="container-fluid">
-                    <Search />
+                    <Search {...Props} />
                     <div className="row">
                         <div className="position-relative col-lg-8 d-flex flex-column align-items-center px-2 h-70vh ">
                             <div className="d-flex justify-content-around flex-wrap h-70vh over-flow-scroll scrollbar-small">
@@ -80,8 +102,9 @@ const Products = () => {
                                             />
                                         );
                                     }
+                                    return <></>;
                                 })}
-                                <Pagination {...paginationProps} />
+                                <Pagination {...Props} />
                             </div>
                         </div>
 

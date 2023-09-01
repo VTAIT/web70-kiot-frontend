@@ -1,41 +1,46 @@
 import React, { createContext, useState } from "react";
 import TableList from "../components/productListComponents/TableList";
-import Pagination from "../components/Pagination";
+
 import Search from "../components/searchComponents/Search";
 import AddProductModal from "../components/productListComponents/AddProductModal";
 import { useEffect } from "react";
 import productAPI from "../apis/productAPI";
 import { Spinner, Toast, ToastContainer } from "react-bootstrap";
+import Pagination from "../components/productComponents/Pagination";
 
 export const productListContext = createContext();
 
 const ProductList = () => {
+    const itemsPerPage = 8;
+    const defaultCussor = 50;
+
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [alert, setAlert] = useState(false);
 
-    const [totalData, setTotalData] = useState([]);
-    const [currentData, setCurrentData] = useState([]);
+    const [totalData, setTotalData] = useState([]); // data in total page
+    const [currentData, setCurrentData] = useState([]); //data to render perpage
+    const [query, setQuery] = useState({
+        cussor: defaultCussor,
+        search: "",
+        price: "",
+        category: "",
+        fromdate: "",
+        todate: "",
+    });
 
-    const itemsPerPage = 8;
-    const defaultCussor = 50;
-    const paginationProps = {
-        totalData,
-        setTotalData,
-        currentData,
-        setCurrentData,
-        itemsPerPage,
-        defaultCussor,
-    };
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState();
 
     const handleGetAllProduct = async () => {
         try {
             setIsLoading(true);
-            const res = await productAPI.getAllProduct(defaultCussor);
+            const res = await productAPI.getAllProduct(query);
             const data = res.data.data.productList;
             setTotalData(data);
 
             setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData (page1)
+            setTotalPages(Math.ceil(data.length / itemsPerPage));
         } catch (error) {
             console.log(error);
             setError(
@@ -44,6 +49,22 @@ const ProductList = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const Props = {
+        setTotalPages,
+        totalPages,
+        setCurrentPage,
+        currentPage,
+        query,
+        setQuery,
+        defaultCussor,
+        handleGetAllProduct,
+        totalData,
+        setTotalData,
+        currentData,
+        setCurrentData,
+        itemsPerPage,
     };
     useEffect(() => {
         handleGetAllProduct();
@@ -76,12 +97,12 @@ const ProductList = () => {
                                 <div className="col-12">
                                     <div className="card-body position-relative h-90vh ">
                                         <>
-                                            <Search />
+                                            <Search {...Props} />
                                             <AddProductModal />
                                             <TableList data={currentData} />
                                         </>
                                     </div>
-                                    <Pagination {...paginationProps} />
+                                    <Pagination {...Props} />
                                 </div>
                             </div>
                             {/* end product list */}

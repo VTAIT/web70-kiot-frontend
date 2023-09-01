@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactPaginate from "react-paginate";
-import productAPI from "../apis/productAPI";
-import { handleSameItem } from "../utils/arrayUtils";
+import productAPI from "../../apis/productAPI";
+import { handleSameItem } from "../../utils/arrayUtils";
 
 const Pagination = (props) => {
     const {
@@ -10,34 +10,42 @@ const Pagination = (props) => {
         setCurrentData,
         itemsPerPage,
         defaultCussor,
+        query,
+        setCurrentPage,
+        totalPages,
+        setTotalPages,
     } = props;
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(
-        Math.ceil(totalData.length / itemsPerPage)
-    );
+
     const handlePageClick = async (e) => {
         const newCurrentPage = e.selected + 1;
         setCurrentPage(newCurrentPage);
 
-        //when client access to the previous of last page, load more 50 items
-        if (newCurrentPage > totalPages - 1) {
-            const res = await productAPI.getAllProduct(
-                totalData.length + defaultCussor
-            );
+        //when client access to the  last page, load more 50 items
+        if (newCurrentPage >= totalPages) {
+            const newQuery = {
+                ...query,
+                cussor: totalData.length + defaultCussor,
+            };
 
-            const newLoadedData = handleSameItem(
-                totalData,
-                res.data.data.productList
-            );
+            try {
+                const res = await productAPI.getAllProduct(newQuery);
 
-            setTotalData(newLoadedData);
-            setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
-            setCurrentData(
-                newLoadedData.slice(
-                    (newCurrentPage - 1) * itemsPerPage,
-                    newCurrentPage * itemsPerPage
-                )
-            );
+                const newLoadedData = handleSameItem(
+                    totalData,
+                    res.data.data.productList
+                );
+
+                setTotalData(newLoadedData);
+                setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
+                setCurrentData(
+                    newLoadedData.slice(
+                        (newCurrentPage - 1) * itemsPerPage,
+                        newCurrentPage * itemsPerPage
+                    )
+                );
+            } catch (error) {
+                console.log(error);
+            }
         } else {
             setCurrentData(
                 totalData.slice(
@@ -47,6 +55,7 @@ const Pagination = (props) => {
             );
         }
     };
+
     return (
         <ReactPaginate
             breakLabel="..."

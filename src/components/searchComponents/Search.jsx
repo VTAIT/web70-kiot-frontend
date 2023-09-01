@@ -1,34 +1,63 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
+import { filteredDataClient } from "../../utils/arrayUtils";
 
-const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
+export const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
+export const priceRange = ["0-50", "50-100", "100"];
 
 const Search = (props) => {
-    const [search, setSearch] = useState("");
-    const [price, setPrice] = useState("");
-    const [category, setCategory] = useState("");
-    const [date, setDate] = useState({ from: "", to: "" });
-    const [query, setQuery] = useState({
-        search: "",
-        price: "",
-        category: "",
-        date: "",
-    });
+    const {
+        query,
+        setQuery,
+        handleGetAllProduct,
+        totalData,
+        setTotalData,
+        setCurrentData,
+        setTotalPages,
+        itemsPerPage,
+    } = props;
+
+    const changeSearchInput = (searchInput) => {
+        const newQueryValue = { ...query, search: searchInput };
+        setQuery(newQueryValue);
+    };
+    const changePriceInput = (e) => {
+        const newQueryValue = { ...query, price: e.target.value };
+        setQuery(newQueryValue);
+    };
+    const changeCategoryInput = (e) => {
+        const newQueryValue = { ...query, category: e.target.value };
+        setQuery(newQueryValue);
+    };
+    const changeFromDateInput = (e) => {
+        const newQueryValue = { ...query, fromdate: e.target.value };
+        setQuery(newQueryValue);
+    };
+    const changeToDateInput = (e) => {
+        const newQueryValue = { ...query, todate: e.target.value };
+        setQuery(newQueryValue);
+    };
 
     const handleSearch = () => {
-        setQuery({
-            search,
-            price,
-            category,
-            date,
-        });
-        console.log({
-            search,
-            price,
-            category,
-            date,
-        });
+        const { search, price, category, fromdate, todate } = query;
+
+        if (!search && !price && !category && !fromdate && !todate) {
+            handleGetAllProduct(query);
+            console.log("s");
+        }
+
+        const itemAfterClientSearch = filteredDataClient(totalData, query);
+
+        if (itemAfterClientSearch.length < itemsPerPage) {
+            handleGetAllProduct(query);
+        } else {
+            setTotalData(itemAfterClientSearch);
+            setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
+            setTotalPages(
+                Math.ceil(itemAfterClientSearch.length / itemsPerPage)
+            );
+        }
     };
 
     return (
@@ -42,7 +71,8 @@ const Search = (props) => {
                     name="search"
                     type="text"
                     placeholder="Product name, id,..."
-                    onChange={(e) => setSearch(e.target.value)}
+                    value={query.search}
+                    onChange={(e) => changeSearchInput(e.target.value)}
                 />
             </div>
 
@@ -54,12 +84,26 @@ const Search = (props) => {
                     <select
                         name="price"
                         id="price"
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => changePriceInput(e)}
+                        value={query.price}
                     >
                         <option value="">All price</option>
-                        <option value="50">less than 50</option>
-                        <option value="50-100">50 to 100</option>
-                        <option value="100">more than 100</option>
+                        {priceRange.map((el) => {
+                            const limit = el.split("-");
+                            const min = limit[0];
+                            const max = limit[1];
+                            if (!max) {
+                                return (
+                                    <option value={el}>more than {min}</option>
+                                );
+                            } else {
+                                return (
+                                    <option value={el}>
+                                        {min} to {max}
+                                    </option>
+                                );
+                            }
+                        })}
                     </select>
                 </div>
                 <div className="selection-container">
@@ -69,7 +113,8 @@ const Search = (props) => {
                     <select
                         id="category"
                         name="category"
-                        onChange={(e) => setCategory(e.target.value)}
+                        value={query.category}
+                        onChange={(e) => changeCategoryInput(e)}
                     >
                         {categories.map((item) => (
                             <option key={item} value={item ? item : ""}>
@@ -89,11 +134,8 @@ const Search = (props) => {
                         type="date"
                         id="fromdate"
                         name="fromdate"
-                        onChange={(e) =>
-                            setDate((pre) => {
-                                return { ...pre, from: e.target.value };
-                            })
-                        }
+                        value={query.fromdate}
+                        onChange={(e) => changeFromDateInput(e)}
                     />
                 </div>
                 <div className="date-item">
@@ -102,11 +144,8 @@ const Search = (props) => {
                         type="date"
                         id="todate"
                         name="todate"
-                        onChange={(e) =>
-                            setDate((pre) => {
-                                return { ...pre, to: e.target.value };
-                            })
-                        }
+                        value={query.todate}
+                        onChange={(e) => changeToDateInput(e)}
                     />
                 </div>
             </div>
