@@ -1,7 +1,9 @@
 import axiosInstance from "./axiosInstance";
 
 const kiotAPI = {
-    getKiot: () => axiosInstance.get("/kiot"),
+    getAll: () => axiosInstance.get("/kiot"),
+    getById: () => axiosInstance.get("/kiot/getById"),
+    update: (kiot) => axiosInstance.post("/kiot/update",kiot),
 };
 
 export default kiotAPI;

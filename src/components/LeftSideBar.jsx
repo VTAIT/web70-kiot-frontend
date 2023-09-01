@@ -74,19 +74,35 @@ const LeftSideBar = () => {
             </>
           )}
           {(user.role_id === 1 || user.role_id === 2) && (
-            <li className={select === 5 ? "mm-active" : ""}>
-              <NavLink
-                to="/accounts"
-                className="nav-link"
-                onClick={(e) => {
-                  // e.preventDefault();
-                  selectItem(5);
-                }}
-              >
-                <i className="ti-control-record" />
-                Accounts
-              </NavLink>
-            </li>
+            <>
+              <li className={select === 5 ? "mm-active" : ""}>
+                <NavLink
+                  to="/accounts"
+                  className="nav-link"
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    selectItem(5);
+                  }}
+                >
+                  <i className="ti-control-record" />
+                  Accounts
+                </NavLink>
+              </li>
+
+              <li className={select === 6 ? "mm-active" : ""}>
+                <NavLink
+                  to="/kiots"
+                  className="nav-link"
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    selectItem(6);
+                  }}
+                >
+                  <i className="ti-control-record" />
+                  Kiots
+                </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </div>

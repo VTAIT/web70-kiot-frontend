@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Account from "../components/accountComponents/Account";
-import accountAPI from "../apis/accountAPI";
-import AccountModal from "../components/accountComponents/AccountModal";
-import { useLocation } from "react-router";
+import Kiot from "../components/kiotComponents/Kiot";
+import kiotAPI from "../apis/kiotAPI";
 
-const Accounts = () => {
-  const [users, setUsers] = useState([]);
+const Kiots = () => {
+  const [kiots, setKiots] = useState([]);
   const [loading, setLoading] = useState(false);
   const [accountModalOpen, setAccountModalOpen] = useState(false);
   const [actionStatus, setActionStatus] = useState();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
   const handleClose = () => setAccountModalOpen(false);
   const handleShow = () => {
     setIsAddMode(true);
@@ -19,22 +15,20 @@ const Accounts = () => {
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
   useEffect(() => {
-    fetchUsers(actionStatus);
+    fetchKiots(actionStatus);
   }, []);
 
-  const fetchUsers = async (actionSt) => {
+  const fetchKiots = async (actionSt) => {
     setTimeoutAlert(actionSt);
     try {
       setLoading(true);
-      const response = queryParams.get("kiotId")
-        ? await accountAPI.getAllByKiotId(queryParams.get("kiotId"))
-        : await accountAPI.getAll();
-      setUsers(response.data.data.accountList);
+      const response = await kiotAPI.getAll();
+      setKiots(response.data.data.kiotList);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
-      setAccountModalOpen(false)
+      // setAccountModalOpen(false)
     }
   };
 
@@ -46,35 +40,37 @@ const Accounts = () => {
       }, 5000);
     }
   };
-  const handleEditAccount = (account) => {
+  const handleEditKiot = (kiot) => {
     setIsAddMode(false);
-    setEditedAccount(account);
-    setAccountModalOpen(true);
+    setEditedAccount(kiot);
+    // setAccountModalOpen(true);
   };
   const dismissAlert = () => setActionStatus();
-  const handleDeleteaccount = async (account) => {
-    const deletedAccount = { ...account, active: false, userId: account._id };
+  const handleDeleteKiot = async (kiot) => {
+    console.log(kiot)
+    const deletedKiot = { ...kiot, active: false, kiot_id: kiot._id };
+    console.log(deletedKiot)
     try {
-      await accountAPI.update(deletedAccount);
-      fetchUsers({
+      await kiotAPI.update(deletedKiot);
+      fetchKiots({
         status: 1,
-        message: "Account is deactivated successfully!",
+        message: "Kiot is deactivated successfully!",
       });
     } catch (error) {
-      setActionStatus({ status: 0, message: "Error in deactivating account!" });
+      setActionStatus({ status: 0, message: "Error in deactivating kiot!" });
     }
   };
 
-  const handleEnableAccount = async (account) => {
-    const enabledAccount = { ...account, active: true, userId: account._id };
+  const handleEnableKiot = async (kiot) => {
+    const enabledKiot = { ...kiot, active: true, kiot_id: kiot._id };
     try {
-      await accountAPI.update(enabledAccount);
-      fetchUsers({
+      await kiotAPI.update(enabledKiot);
+      fetchKiots({
         status: 1,
-        message: "Account is enabled successfully!",
+        message: "Kiot is enabled successfully!",
       });
     } catch (error) {
-      setTimeoutAlert({ status: 0, message: "Error in enabling account!" });
+      setTimeoutAlert({ status: 0, message: "Error in enabling kiot!" });
     }
   };
 
@@ -105,22 +101,7 @@ const Accounts = () => {
             <div className="col-12">
               <div className="card">
                 <div className="card-body">
-                  <div
-                    className="mt-0 header-title"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h4 className="mt-0 header-title">Account List</h4>
-                    <button
-                      className="btn btn-primary mb-4 fw-bolder "
-                      type="button"
-                      onClick={handleShow}
-                    >
-                      Add Account
-                    </button>
-                  </div>
+                  <h4 className="mt-0 header-title">Kiot List</h4>
                   <table
                     id="datatable"
                     className="table table-bordered dt-responsive nowrap"
@@ -132,34 +113,30 @@ const Accounts = () => {
                   >
                     <thead>
                       <tr>
-                        <th>User Name</th>
-                        <th>Full Name</th>
+                        <th>Owner</th>
+                        <th>Kiot Name</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
+                        <th>Description</th>
                         <th>Active</th>
-                        <th>Kiot ID</th>
-                        <th>Role ID</th>
                         <th>Created At</th>
+                        <th>Links</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {users &&
-                        users.length > 0 &&
-                        users.map((account, index) => {
+                      {kiots &&
+                        kiots.length > 0 &&
+                        kiots.map((kiot, index) => {
                           return (
-                            <Account
-                              account={account}
+                            <Kiot
+                              kiot={kiot}
                               key={index}
-                              updateList={fetchUsers}
-                              onEditAccount={() => handleEditAccount(account)}
-                              onDeleteAccount={() =>
-                                handleDeleteaccount(account)
-                              }
-                              onEnableAccount={() =>
-                                handleEnableAccount(account)
-                              }
+                              updateList={fetchKiots}
+                              onEditKiot={() => handleEditKiot(kiot)}
+                              onDeleteKiot={() => handleDeleteKiot(kiot)}
+                              onEnableKiot={() => handleEnableKiot(kiot)}
                             />
                           );
                         })}
@@ -171,15 +148,15 @@ const Accounts = () => {
           </div>
         </div>
       </div>
-      <AccountModal
+      {/* <AccountModal
         show={accountModalOpen}
         handleClose={handleClose}
         onUpdateAccount={fetchUsers}
         editedAccount={editedAccount}
         isAddMode={isAddMode}
-      />
+      /> */}
     </div>
   );
 };
 
-export default Accounts;
+export default Kiots;
