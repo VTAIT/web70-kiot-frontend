@@ -39,6 +39,7 @@ const Products = () => {
 
             setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData
             setTotalPages(Math.ceil(data.length / itemsPerPage));
+            setCurrentPage(1);
         } catch (error) {
             console.log(error);
             setError(

@@ -24,11 +24,12 @@ const handleSameItem = (arr1, arr2) => {
 
 const filteredDataClient = (totalData, query) => {
     const remainData = totalData.filter((item) => {
+        let isMatchItem = true;
         // filter name, id
         const isId = !isNaN(parseInt(query.search));
 
         if (query.search && isId && parseInt(query.search) !== item._id) {
-            return false;
+            isMatchItem = false;
         }
 
         if (
@@ -38,7 +39,7 @@ const filteredDataClient = (totalData, query) => {
                 .toLowerCase()
                 .includes(query.search.toLowerCase())
         ) {
-            return false;
+            isMatchItem = false;
         }
 
         //filter price
@@ -60,12 +61,13 @@ const filteredDataClient = (totalData, query) => {
                 isMatchPrice = true;
             }
 
-            return isMatchPrice;
+            isMatchItem = isMatchPrice;
         }
 
         //filter category
+
         if (query.category && item.category !== query.category) {
-            return false;
+            isMatchItem = false;
         }
 
         //filter date
@@ -73,17 +75,16 @@ const filteredDataClient = (totalData, query) => {
             query.fromdate &&
             new Date(item.createdAt) < new Date(query.fromdate)
         ) {
-            return false;
+            isMatchItem = false;
         }
 
         if (query.todate && new Date(item.createdAt) > new Date(query.todate)) {
-            return false;
+            isMatchItem = false;
         }
 
-        return true;
+        return isMatchItem;
     });
 
-    console.log(remainData);
     return remainData;
 };
 

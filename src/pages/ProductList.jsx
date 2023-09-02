@@ -39,6 +39,7 @@ const ProductList = () => {
             const data = res.data.data.productList;
             setTotalData(data);
 
+            setCurrentPage(1);
             setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData (page1)
             setTotalPages(Math.ceil(data.length / itemsPerPage));
         } catch (error) {

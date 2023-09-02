@@ -16,6 +16,8 @@ const Search = (props) => {
         setCurrentData,
         setTotalPages,
         itemsPerPage,
+        defaultCussor,
+        setCurrentPage,
     } = props;
 
     const changeSearchInput = (searchInput) => {
@@ -40,23 +42,32 @@ const Search = (props) => {
     };
 
     const handleSearch = () => {
-        const { search, price, category, fromdate, todate } = query;
+        const newQuery = { ...query, cussor: defaultCussor };
+        console.log(newQuery);
+        setQuery(newQuery);
+
+        const { search, price, category, fromdate, todate } = newQuery;
 
         if (!search && !price && !category && !fromdate && !todate) {
-            handleGetAllProduct(query);
-            console.log("s");
+            handleGetAllProduct(newQuery);
         }
 
-        const itemAfterClientSearch = filteredDataClient(totalData, query);
+        let itemAfterClientSearch = filteredDataClient(totalData, newQuery);
 
-        if (itemAfterClientSearch.length < itemsPerPage) {
-            handleGetAllProduct(query);
+        if (itemAfterClientSearch.length <= itemsPerPage) {
+            handleGetAllProduct(newQuery);
+            console.log("less than perpage");
         } else {
+            console.log("totalData", totalData);
+            console.log("query", newQuery);
+            itemAfterClientSearch = filteredDataClient(totalData, newQuery);
             setTotalData(itemAfterClientSearch);
             setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
             setTotalPages(
                 Math.ceil(itemAfterClientSearch.length / itemsPerPage)
             );
+            setCurrentPage(1);
+            console.log("more than perpage");
         }
     };
 

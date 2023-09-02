@@ -14,6 +14,7 @@ const Pagination = (props) => {
         setCurrentPage,
         totalPages,
         setTotalPages,
+        setQuery,
     } = props;
 
     const handlePageClick = async (e) => {
@@ -24,8 +25,9 @@ const Pagination = (props) => {
         if (newCurrentPage >= totalPages) {
             const newQuery = {
                 ...query,
-                cussor: totalData.length + defaultCussor,
+                cussor: query.cussor + defaultCussor,
             };
+            setQuery(newQuery);
 
             try {
                 const res = await productAPI.getAllProduct(newQuery);
