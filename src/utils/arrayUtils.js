@@ -1,5 +1,3 @@
-import { priceRange } from "../components/searchComponents/Search";
-
 const handleSameItem = (arr1, arr2) => {
     const seenIds = {};
     const arr = [];
@@ -18,7 +16,6 @@ const handleSameItem = (arr1, arr2) => {
         }
     });
 
-    arr.sort((a, b) => a._id - b._id);
     return arr;
 };
 

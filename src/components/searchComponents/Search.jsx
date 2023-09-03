@@ -1,7 +1,8 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
-import { filteredDataClient } from "../../utils/arrayUtils";
+import { filteredDataClient, handleSameItem } from "../../utils/arrayUtils";
+import productAPI from "../../apis/productAPI";
 
 export const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 export const priceRange = ["0-50", "50-100", "100"];
@@ -18,10 +19,13 @@ const Search = (props) => {
         itemsPerPage,
         defaultCussor,
         setCurrentPage,
+        setCussor,
+        setIsLoading,
+        setError,
     } = props;
 
-    const changeSearchInput = (searchInput) => {
-        const newQueryValue = { ...query, search: searchInput };
+    const changeSearchInput = (e) => {
+        const newQueryValue = { ...query, search: e.target.value };
         setQuery(newQueryValue);
     };
     const changePriceInput = (e) => {
@@ -41,33 +45,65 @@ const Search = (props) => {
         setQuery(newQueryValue);
     };
 
-    const handleSearch = () => {
-        const newQuery = { ...query, cussor: defaultCussor };
-        console.log(newQuery);
-        setQuery(newQuery);
-
-        const { search, price, category, fromdate, todate } = newQuery;
+    const handleSearch = async () => {
+        const { search, price, category, fromdate, todate } = query;
+        console.log("query", query);
 
         if (!search && !price && !category && !fromdate && !todate) {
-            handleGetAllProduct(newQuery);
+            return await handleGetAllProduct(defaultCussor);
         }
 
-        let itemAfterClientSearch = filteredDataClient(totalData, newQuery);
+        let itemAfterClientSearch = filteredDataClient(totalData, query);
 
         if (itemAfterClientSearch.length <= itemsPerPage) {
-            handleGetAllProduct(newQuery);
             console.log("less than perpage");
+            try {
+                setIsLoading(true);
+                itemAfterClientSearch = filteredDataClient(totalData, query);
+                const res = await productAPI.getAllProduct_query(
+                    defaultCussor,
+                    query
+                );
+                const data = res.data.data;
+                const newQueryData = handleSameItem(
+                    itemAfterClientSearch,
+                    data.productList
+                );
+
+                setTotalData(newQueryData);
+                setCussor(-1);
+                setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
+                setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
+                setCurrentPage(1);
+            } catch (error) {
+                console.log(error);
+                setError(
+                    `${error.response.data.messege}, ${error.response.data.error}`
+                );
+            } finally {
+                setIsLoading(false);
+            }
         } else {
-            console.log("totalData", totalData);
-            console.log("query", newQuery);
-            itemAfterClientSearch = filteredDataClient(totalData, newQuery);
-            setTotalData(itemAfterClientSearch);
-            setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
-            setTotalPages(
-                Math.ceil(itemAfterClientSearch.length / itemsPerPage)
-            );
-            setCurrentPage(1);
             console.log("more than perpage");
+            try {
+                setIsLoading(true);
+                itemAfterClientSearch = filteredDataClient(totalData, query);
+
+                setTotalData(itemAfterClientSearch);
+                setCussor(-1);
+                setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
+                setTotalPages(
+                    Math.ceil(itemAfterClientSearch.length / itemsPerPage)
+                );
+                setCurrentPage(1);
+            } catch (error) {
+                console.log(error);
+                setError(
+                    `${error.response.data.messege}, ${error.response.data.error}`
+                );
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -83,7 +119,7 @@ const Search = (props) => {
                     type="text"
                     placeholder="Product name, id,..."
                     value={query.search}
-                    onChange={(e) => changeSearchInput(e.target.value)}
+                    onChange={(e) => changeSearchInput(e)}
                 />
             </div>
 

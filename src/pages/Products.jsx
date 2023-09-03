@@ -7,18 +7,19 @@ import Search from "../components/searchComponents/Search";
 import { useEffect } from "react";
 import productAPI from "../apis/productAPI";
 import { Spinner } from "react-bootstrap";
+import { handleSameItem } from "../utils/arrayUtils";
 
 const Products = () => {
     const itemsPerPage = 8;
-    const defaultCussor = 50;
+    const defaultCussor = -1;
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
+    const [cussor, setCussor] = useState(defaultCussor);
     const [totalData, setTotalData] = useState([]); // data in total page
     const [currentData, setCurrentData] = useState([]); //data to render perpage
     const [query, setQuery] = useState({
-        cussor: defaultCussor,
         search: "",
         price: "",
         category: "",
@@ -29,16 +30,34 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
 
-    const handleGetAllProduct = async (query) => {
+    const handleDataFromServer = (res, newCurrentPage) => {
+        const data = res.data.data;
+
+        const newLoadedData = handleSameItem(totalData, data.productList);
+
+        setTotalData(newLoadedData);
+        setCussor(data.cussor);
+        setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
+
+        if (newCurrentPage) {
+            setCurrentData(
+                newLoadedData.slice(
+                    (newCurrentPage - 1) * itemsPerPage,
+                    newCurrentPage * itemsPerPage
+                )
+            );
+        } else {
+            setCurrentData(res.data.data.productList.slice(0, itemsPerPage));
+        }
+    };
+
+    const handleGetAllProduct = async (cussor) => {
         try {
             setIsLoading(true);
-            const res = await productAPI.getAllProduct(query);
-            const data = res.data.data.productList;
+            const res = await productAPI.getAllProduct(cussor);
 
-            setTotalData(data);
+            handleDataFromServer(res);
 
-            setCurrentData(data.slice(0, itemsPerPage)); // Set initial currentData
-            setTotalPages(Math.ceil(data.length / itemsPerPage));
             setCurrentPage(1);
         } catch (error) {
             console.log(error);
@@ -51,6 +70,7 @@ const Products = () => {
     };
 
     const Props = {
+        setIsLoading,
         setTotalPages,
         totalPages,
         setCurrentPage,
@@ -64,10 +84,13 @@ const Products = () => {
         currentData,
         setCurrentData,
         itemsPerPage,
+        cussor,
+        setCussor,
+        handleDataFromServer,
     };
 
     useEffect(() => {
-        handleGetAllProduct(query);
+        handleGetAllProduct(defaultCussor);
     }, []);
 
     if (isLoading) {
