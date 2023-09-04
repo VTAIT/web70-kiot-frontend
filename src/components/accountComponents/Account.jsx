@@ -28,25 +28,21 @@ const Account = (props) => {
       <td>{account.phone}</td>
       <td>{account.email}</td>
       <td>{account.address}</td>
-
-      {account.status && (
-        <>
-          <td>{account.status}</td>
-          {account.status === 1 ? (
-            <td>Activated</td>
-          ) : (
-            <td>
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={() => activateAccount(account._id)}
-              >
-                {loading ? "Activating" : "Activate"}
-              </button>
-            </td>
-          )}
-        </>
+      <td>{account.status}</td>
+      {account.status === 1 ? (
+        <td>Activated</td>
+      ) : (
+        <td>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => activateAccount(account._id)}
+          >
+            {loading ? "Activating" : "Activate"}
+          </button>
+        </td>
       )}
+
       {!(window.location.pathname.indexOf("pending") > -1) && (
         <>
           <td>{account.active ? "Yes" : "No"}</td>

@@ -15,7 +15,6 @@ const AuthState = ({ children }) => {
         try {
             const response = await authAPI.authInfo();
             const data = response.data;
-            console.log("response.data:", response.data);
             setAuth({
                 isAuthenticated: true,
                 user: data.data.userInfo,
@@ -31,6 +30,7 @@ const AuthState = ({ children }) => {
             user: {},
         });
     };
+    
 
     useEffect(() => {
         const accessToken = localStorage.getItem("accessToken");

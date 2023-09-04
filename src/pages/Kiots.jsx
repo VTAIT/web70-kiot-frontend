@@ -23,7 +23,7 @@ const Kiots = () => {
     try {
       setLoading(true);
       const response = await kiotAPI.getAll();
-      setKiots(response.data.data.kiotList);
+      setKiots(response.data.data);
     } catch (error) {
       console.log(error);
     } finally {
