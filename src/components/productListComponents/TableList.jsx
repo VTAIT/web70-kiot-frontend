@@ -12,14 +12,14 @@ const TableList = ({ data }) => {
                     <th>Product Name</th>
                     <th>Category</th>
                     <th>Price</th>
-                    <th>Promotion</th>
+                    <th>Sale Off</th>
                     <th>Active</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map((item) => (
-                    <Item item={item} key={item._id} />
+                    <Item product={item} key={item._id} />
                 ))}
             </tbody>
         </table>

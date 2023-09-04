@@ -6,7 +6,6 @@ import {
 } from "../../utils/cartUtils";
 const TablePrice = () => {
     const { cart, changeQuantity } = useContext(cartContext);
-
     const [arrQuantity, setArrQuantity] = useState([]);
 
     const handleOnChange = (value, index) => {
@@ -28,21 +27,22 @@ const TablePrice = () => {
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Total</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {cart.map((el, index) => {
                     return (
-                        <tr className="align-items-center" key={el.product.id}>
+                        <tr className="align-items-center" key={el.product._id}>
                             <td>
                                 <div className="d-flex flex-column">
                                     <img
                                         src={el.product.image}
-                                        alt={el.product.product_name}
+                                        alt={el.product.name_product}
                                     />
                                     <p className="d-inline-block align-middle mb-0">
                                         <div className="d-inline-block align-middle mb-0 product-name">
-                                            {el.product.product_name}
+                                            {el.product.name_product}
                                         </div>
                                         <br />
                                     </p>
@@ -68,7 +68,7 @@ const TablePrice = () => {
                                     x $
                                     {caculatePromotionPrice(
                                         el.product.price,
-                                        el.product.promotion_rate
+                                        el.saleOff
                                     )}
                                 </div>
                             </td>
@@ -78,7 +78,7 @@ const TablePrice = () => {
                                 {caculateTotalPrice(
                                     caculatePromotionPrice(
                                         el.product.price,
-                                        el.product.promotion_rate
+                                        el.saleOff
                                     ),
                                     el.quantity
                                 )}

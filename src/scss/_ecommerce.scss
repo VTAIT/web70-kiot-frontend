@@ -360,7 +360,7 @@ hr.thick {
     }    
     tbody{
       td{
-        padding: 20px 10px;
+        padding: 10px 10px;
         border-top: 0;
         border-bottom: 1px solid $gray-200;
         .product-name{
@@ -547,8 +547,15 @@ hr.thick {
   }
 }
 
+.product-container{
+  display: flex;
+  gap: 10px;
+  padding: 0px;
+}
+
 .cart{
   color: rgb(85, 85, 85);
+  flex: 1 1 40vw;
   .shopping-cart {
     button {
       background-color: rgb(255, 0, 0, 0.7);
@@ -570,14 +577,17 @@ hr.thick {
 
       color: rgb(85, 85, 85);
       font-weight: 500;
+      padding: 10px 10px;
     }
     th {
       color: rgb(85, 85, 85);
       font-weight: 700;
+      padding: 10px 10px;
     }
     .table-container {
+      margin: 20px 0px;
       overflow-y: scroll;
-      height: 42vh;
+      height: 45vh;
       &::-webkit-scrollbar {
         width: 5px;
       }
@@ -585,9 +595,6 @@ hr.thick {
         background-color: #888; 
         border-radius: 5px; 
       }
-      //   &::-webkit-scrollbar-track {
-      //   background-color: #f1f1f1; 
-      // }
     }
   }
 }
@@ -596,8 +603,8 @@ hr.thick {
   width: 10vw;
   height: fit-content;
 }
-.h-70vh{
-  height: 70vh;
+.h-65vh{
+  height: 65vh;
 }
 
 
@@ -627,36 +634,42 @@ hr.thick {
   bottom: -60px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 
 .search-form{
   width: 100%;
-  height: 60px;
+  height: fit-content;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 5px 10px;
-  margin: 10px 0px;
-  background-color: rgb(237, 240, 245);
+  flex-wrap: wrap;
+  background-color:white;
   font-size: 14px;
-  color: gray;
-  border-radius: 10px;
+  color: white;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   .search-input{
     display: flex;
     align-items: center ;
     padding: 0px 8px;
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px;
+    width: 200px;
+    margin: 5px 10px;
   }
   label{
     font-size: 14px;
     line-height: 0;
   }
   input {
+    border-radius: 5px;
     border: none;
     outline: none;
-    background-color: white;
+    background-color: rgb(238, 238, 238);
     padding: 8px;
     color: gray;
     &:focus{
@@ -664,36 +677,31 @@ hr.thick {
       outline: none;
     }
   }
-  .select-input{
-    margin: 0px 20px;
-    display: flex;
-    align-items: center;
-    gap:10px;
+
     .selection-container{
-      background-color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      background-color: white;
-      color: gray;
+      width: 200px;
+      background-color: rgb(238, 238, 238);
+      border-radius: 5px;
+      height: fit-content;
+      margin: 5px 10px;
+      padding: 0px 10px;
       display: flex;
       align-items: center;
-      padding: 0px 10px;
-      height: fit-content;
       label {
         font-size: 16px;
-        background-color: white;
+        background-color: rgb(238, 238, 238);
         border-radius: 50%;
         margin: 5px;
       }
 
       select{
+        flex: 1 0 auto;
         width: fit-content;
         padding: 8px;
         border: none;
         border-radius: 5px;
         font-size: 14px;
-        background-color: white;
+        background-color: rgb(238, 238, 238);
         color: gray;
         &:focus{
           border: none;
@@ -702,30 +710,19 @@ hr.thick {
       }
     }
 
-  }
+  
   .date-selection{
+    width: 200px;
     position: relative;
     display: flex;
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: start;
-    // padding: 0px 10px 0px 50px;
+    margin: 5px 10px;
     padding: 0px 10px;
-    // p{
-    //   display: block;
-    //   position: absolute;
-    //   left: 5px;
-    //   top: 50%;
-    //   transform: translateY(-50%);
-    //   width: 40px;
-    //   height: 100%;
-    //   border-right: 1px solid rgba(128, 128, 128,0.5);
-    //   display: flex;
-    //   align-items: center;
-    // }
     label {
       font-size: 14px;
       height: fit-content;
@@ -748,6 +745,7 @@ hr.thick {
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
+    margin: 5px 10px;
   }
 }
 
@@ -758,10 +756,12 @@ hr.thick {
     height: fit-content;
   }
   .e-co-product{
-
     .img-cart{
     width: 15vw;
     height: 15vw;
     }
+  }
+  .h-65vh{
+    height: 55vh;
   }
 }

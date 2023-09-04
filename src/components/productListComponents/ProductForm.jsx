@@ -11,18 +11,19 @@ import { useEffect } from "react";
 import kiotAPI from "../../apis/kiotAPI";
 import productAPI from "../../apis/productAPI";
 import { productListContext } from "../../pages/ProductList";
+import imageAPI from "../../apis/imageAPI";
+import { productPropsContext } from "../searchComponents/SearchAndPaginaton";
 
 const categories = ["Choose", "EU", "NA", "OC", "AF", "AS", "SA"];
 
 const ProductFrom = ({ setShow, product }) => {
-    const { handleGetAllProduct, setAlert } = useContext(productListContext);
+    const { setAlert } = useContext(productListContext);
+    const productProps = useContext(productPropsContext);
+    const { auth } = useContext(AuthContext);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-
-    const { auth } = useContext(AuthContext);
 
     const [kiots, setKiots] = useState([{ _id: "", username: "" }]);
 
@@ -32,33 +33,51 @@ const ProductFrom = ({ setShow, product }) => {
         setShowConfirmModal(false);
 
         const formData = new FormData();
-
-        formData.append("product_name", dataInForm.product_name);
-        formData.append("category", dataInForm.category);
-        formData.append("price", dataInForm.price);
+        formData.append("name_file", dataInForm.name_product);
         formData.append("image", dataInForm.image);
-        formData.append("description", dataInForm.description);
         formData.append("kiot_id", dataInForm.kiot_id);
-        formData.append("active", dataInForm.active);
 
         try {
             setIsLoading(true);
             if (product) {
-                formData.append("productId", product._id);
+                //for update product, because create and update modal use a form together
+                let dataForUpdateProduct;
 
-                const res = await productAPI.updateProduct(formData);
+                if (dataInForm.image) {
+                    const resImage = await imageAPI.createImage(formData);
+                    const srcImage = resImage.data.data.imageInfo.src;
 
-                console.log(res.data.messege);
+                    dataForUpdateProduct = {
+                        ...dataInForm,
+                        image: srcImage,
+                        productId: product._id,
+                    };
+                }
+                if (!dataInForm.image) {
+                    dataForUpdateProduct = {
+                        ...dataInForm,
+                        image: "",
+                        productId: product._id,
+                    };
+                }
+
+                const resProduct = await productAPI.updateProduct(
+                    dataForUpdateProduct
+                );
 
                 setAlert(true);
-                handleGetAllProduct();
+                productProps.handleGetAllProduct();
             } else {
-                const res = await productAPI.createProduct(formData);
+                const resImage = await imageAPI.createImage(formData);
+                const srcImage = resImage.data.data.imageInfo.src;
 
-                console.log(res.data.messege);
+                const dataForCreateProduct = { ...dataInForm, image: srcImage };
+                const resProduct = await productAPI.createProduct(
+                    dataForCreateProduct
+                );
 
                 setAlert(true);
-                handleGetAllProduct();
+                productProps.handleGetAllProduct();
             }
             setShow(false);
         } catch (error) {
@@ -73,7 +92,7 @@ const ProductFrom = ({ setShow, product }) => {
 
     const formik = useFormik({
         initialValues: {
-            product_name: product ? product.product_name : "",
+            name_product: product ? product.name_product : "",
             category: product ? product.category : "",
             price: product ? product.price : "",
             image: "",
@@ -83,7 +102,7 @@ const ProductFrom = ({ setShow, product }) => {
         },
 
         validationSchema: Yup.object({
-            product_name: Yup.string()
+            name_product: Yup.string()
                 .required("Name is required")
                 .min(2, "More than 2 characters"),
             category: Yup.string().required("Category is required"),
@@ -94,7 +113,10 @@ const ProductFrom = ({ setShow, product }) => {
                 ? Yup.mixed().notRequired()
                 : Yup.mixed().required("Image is required"),
             description: Yup.string().required("Description is required"),
-            kiot_id: Yup.string().required("Description is required"),
+            kiot_id:
+                auth.user.role_id === 1
+                    ? Yup.string().required("Description is required")
+                    : Yup.string().notRequired(),
             active: Yup.boolean().required("Active status is required"),
         }),
 
@@ -106,11 +128,13 @@ const ProductFrom = ({ setShow, product }) => {
 
     useEffect(() => {
         const getKiots = async () => {
-            const res = await kiotAPI.getKiot();
-            console.log(res);
+            const res = await kiotAPI.getAll();
             setKiots([{ _id: "", username: "" }, ...res.data.data.kiotList]);
         };
-        getKiots();
+
+        if (auth.user.role_id === 1) {
+            getKiots();
+        }
     }, []);
 
     if (isLoading) {
@@ -132,17 +156,17 @@ const ProductFrom = ({ setShow, product }) => {
         <>
             <Form onSubmit={formik.handleSubmit}>
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="product_name">
+                    <Form.Group as={Col} controlId="name_product">
                         <Form.Label>Product's Name:</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Product's name"
-                            value={formik.values.product_name}
+                            value={formik.values.name_product}
                             onChange={formik.handleChange}
                         />
-                        {formik.errors.product_name && (
+                        {formik.errors.name_product && (
                             <p className="text-danger">
-                                {formik.errors.product_name}
+                                {formik.errors.name_product}
                             </p>
                         )}
                     </Form.Group>
@@ -272,7 +296,7 @@ const ProductFrom = ({ setShow, product }) => {
                             width: "fit-content",
                             margin: "0px 10px",
                             background:
-                                !formik.errors.product_name &&
+                                !formik.errors.name_product &&
                                 !formik.errors.price &&
                                 !formik.errors.image &&
                                 !formik.errors.category &&
