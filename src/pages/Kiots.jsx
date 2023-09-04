@@ -14,6 +14,7 @@ const Kiots = () => {
   };
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
+
   useEffect(() => {
     fetchKiots(actionStatus);
   }, []);
@@ -47,9 +48,9 @@ const Kiots = () => {
   };
   const dismissAlert = () => setActionStatus();
   const handleDeleteKiot = async (kiot) => {
-    console.log(kiot)
+    console.log(kiot);
     const deletedKiot = { ...kiot, active: false, kiot_id: kiot._id };
-    console.log(deletedKiot)
+    console.log(deletedKiot);
     try {
       await kiotAPI.update(deletedKiot);
       fetchKiots({

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
 import AppContext from "../../contexts/AppContext/AppContext";
 import leftNavBarItems from "../../global/leftNavBarItems";
@@ -6,8 +6,11 @@ import LeftSideBarItem from "./LeftSideBarItem";
 const LeftSideBar = () => {
   const { auth } = useContext(AuthContext);
   const { isAuthenticated, user } = auth;
-  const { leftSideBarOpen } = useContext(AppContext);
-
+  const { handleLeftSideBarSelectedItem, leftSideBarOpen } =
+    useContext(AppContext);
+  useEffect(() => {
+    auth.user.role_id === 1 && handleLeftSideBarSelectedItem(6);
+  }, []);
   return (
     isAuthenticated &&
     leftSideBarOpen && (
