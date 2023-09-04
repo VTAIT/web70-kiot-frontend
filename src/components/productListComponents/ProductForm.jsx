@@ -128,7 +128,7 @@ const ProductFrom = ({ setShow, product }) => {
 
     useEffect(() => {
         const getKiots = async () => {
-            const res = await kiotAPI.getKiot();
+            const res = await kiotAPI.getAll();
             setKiots([{ _id: "", username: "" }, ...res.data.data.kiotList]);
         };
 

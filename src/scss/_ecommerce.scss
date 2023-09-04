@@ -685,6 +685,8 @@ hr.thick {
       height: fit-content;
       margin: 5px 10px;
       padding: 0px 10px;
+      display: flex;
+      align-items: center;
       label {
         font-size: 16px;
         background-color: rgb(238, 238, 238);
@@ -693,6 +695,7 @@ hr.thick {
       }
 
       select{
+        flex: 1 0 auto;
         width: fit-content;
         padding: 8px;
         border: none;
