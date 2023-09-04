@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Account from "../components/accountComponents/Account";
 import accountAPI from "../apis/accountAPI";
 import AccountModal from "../components/accountComponents/AccountModal";
 import { useLocation } from "react-router";
+import AppContext from "../contexts/AppContext/AppContext";
+import leftNavBarItems from "../global/leftNavBarItems";
 
 const Accounts = () => {
   const [users, setUsers] = useState([]);
@@ -16,9 +18,14 @@ const Accounts = () => {
     setIsAddMode(true);
     setAccountModalOpen(true);
   };
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
   useEffect(() => {
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === "/accounts"
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
     fetchUsers(actionStatus);
   }, []);
 
@@ -34,7 +41,7 @@ const Accounts = () => {
       console.log(error);
     } finally {
       setLoading(false);
-      setAccountModalOpen(false)
+      setAccountModalOpen(false);
     }
   };
 

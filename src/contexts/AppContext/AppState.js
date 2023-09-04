@@ -3,9 +3,13 @@ import AppContext from "./AppContext";
 
 const AppState = ({ children }) => {
   const [leftSideBarOpen, setLeftSideBarOpen] = useState(true);
+  const [leftSideBarSelectedItem, setLeftSideBarSelectedItem] = useState(1);
 
   const handleLeftSideBarStatus = (select) => {
     setLeftSideBarOpen(select);
+  };
+  const handleLeftSideBarSelectedItem = (select) => {
+    setLeftSideBarSelectedItem(select);
   };
 
   return (
@@ -13,6 +17,8 @@ const AppState = ({ children }) => {
       value={{
         leftSideBarOpen,
         handleLeftSideBarStatus,
+        leftSideBarSelectedItem,
+        handleLeftSideBarSelectedItem
       }}
     >
       {children}

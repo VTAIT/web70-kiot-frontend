@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import customerAPI from "../apis/customerAPI";
 import Customer from "../components/customerComponents/Customer";
 import CustomerModal from "../components/customerComponents/CustomerModal";
 import { useLocation } from "react-router";
+import leftNavBarItems from "../global/leftNavBarItems";
+import AppContext from "../contexts/AppContext/AppContext";
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,12 +15,17 @@ const Customers = () => {
     setIsAddMode(true);
     setCustomerModalOpen(true);
   };
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
   const [editedCustomer, setEditedCustomer] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === "/customers"
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
     fetchCustomers(actionStatus);
   }, []);
 
