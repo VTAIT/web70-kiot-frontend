@@ -6,7 +6,6 @@ import {
 } from "../../utils/cartUtils";
 const TablePrice = () => {
     const { cart, changeQuantity } = useContext(cartContext);
-
     const [arrQuantity, setArrQuantity] = useState([]);
 
     const handleOnChange = (value, index) => {
@@ -28,12 +27,13 @@ const TablePrice = () => {
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Total</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {cart.map((el, index) => {
                     return (
-                        <tr className="align-items-center" key={el.product.id}>
+                        <tr className="align-items-center" key={el.product._id}>
                             <td>
                                 <div className="d-flex flex-column">
                                     <img
@@ -68,7 +68,7 @@ const TablePrice = () => {
                                     x $
                                     {caculatePromotionPrice(
                                         el.product.price,
-                                        el.product.promotion_rate
+                                        el.saleOff
                                     )}
                                 </div>
                             </td>
@@ -78,7 +78,7 @@ const TablePrice = () => {
                                 {caculateTotalPrice(
                                     caculatePromotionPrice(
                                         el.product.price,
-                                        el.product.promotion_rate
+                                        el.saleOff
                                     ),
                                     el.quantity
                                 )}

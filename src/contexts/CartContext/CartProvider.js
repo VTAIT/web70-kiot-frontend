@@ -4,12 +4,16 @@ import cartContext from "./CartContext";
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
-    const addProduct = (product, quantity = 1) => {
+    const addProduct = (product, saleOff = 0, quantity = 1) => {
         const existProduct = cart.find((el) => el.product._id === product._id);
         if (!existProduct) {
             setCart((pre) => [
                 ...pre,
-                { quantity: parseInt(quantity), product },
+                {
+                    product,
+                    quantity: parseInt(quantity),
+                    saleOff,
+                },
             ]);
         }
     };
@@ -26,7 +30,11 @@ const CartProvider = ({ children }) => {
         const productIndex = updateCart.findIndex(
             (el) => el.product._id === product._id
         );
-        updateCart[productIndex] = { quantity: parseInt(quantity), product };
+
+        updateCart[productIndex] = {
+            ...updateCart[productIndex],
+            quantity: parseInt(quantity),
+        };
 
         return setCart(updateCart);
     };

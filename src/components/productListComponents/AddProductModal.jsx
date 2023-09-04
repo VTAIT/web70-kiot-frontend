@@ -10,7 +10,7 @@ export default function AddProductModal({ handleGetAllProduct }) {
     return (
         <>
             <Button
-                className="my-1 d-flex align-items-center"
+                className="my-2 d-flex align-items-center "
                 variant="primary"
                 onClick={() => setShow(true)}
             >

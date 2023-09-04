@@ -14,10 +14,7 @@ const caculateTotalPayment = (cart) => {
         totalPayment =
             totalPayment +
             caculateTotalPrice(
-                caculatePromotionPrice(
-                    el.product.price,
-                    el.product.promotion_rate
-                ),
+                caculatePromotionPrice(el.product.price, el.saleOff),
                 el.quantity
             );
     });

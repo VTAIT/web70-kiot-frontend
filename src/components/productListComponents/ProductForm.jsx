@@ -12,11 +12,13 @@ import kiotAPI from "../../apis/kiotAPI";
 import productAPI from "../../apis/productAPI";
 import { productListContext } from "../../pages/ProductList";
 import imageAPI from "../../apis/imageAPI";
+import { productPropsContext } from "../searchComponents/SearchAndPaginaton";
 
 const categories = ["Choose", "EU", "NA", "OC", "AF", "AS", "SA"];
 
 const ProductFrom = ({ setShow, product }) => {
-    const { handleGetAllProduct, setAlert } = useContext(productListContext);
+    const { setAlert } = useContext(productListContext);
+    const productProps = useContext(productPropsContext);
     const { auth } = useContext(AuthContext);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -64,7 +66,7 @@ const ProductFrom = ({ setShow, product }) => {
                 );
 
                 setAlert(true);
-                handleGetAllProduct();
+                productProps.handleGetAllProduct();
             } else {
                 const resImage = await imageAPI.createImage(formData);
                 const srcImage = resImage.data.data.imageInfo.src;
@@ -75,7 +77,7 @@ const ProductFrom = ({ setShow, product }) => {
                 );
 
                 setAlert(true);
-                handleGetAllProduct();
+                productProps.handleGetAllProduct();
             }
             setShow(false);
         } catch (error) {

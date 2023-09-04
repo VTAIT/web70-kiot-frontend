@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import productAPI from "../../apis/productAPI";
-import { filteredDataClient, handleSameItem } from "../../utils/arrayUtils";
+import { handleSameItem } from "../../utils/arrayUtils";
 
 const Pagination = (props) => {
     const {
@@ -17,66 +17,11 @@ const Pagination = (props) => {
         setCurrentPage,
         handleDataFromServer,
         setError,
+        saleOffProductList,
+        setSaleOffProductList,
+        saleOffTransactionList,
+        setSaleOffTransactionList,
     } = props;
-
-    // const handlePageClick = async (e) => {
-    //     const newCurrentPage = e.selected + 1;
-
-    //     setCurrentPage(newCurrentPage);
-    //     //when client access to the  last page, load more 50 items
-    //     const isQuerying = Boolean(
-    //         query.search ||
-    //             query.price ||
-    //             query.category ||
-    //             query.fromdate ||
-    //             query.todate
-    //     );
-
-    //     if (newCurrentPage >= totalPages && !isQuerying) {
-    //         try {
-    //             const res = await productAPI.getAllProduct(cussor);
-    //             handleDataFromServer(res, newCurrentPage);
-    //         } catch (error) {
-    //             console.log(error);
-    //             setError(
-    //                 `${error.response.data.messege}, ${error.response.data.error}`
-    //             );
-    //         }
-    //     } else if (newCurrentPage >= totalPages && isQuerying) {
-    //         const itemAfterClientSearch = filteredDataClient(totalData, query);
-    //         try {
-    //             const res = await productAPI.getAllProduct_query(cussor, query);
-
-    //             const data = res.data.data;
-    //             const newQueryData = handleSameItem(
-    //                 itemAfterClientSearch,
-    //                 data.productList
-    //             );
-
-    //             setTotalData(newQueryData);
-    //             setCussor(data.cussor);
-    //             setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
-    //             setCurrentData(
-    //                 newQueryData.slice(
-    //                     (newCurrentPage - 1) * itemsPerPage,
-    //                     newCurrentPage * itemsPerPage
-    //                 )
-    //             );
-    //         } catch (error) {
-    //             console.log(error);
-    //             setError(
-    //                 `${error.response.data.messege}, ${error.response.data.error}`
-    //             );
-    //         }
-    //     } else {
-    //         setCurrentData(
-    //             totalData.slice(
-    //                 (newCurrentPage - 1) * itemsPerPage,
-    //                 newCurrentPage * itemsPerPage
-    //             )
-    //         );
-    //     }
-    // };
 
     const handlePageClick = async (e) => {
         const newCurrentPage = e.selected + 1;
@@ -102,17 +47,30 @@ const Pagination = (props) => {
                 );
             }
         } else if (newCurrentPage >= totalPages && isQuerying) {
-            const itemAfterClientSearch = filteredDataClient(totalData, query);
+            // const itemAfterClientSearch = filteredDataClient(totalData, query);
+
             try {
                 const res = await productAPI.getAllProduct_query(cussor, query);
 
                 const data = res.data.data;
+
                 const newQueryData = handleSameItem(
-                    itemAfterClientSearch,
+                    totalData,
                     data.productList
+                );
+                const newSaleOffProductList = handleSameItem(
+                    saleOffProductList,
+                    data.saleOffProductList
+                );
+                const newSaleOffTransactionList = handleSameItem(
+                    saleOffTransactionList,
+                    data.saleOffTransactionList
                 );
 
                 setTotalData(newQueryData);
+                setSaleOffProductList(newSaleOffProductList);
+                setSaleOffTransactionList(newSaleOffTransactionList);
+
                 setCussor(data.cussor);
                 setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
                 setCurrentData(

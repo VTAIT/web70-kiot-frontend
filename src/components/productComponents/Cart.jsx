@@ -8,7 +8,7 @@ const Cart = () => {
     return (
         <>
             <div className="cart w-100 d-flex align-items-center flex-column  justify-content-between">
-                <div className="table-responsive w-100 shopping-cart d-flex flex-column">
+                <div className="w-100 shopping-cart d-flex flex-column">
                     <div className="position-relative table-container w-100">
                         {cart.length ? (
                             <TablePrice />
@@ -27,7 +27,7 @@ const Cart = () => {
                         <TablePayment />
                         <button
                             className=" position-absolute bottom-0 start-50 translate-middle-x bg-success text-white border-0 rounded-pill px-3 my-2"
-                            onChange={() => {
+                            onClick={() => {
                                 console.log(cart);
                             }}
                         >

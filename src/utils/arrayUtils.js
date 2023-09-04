@@ -1,4 +1,4 @@
-const handleSameItem = (arr1, arr2) => {
+const handleSameItem = (arr1, arr2, sort = false) => {
     const seenIds = {};
     const arr = [];
 
@@ -16,6 +16,9 @@ const handleSameItem = (arr1, arr2) => {
         }
     });
 
+    if (sort) {
+        arr.sort((a, b) => b._id - a._id);
+    }
     return arr;
 };
 
@@ -40,7 +43,7 @@ const filteredDataClient = (totalData, query) => {
         }
 
         //filter price
-        if (query.price) {
+        if (query.price && isMatchItem) {
             let isMatchPrice = false;
 
             const limit = query.price.split("-");
@@ -63,19 +66,24 @@ const filteredDataClient = (totalData, query) => {
 
         //filter category
 
-        if (query.category && item.category !== query.category) {
+        if (query.category && item.category !== query.category && isMatchItem) {
             isMatchItem = false;
         }
 
         //filter date
         if (
             query.fromdate &&
-            new Date(item.createdAt) < new Date(query.fromdate)
+            new Date(item.createdAt) < new Date(query.fromdate) &&
+            isMatchItem
         ) {
             isMatchItem = false;
         }
 
-        if (query.todate && new Date(item.createdAt) > new Date(query.todate)) {
+        if (
+            query.todate &&
+            new Date(item.createdAt) > new Date(query.todate) &&
+            isMatchItem
+        ) {
             isMatchItem = false;
         }
 

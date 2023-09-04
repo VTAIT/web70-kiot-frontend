@@ -12,7 +12,6 @@ const Search = (props) => {
         query,
         setQuery,
         handleGetAllProduct,
-        totalData,
         setTotalData,
         setCurrentData,
         setTotalPages,
@@ -22,6 +21,11 @@ const Search = (props) => {
         setCussor,
         setIsLoading,
         setError,
+        saleOffProductList,
+        setSaleOffProductList,
+        saleOffTransactionList,
+        setSaleOffTransactionList,
+        cachedData,
     } = props;
 
     const changeSearchInput = (e) => {
@@ -47,30 +51,42 @@ const Search = (props) => {
 
     const handleSearch = async () => {
         const { search, price, category, fromdate, todate } = query;
-        console.log("query", query);
 
         if (!search && !price && !category && !fromdate && !todate) {
             return await handleGetAllProduct(defaultCussor);
         }
 
-        let itemAfterClientSearch = filteredDataClient(totalData, query);
+        let itemAfterClientSearch = filteredDataClient(cachedData, query);
 
         if (itemAfterClientSearch.length <= itemsPerPage) {
             console.log("less than perpage");
             try {
                 setIsLoading(true);
-                itemAfterClientSearch = filteredDataClient(totalData, query);
+
+                itemAfterClientSearch = filteredDataClient(cachedData, query);
                 const res = await productAPI.getAllProduct_query(
                     defaultCussor,
                     query
                 );
                 const data = res.data.data;
+
                 const newQueryData = handleSameItem(
                     itemAfterClientSearch,
                     data.productList
                 );
+                const newSaleOffProductList = handleSameItem(
+                    saleOffProductList,
+                    data.saleOffProductList
+                );
+                const newSaleOffTransactionList = handleSameItem(
+                    saleOffTransactionList,
+                    data.saleOffTransactionList
+                );
 
                 setTotalData(newQueryData);
+                setSaleOffProductList(newSaleOffProductList);
+                setSaleOffTransactionList(newSaleOffTransactionList);
+
                 setCussor(-1);
                 setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
                 setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
@@ -87,7 +103,10 @@ const Search = (props) => {
             console.log("more than perpage");
             try {
                 setIsLoading(true);
-                itemAfterClientSearch = filteredDataClient(totalData, query);
+                itemAfterClientSearch = await filteredDataClient(
+                    cachedData,
+                    query
+                );
 
                 setTotalData(itemAfterClientSearch);
                 setCussor(-1);
@@ -123,54 +142,55 @@ const Search = (props) => {
                 />
             </div>
 
-            <div className="select-input">
-                <div className="selection-container">
-                    <label htmlFor="price">
-                        <MdOutlineAttachMoney />
-                    </label>
-                    <select
-                        name="price"
-                        id="price"
-                        onChange={(e) => changePriceInput(e)}
-                        value={query.price}
-                    >
-                        <option value="">All price</option>
-                        {priceRange.map((el) => {
-                            const limit = el.split("-");
-                            const min = limit[0];
-                            const max = limit[1];
-                            if (!max) {
-                                return (
-                                    <option value={el}>more than {min}</option>
-                                );
-                            } else {
-                                return (
-                                    <option value={el}>
-                                        {min} to {max}
-                                    </option>
-                                );
-                            }
-                        })}
-                    </select>
-                </div>
-                <div className="selection-container">
-                    <label htmlFor="category">
-                        <MdCategory />
-                    </label>
-                    <select
-                        id="category"
-                        name="category"
-                        value={query.category}
-                        onChange={(e) => changeCategoryInput(e)}
-                    >
-                        {categories.map((item) => (
-                            <option key={item} value={item ? item : ""}>
-                                {item ? item : "All category"}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+            <div className="selection-container">
+                <label htmlFor="price">
+                    <MdOutlineAttachMoney />
+                </label>
+                <select
+                    name="price"
+                    id="price"
+                    onChange={(e) => changePriceInput(e)}
+                    value={query.price}
+                >
+                    <option value="">All price</option>
+                    {priceRange.map((el) => {
+                        const limit = el.split("-");
+                        const min = limit[0];
+                        const max = limit[1];
+                        if (!max) {
+                            return (
+                                <option key={el} value={el}>
+                                    more than {min}
+                                </option>
+                            );
+                        } else {
+                            return (
+                                <option key={el} value={el}>
+                                    {min} to {max}
+                                </option>
+                            );
+                        }
+                    })}
+                </select>
             </div>
+            <div className="selection-container">
+                <label htmlFor="category">
+                    <MdCategory />
+                </label>
+                <select
+                    id="category"
+                    name="category"
+                    value={query.category}
+                    onChange={(e) => changeCategoryInput(e)}
+                >
+                    {categories.map((item) => (
+                        <option key={item} value={item ? item : ""}>
+                            {item ? item : "All category"}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
             <div className="selection-container date-selection">
                 {/* <p>
                     <span>Date:</span>
