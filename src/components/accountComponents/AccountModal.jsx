@@ -3,6 +3,8 @@ import BootstrapModal from "react-bootstrap/Modal";
 import accountAPI from "../../apis/accountAPI";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import AccountModalFormItem from "./AccountModalFormItem";
+import { passwordModal } from "../../global/accountModalFormItems";
 
 const AccountModal = ({
   show,
@@ -31,7 +33,7 @@ const AccountModal = ({
         address: editedAccount.address,
         password: "",
         confirmPassword: "",
-        role: editedAccount.role_id === "2" ? "owner" : "employee",
+        role: editedAccount.role_id === 2 ? "owner" : "employee",
       };
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -274,6 +276,10 @@ const AccountModal = ({
                     <p>Leave blank to keep the same password</p>
                   </div>
                 )}
+
+                {/* {passwordModal.map((item) => (
+                  <AccountModalFormItem  item={item} errors={errors} touched={touched} />
+                ))} */}
                 <div className="form-row">
                   <div className="form-group col">
                     <label>
@@ -310,6 +316,8 @@ const AccountModal = ({
                       className="invalid-feedback"
                     />
                   </div>
+                </div>
+                <div className="form-row">
                   <div className="form-group col">
                     <label>Confirm Password</label>
                     <Field

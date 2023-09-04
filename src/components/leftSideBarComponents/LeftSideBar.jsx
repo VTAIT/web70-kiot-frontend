@@ -14,13 +14,9 @@ const LeftSideBar = () => {
       <div className="left-sidenav mm-active">
         <ul className="metismenu left-sidenav-menu mm-show">
           {leftNavBarItems.map((item) => {
-            return item.ownerAndAdminOnly ? (
-              (user.role_id === 1 || user.role_id === 2) && (
-                <LeftSideBarItem item={item} />
-              )
-            ) : (
-              <LeftSideBarItem item={item} />
-            );
+            return item.adminOnly
+              ? user.role_id === 1 && <LeftSideBarItem item={item} />
+              : user.role_id !== 1 && <LeftSideBarItem item={item} />;
           })}
         </ul>
       </div>

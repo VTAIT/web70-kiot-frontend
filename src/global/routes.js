@@ -6,6 +6,7 @@ import Register from "../pages/Register.jsx";
 import PendingAccounts from "../pages/PendingAccounts.jsx";
 import Accounts from "../pages/Accounts.jsx";
 import Kiots from "../pages/Kiots.jsx";
+import Profile from "../pages/Profile.jsx";
 
 export const routes = [
   {
@@ -38,6 +39,11 @@ export const routes = [
   {
     path: "/accounts",
     component: <Accounts />,
+    isPrivate: true,
+  },
+  {
+    path: "/profile",
+    component: <Profile />,
     isPrivate: true,
   },
   {

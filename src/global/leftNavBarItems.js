@@ -18,18 +18,18 @@ export const leftNavBarItems = [
     id: 4,
     path: "/pending-accounts",
     text: "Pending Accounts",
+    adminOnly: true,
   },
   {
     id: 5,
     path: "/accounts",
     text: "Accounts",
-    ownerAndAdminOnly: true,
   },
   {
     id: 6,
     path: "/kiots",
     text: "Kiots",
-    ownerAndAdminOnly: true,
+    adminOnly: true,
   },
 ];
 export default leftNavBarItems;

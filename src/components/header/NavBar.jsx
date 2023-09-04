@@ -16,7 +16,7 @@ import {
   FaMagnifyingGlass,
 } from "react-icons/fa6";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppContext from "../../contexts/AppContext/AppContext";
 
 const logo =
@@ -160,7 +160,7 @@ const NavBar = () => {
               <Dropdown.Item>
                 <div>
                   <FaRegUser className="text-muted ms-2" />
-                  <span className="text-muted ms-2"> Profile </span>
+                  <Link to="/profile" className="text-muted ms-2"> Profile </Link>
                 </div>
               </Dropdown.Item>
               <Dropdown.Item>
