@@ -22,9 +22,6 @@ const Customer = (props) => {
         <span onClick={props.onEditCustomer}>
           <FaRegPenToSquare className="text-info ms-2" />
         </span>
-        <a href>
-          <FaRegTrashCan className="text-danger ms-2" />
-        </a>
       </td>
     </tr>
   );
