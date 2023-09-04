@@ -1,14 +1,28 @@
 import React from "react";
 import EditProductModal from "./EditProductModal";
+import { useContext } from "react";
+import { productPropsContext } from "../searchComponents/SearchAndPaginaton";
 
 const Item = (props) => {
-    const item = props.item;
+    const product = props.product;
+
+    const productProps = useContext(productPropsContext);
+    const saleOffProductList = productProps.saleOffProductList;
+
+    const getSaleOffProduct = (product) => {
+        const saleOffProduct = saleOffProductList.find(
+            (el) =>
+                el.name_product === product.name_product &&
+                el.kiot_id === product.kiot_id
+        );
+        return saleOffProduct;
+    };
     return (
         <tr>
             <td>
                 <p className="d-inline-block align-middle mb-0">
                     <div className="d-inline-block align-middle mb-0 product-name">
-                        {item.name_product}
+                        {product.name_product}
                     </div>
                     <br />
                     {/* <span className="text-muted font-13">
@@ -16,24 +30,25 @@ const Item = (props) => {
                     </span> */}
                 </p>
             </td>
-            <td>{item.category}</td>
-            <td>${item.price}</td>
+            <td>{product.category}</td>
+            <td>${product.price}</td>
             <td>
-                {item.promotion ? (
+                {getSaleOffProduct(product) &&
+                getSaleOffProduct(product).active ? (
                     <p className="text-success m-0"> Yes</p>
                 ) : (
                     <p className="text-danger m-0">No</p>
                 )}
             </td>
             <td>
-                {item.active ? (
+                {product.active ? (
                     <p className="text-success m-0"> Yes</p>
                 ) : (
                     <p className="text-danger m-0">No</p>
                 )}
             </td>
             <td>
-                <EditProductModal product={item} />
+                <EditProductModal product={product} />
             </td>
         </tr>
     );
