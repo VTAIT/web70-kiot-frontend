@@ -1,7 +1,4 @@
-import React, {
-  useContext,
-  useState,
-} from "react";
+import React, { useContext, useState } from "react";
 import us_flag from "../../images/flags/us_flag.png";
 import vn_flag from "../../images/flags/vn_flag.png";
 import { Dropdown, Badge } from "react-bootstrap";
@@ -22,9 +19,7 @@ import AppContext from "../../contexts/AppContext/AppContext";
 const logo =
   "https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
 
-const handleSeachAll = (data) => {
-
-}
+const handleSeachAll = (data) => {};
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <div
@@ -145,11 +140,11 @@ const NavBar = () => {
                 href=""
               >
                 <img
-                  src={logo}
+                  src={user.avatarUrl ? user.avatarUrl : logo}
                   alt="profile-user"
                   className="rounded-circle mx-2"
                 />
-                <span className="ml-1 nav-user-name hidden-sm">
+                <span className="ml-0 nav-user-name hidden-sm">
                   {user.username}
                 </span>
                 <FaChevronDown size={12} style={{ marginLeft: 5 }} />
@@ -160,7 +155,10 @@ const NavBar = () => {
               <Dropdown.Item>
                 <div>
                   <FaRegUser className="text-muted ms-2" />
-                  <Link to="/profile" className="text-muted ms-2"> Profile </Link>
+                  <Link to="/profile" className="text-muted ms-2">
+                    {" "}
+                    Profile{" "}
+                  </Link>
                 </div>
               </Dropdown.Item>
               <Dropdown.Item>
@@ -209,7 +207,7 @@ const NavBar = () => {
               placeholder="Search..."
               className="form-control"
             />
-            <a href="" onClick={e => e.preventDefault()}>
+            <a href="" onClick={(e) => e.preventDefault()}>
               <FaMagnifyingGlass size={18} />
             </a>
           </form>
