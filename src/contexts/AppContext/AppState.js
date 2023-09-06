@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "./AppContext";
 
 const AppState = ({ children }) => {
   const [leftSideBarOpen, setLeftSideBarOpen] = useState(true);
+
   const [leftSideBarSelectedItem, setLeftSideBarSelectedItem] = useState(1);
 
   const handleLeftSideBarStatus = (select) => {
@@ -18,7 +19,7 @@ const AppState = ({ children }) => {
         leftSideBarOpen,
         handleLeftSideBarStatus,
         leftSideBarSelectedItem,
-        handleLeftSideBarSelectedItem
+        handleLeftSideBarSelectedItem,
       }}
     >
       {children}

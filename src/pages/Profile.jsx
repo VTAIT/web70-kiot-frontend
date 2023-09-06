@@ -16,7 +16,7 @@ function Profile() {
     setTimeoutAlert(actionSt);
     try {
       const response = await kiotAPI.getById(auth.user.kiot_id);
-      setKiot(response.data.data);
+      setKiot(response.data.data.kiotInfo);
     } catch (error) {
       console.log(error);
     } finally {
