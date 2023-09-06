@@ -13,8 +13,7 @@ const PendingAccounts = () => {
   const fetchRegisterUser = async () => {
     try {
       setLoading(true);
-      const response = await accountAPI.getAllAccept();
-      console.log(response);
+      const response = await accountAPI.getAllAccept();  
       setRegisteredUsers(response.data.data.accountList);
     } catch (error) {
       console.log(error);
