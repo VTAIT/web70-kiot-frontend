@@ -6,6 +6,7 @@ import { Spinner } from "react-bootstrap";
 import Search from "./Search";
 import Pagination from "./Pagination";
 import { createContext } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const productPropsContext = createContext();
 
@@ -22,12 +23,17 @@ const SearchAndPaginaton = ({ children }) => {
     const [cachedData, setCachedData] = useState([]); //all fetched data
     const [totalData, setTotalData] = useState([]); // data in total page
     const [currentData, setCurrentData] = useState([]); //data to render perpage
+
+    //set query to send server
+    const [searchParams, setSearchParams] = useSearchParams();
+    const currentKiot = searchParams.get("kiotId");
     const [query, setQuery] = useState({
         search: "",
         price: "",
         category: "",
         fromdate: "",
         todate: "",
+        Did: currentKiot ? currentKiot : "",
     });
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +79,7 @@ const SearchAndPaginaton = ({ children }) => {
     const handleGetAllProduct = async (cussor = defaultCussor) => {
         try {
             setIsLoading(true);
-            const res = await productAPI.getAllProduct(cussor);
+            const res = await productAPI.getAllProduct(cussor, query);
 
             handleDataFromServer(res);
 
@@ -111,6 +117,9 @@ const SearchAndPaginaton = ({ children }) => {
         setCurrentData,
         cussor,
         setCussor,
+        searchParams,
+        setSearchParams,
+        currentKiot,
         handleDataFromServer,
         handleGetAllProduct,
     };
@@ -138,12 +147,11 @@ const SearchAndPaginaton = ({ children }) => {
         <div className="page-content">
             <div className="container-fluid position-relative">
                 <div className="row p-2">
-                    <Search {...Props} />
                     <productPropsContext.Provider value={Props}>
+                        <Search />
                         {children}
+                        <Pagination />
                     </productPropsContext.Provider>
-
-                    <Pagination {...Props} />
                 </div>
             </div>
         </div>

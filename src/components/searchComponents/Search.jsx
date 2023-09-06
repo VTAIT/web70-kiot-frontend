@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
 import { filteredDataClient, handleSameItem } from "../../utils/arrayUtils";
 import productAPI from "../../apis/productAPI";
+import { productPropsContext } from "./SearchAndPaginaton";
 
 export const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 export const priceRange = ["0-50", "50-100", "100"];
 
 const Search = (props) => {
+    const productProps = useContext(productPropsContext);
     const {
         query,
         setQuery,
@@ -26,7 +28,7 @@ const Search = (props) => {
         saleOffTransactionList,
         setSaleOffTransactionList,
         cachedData,
-    } = props;
+    } = productProps;
 
     const changeSearchInput = (e) => {
         const newQueryValue = { ...query, search: e.target.value };
