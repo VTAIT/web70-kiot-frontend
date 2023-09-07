@@ -14,7 +14,7 @@ import { productListContext } from "../../pages/ProductList";
 import imageAPI from "../../apis/imageAPI";
 import { productPropsContext } from "../searchComponents/SearchAndPaginaton";
 
-const categories = ["Choose", "EU", "NA", "OC", "AF", "AS", "SA"];
+const categories = ["EU", "NA", "OC", "AF", "AS", "SA"];
 
 const ProductFrom = ({ setShow, product }) => {
     const { setAlert } = useContext(productListContext);
@@ -25,7 +25,7 @@ const ProductFrom = ({ setShow, product }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const [kiots, setKiots] = useState([{ _id: "", username: "" }]);
+    const [kiot, setKiot] = useState({});
 
     const [dataInForm, setDataInForm] = useState({});
 
@@ -72,6 +72,7 @@ const ProductFrom = ({ setShow, product }) => {
                 const srcImage = resImage.data.data.imageInfo.src;
 
                 const dataForCreateProduct = { ...dataInForm, image: srcImage };
+
                 const resProduct = await productAPI.createProduct(
                     dataForCreateProduct
                 );
@@ -112,11 +113,11 @@ const ProductFrom = ({ setShow, product }) => {
             image: product
                 ? Yup.mixed().notRequired()
                 : Yup.mixed().required("Image is required"),
+
             description: Yup.string().required("Description is required"),
-            kiot_id:
-                auth.user.role_id === 1
-                    ? Yup.string().required("Description is required")
-                    : Yup.string().notRequired(),
+
+            kiot_id: Yup.string().required("Kiot is required"),
+
             active: Yup.boolean().required("Active status is required"),
         }),
 
@@ -127,13 +128,21 @@ const ProductFrom = ({ setShow, product }) => {
     });
 
     useEffect(() => {
-        const getKiots = async () => {
-            const res = await kiotAPI.getAll();
-            setKiots([{ _id: "", username: "" }, ...res.data.data.kiotList]);
+        const getKiot = async (kiot_id) => {
+            try {
+                const res = await kiotAPI.getById(kiot_id);
+                setKiot(res.data.data.kiotInfo);
+            } catch (error) {
+                setError(
+                    `${error.response.data.messege}, ${error.response.data.error}`
+                );
+            }
         };
 
         if (auth.user.role_id === 1) {
-            getKiots();
+            getKiot(productProps.currentKiot);
+        } else {
+            getKiot(auth.user.kiot_id);
         }
     }, []);
 
@@ -240,30 +249,23 @@ const ProductFrom = ({ setShow, product }) => {
                     </Form.Group>
                 </Row>
 
-                {auth.user.role_id === 1 && (
-                    <Row>
-                        <Form.Group as={Col} controlId="kiot_id">
-                            <Form.Label>Ki-ot's name:</Form.Label>
-                            <Form.Select
-                                value={formik.values.kiot_id}
-                                onChange={formik.handleChange}
-                            >
-                                {kiots.map((item) => (
-                                    <option key={item._id} value={item._id}>
-                                        {item.username
-                                            ? item.username
-                                            : "Choose..."}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                            {formik.errors.kiot_id && (
-                                <p className="text-danger">
-                                    {formik.errors.kiot_id}
-                                </p>
-                            )}
-                        </Form.Group>
-                    </Row>
-                )}
+                <Row>
+                    <Form.Group as={Col} controlId="kiot_id">
+                        <Form.Label>Ki-ot's name:</Form.Label>
+                        <Form.Select
+                            value={formik.values.kiot_id}
+                            onChange={formik.handleChange}
+                        >
+                            <option value="">Choose...</option>
+                            <option value={kiot._id}>{kiot.username}</option>
+                        </Form.Select>
+                        {formik.errors.kiot_id && (
+                            <p className="text-danger">
+                                {formik.errors.kiot_id}
+                            </p>
+                        )}
+                    </Form.Group>
+                </Row>
 
                 <Row className="mb-3">
                     <Form.Group controlId="description">
@@ -300,7 +302,8 @@ const ProductFrom = ({ setShow, product }) => {
                                 !formik.errors.price &&
                                 !formik.errors.image &&
                                 !formik.errors.category &&
-                                !formik.errors.decription
+                                !formik.errors.kiot_id &&
+                                !formik.errors.description
                                     ? "linear-gradient(to right, rgb(37, 106, 253), rgba(37, 106, 253,0.6))"
                                     : "linear-gradient(to right, rgb(128, 128, 128), rgba(128, 128, 128,0.6))",
                         }}

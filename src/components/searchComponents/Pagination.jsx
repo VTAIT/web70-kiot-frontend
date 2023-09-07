@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
 import productAPI from "../../apis/productAPI";
 import { handleSameItem } from "../../utils/arrayUtils";
+import { productPropsContext } from "./SearchAndPaginaton";
 
 const Pagination = (props) => {
+    const productProps = useContext(productPropsContext);
     const {
         totalData,
         setTotalData,
@@ -21,7 +23,7 @@ const Pagination = (props) => {
         setSaleOffProductList,
         saleOffTransactionList,
         setSaleOffTransactionList,
-    } = props;
+    } = productProps;
 
     const handlePageClick = async (e) => {
         const newCurrentPage = e.selected + 1;
@@ -38,7 +40,7 @@ const Pagination = (props) => {
 
         if (newCurrentPage >= totalPages && !isQuerying) {
             try {
-                const res = await productAPI.getAllProduct(cussor);
+                const res = await productAPI.getAllProduct(cussor, query);
                 handleDataFromServer(res, newCurrentPage);
             } catch (error) {
                 console.log(error);
