@@ -28,12 +28,12 @@ const Kiot = (props) => {
       </td>
       <td>
         <div className="d-flex flex-column p-2 bd-highlight">
-        <Link to={`/productList?kiotId=${kiot._id}`}>Products</Link>
-        <Link to={`/accounts?kiotId=${kiot._id}`}>Accounts</Link>
-        <Link to={`/customers?kiotId=${kiot._id}`}>Customers</Link>
-        <Link to="">Transactions</Link>
+          <Link to={`/productList?kiotId=${kiot._id}`}>Products</Link>
+          <Link to={`/saleoffs?kiotId=${kiot._id}`}>SaleOffs</Link>
+          <Link to={`/accounts?kiotId=${kiot._id}`}>Accounts</Link>
+          <Link to={`/customers?kiotId=${kiot._id}`}>Customers</Link>
+          <Link to="">Transactions</Link>
         </div>
-        
       </td>
       <td>
         {kiot.active ? (

@@ -31,5 +31,10 @@ export const leftNavBarItems = [
     text: "Kiots",
     adminOnly: true,
   },
+  {
+    id: 6,
+    path: "/saleoffs",
+    text: "SaleOffs",
+  },
 ];
 export default leftNavBarItems;
