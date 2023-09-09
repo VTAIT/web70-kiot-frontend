@@ -1,8 +1,8 @@
 import React from "react";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
 import { useContext } from "react";
 import AddProductModal from "./AddProductModal";
 import TableList from "./TableList";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const ProductListRender = () => {
   const productProps = useContext(productPropsContext);

@@ -1,35 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
-import { filteredDataClient, handleSameItem } from "../../utils/arrayUtils";
-import productAPI from "../../apis/productAPI";
-import { productPropsContext } from "./SearchAndPaginaton";
-
+import { useSearchParams } from "react-router-dom";
+import AuthContext from "../../contexts/AuthContext/AuthContext";
 export const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 export const priceRange = ["0-50", "50-100", "100"];
 
 const Search = (props) => {
-  const productProps = useContext(productPropsContext);
-  const {
-    query,
-    setQuery,
-    handleGetAllProduct,
-    setTotalData,
-    setCurrentData,
-    setTotalPages,
-    itemsPerPage,
-    defaultCussor,
-    setCurrentPage,
-    cussor,
-    setCussor,
-    setIsLoading,
-    setError,
-    saleOffProductList,
-    setSaleOffProductList,
-    saleOffTransactionList,
-    setSaleOffTransactionList,
-    cachedData,
-  } = productProps;
+  const { auth } = useContext(AuthContext);
+  const [query, setQuery] = useState({
+    search: "",
+    price: "",
+    category: "",
+    fromdate: "",
+    todate: "",
+  });
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const changeSearchInput = (e) => {
     const newQueryValue = { ...query, search: e.target.value };
@@ -53,72 +40,11 @@ const Search = (props) => {
   };
 
   const handleSearch = async () => {
-    const { search, price, category, fromdate, todate } = query;
-
-    if (!search && !price && !category && !fromdate && !todate) {
-      return await handleGetAllProduct(defaultCussor);
-    }
-
-    let itemAfterClientSearch = filteredDataClient(cachedData, query);
-
-    if (itemAfterClientSearch.length <= itemsPerPage) {
-      console.log("less than perpage");
-      try {
-        setIsLoading(true);
-
-        itemAfterClientSearch = filteredDataClient(cachedData, query);
-        const res = await productAPI.getAllProduct_query(cussor, query);
-        const data = res.data.data;
-
-        const newQueryData = handleSameItem(
-          itemAfterClientSearch,
-          data.productList
-        );
-        const newSaleOffProductList = handleSameItem(
-          saleOffProductList,
-          data.saleOffProductList
-        );
-        const newSaleOffTransactionList = handleSameItem(
-          saleOffTransactionList,
-          data.saleOffTransactionList
-        );
-
-        setTotalData(newQueryData);
-        setSaleOffProductList(newSaleOffProductList);
-        setSaleOffTransactionList(newSaleOffTransactionList);
-
-        setCussor(-1);
-        setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
-        setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
-        setCurrentPage(1);
-      } catch (error) {
-        console.log(error);
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      console.log("more than perpage");
-      try {
-        setIsLoading(true);
-        itemAfterClientSearch = await filteredDataClient(cachedData, query);
-
-        setTotalData(itemAfterClientSearch);
-        setCussor(itemAfterClientSearch.slice(-1)[0]._id - 1);
-        setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
-        setTotalPages(Math.ceil(itemAfterClientSearch.length / itemsPerPage));
-        setCurrentPage(1);
-      } catch (error) {
-        console.log(error);
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
+    const newQuery = {
+      kiotId: searchParams.get("kiotId") || auth.user.kiot_id,
+      ...query,
+    };
+    setSearchParams(newQuery);
   };
 
   return (

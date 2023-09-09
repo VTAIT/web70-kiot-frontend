@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Star from "./Star";
 import cartContext from "../../contexts/CartContext/CartContext";
 import { caculatePromotionPrice } from "../../utils/cartUtils";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const ProductCart = ({ product }) => {
   const { addProduct } = useContext(cartContext);

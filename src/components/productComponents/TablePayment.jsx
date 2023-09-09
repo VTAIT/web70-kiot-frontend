@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import cartContext from "../../contexts/CartContext/CartContext";
 import { caculateTotalPayment } from "../../utils/cartUtils";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const TablePayment = () => {
   const tax = 10;

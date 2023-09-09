@@ -1,7 +1,7 @@
 import React from "react";
 import EditProductModal from "./EditProductModal";
 import { useContext } from "react";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const Item = (props) => {
   const product = props.product;

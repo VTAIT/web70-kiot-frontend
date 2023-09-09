@@ -12,7 +12,7 @@ import kiotAPI from "../../apis/kiotAPI";
 import productAPI from "../../apis/productAPI";
 import { productListContext } from "../../pages/ProductList";
 import imageAPI from "../../apis/imageAPI";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const categories = ["EU", "NA", "OC", "AF", "AS", "SA"];
 
