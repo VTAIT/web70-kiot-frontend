@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
-import SearchAndPaginaton from "../components/searchProductComponents/SearchAndPaginaton";
 import ProductListRender from "../components/productListComponents/ProductListRender";
+import ProductProvider from "../components/productProviderComponents/ProductProvider";
+import Search from "../components/productProviderComponents/Search";
 
 export const productListContext = createContext();
 
@@ -11,9 +12,10 @@ const ProductList = () => {
   return (
     <productListContext.Provider value={{ setAlert }}>
       <div className="page-content">
-        <SearchAndPaginaton perPage={8}>
+        <Search />
+        <ProductProvider perPage={8}>
           <ProductListRender />
-        </SearchAndPaginaton>
+        </ProductProvider>
       </div>
       <ToastContainer
         className="p-3"

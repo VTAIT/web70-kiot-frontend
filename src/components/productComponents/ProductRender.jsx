@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { productPropsContext } from "../searchProductComponents/SearchAndPaginaton";
+import { productPropsContext } from "../productProviderComponents/ProductProvider";
 import ProductCart from "./ProductCart";
 
 const ProductRender = () => {

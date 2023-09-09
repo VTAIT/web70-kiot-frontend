@@ -32,7 +32,7 @@ export const leftNavBarItems = [
     adminOnly: true,
   },
   {
-    id: 6,
+    id: 7,
     path: "/saleoffs",
     text: "SaleOffs",
   },
