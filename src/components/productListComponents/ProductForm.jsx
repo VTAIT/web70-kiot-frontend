@@ -78,7 +78,6 @@ const ProductFrom = ({ setShow, product }) => {
       }
       setShow(false);
     } catch (error) {
-      console.log(error);
       setError(`${error.response.data.messege}, ${error.response.data.error}`);
     } finally {
       setIsLoading(false);

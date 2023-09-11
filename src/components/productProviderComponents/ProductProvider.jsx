@@ -30,7 +30,7 @@ const ProductProvider = (props) => {
   const categoryQuery = searchParams.get("category");
   const fromdateQuery = searchParams.get("fromdate");
   const todateQuery = searchParams.get("todate");
-  const currentKiot = searchParams.get("todate");
+  const currentKiot = searchParams.get("kiotId");
 
   const [query, setQuery] = useState({
     search: "",
@@ -82,12 +82,11 @@ const ProductProvider = (props) => {
       data.saleOffTransactionList
     );
     setTotalData(newLoadedData);
+    setCachedData(newLoadedData);
     setSaleOffProductList(newSaleOffProductList);
     setSaleOffTransactionList(newSaleOffTransactionList);
-    setCussor(data.cussor);
     setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
-
-    setCachedData(newLoadedData);
+    setCussor(data.cussor);
 
     //hanlde data when changing to new page
     if (newCurrentPage) {
@@ -107,7 +106,6 @@ const ProductProvider = (props) => {
       setIsLoading(true);
       handleDataFromServer(cussor);
     } catch (error) {
-      console.log(error);
       setError(`${error.response.data.messege}, ${error.response.data.error}`);
     } finally {
       setIsLoading(false);
@@ -147,7 +145,6 @@ const ProductProvider = (props) => {
         setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
         setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -165,7 +162,6 @@ const ProductProvider = (props) => {
         setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
         setTotalPages(Math.ceil(itemAfterClientSearch.length / itemsPerPage));
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );

@@ -10,7 +10,8 @@ export default function AddSaleOffModal() {
   return (
     <>
       <Button
-        className="m-2 d-flex align-items-center "
+        className="mx-2 d-flex align-items-center"
+        style={{ width: "fit-content" }}
         variant="primary"
         onClick={() => setShow(true)}
       >

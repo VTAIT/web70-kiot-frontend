@@ -42,7 +42,6 @@ const Pagination = (props) => {
       try {
         handleDataFromServer(cussor, newCurrentPage);
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -76,7 +75,6 @@ const Pagination = (props) => {
           )
         );
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );

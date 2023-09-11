@@ -1,10 +1,10 @@
 import React, { createContext, useState } from "react";
 import { Accordion, Toast, ToastContainer } from "react-bootstrap";
-import SaleOffProductListProvider from "../components/saleOffComponents/saleOffProductList/SaleOffProductListProvider";
-import SaleOffTransactionProvider from "../components/saleOffComponents/saleOffTransaction/SaleOffTransactionProvider";
 import SaleOffProductList from "../components/saleOffComponents/saleOffProductList/SaleOffProductList.render";
 import SaleOffTransactionList from "../components/saleOffComponents/saleOffTransaction/saleOffTransaction.render";
 import AddSaleOffModal from "../components/saleOffComponents/AddSaleOffModal";
+import SaleOffProvider from "../components/saleOffComponents/saleOffProvider/SaleOffProvider";
+import Search from "../components/saleOffComponents/saleOffProvider/Search";
 
 export const saleOffsContext = createContext();
 
@@ -13,24 +13,30 @@ const SaleOffs = () => {
 
   return (
     <saleOffsContext.Provider value={{ setAlert }}>
-      <div className="page-content">
-        <AddSaleOffModal />
+      <div className="page-content container-fluid">
+        <Search />
         <Accordion flush className="m-2">
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Product's Promotions</Accordion.Header>
+            <Accordion.Header>
+              <div className="promotion-title">Product's Promotions</div>
+            </Accordion.Header>
             <Accordion.Body>
-              <SaleOffProductListProvider>
+              <SaleOffProvider type={1} perPage={5}>
+                <AddSaleOffModal />
                 <SaleOffProductList />
-              </SaleOffProductListProvider>
+              </SaleOffProvider>
             </Accordion.Body>
           </Accordion.Item>
 
           <Accordion.Item eventKey="1">
-            <Accordion.Header>Transaction's Promotions</Accordion.Header>
+            <Accordion.Header>
+              <div className="promotion-title">Transaction's Promotions</div>
+            </Accordion.Header>
             <Accordion.Body>
-              <SaleOffTransactionProvider>
+              <SaleOffProvider type={2} perPage={5}>
+                <AddSaleOffModal />
                 <SaleOffTransactionList />
-              </SaleOffTransactionProvider>
+              </SaleOffProvider>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
@@ -52,7 +58,7 @@ const SaleOffs = () => {
             <small>Just now!</small>
           </Toast.Header>
           <Toast.Body>
-            Update saleOff list successfull! Press search to refresh list!
+            Update saleOff list successfull! Please reload to update data!
           </Toast.Body>
         </Toast>
       </ToastContainer>

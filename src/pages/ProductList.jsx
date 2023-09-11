@@ -11,7 +11,7 @@ const ProductList = () => {
 
   return (
     <productListContext.Provider value={{ setAlert }}>
-      <div className="page-content">
+      <div className="page-content px-2">
         <Search />
         <ProductProvider perPage={8}>
           <ProductListRender />

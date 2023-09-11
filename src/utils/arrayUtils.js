@@ -26,23 +26,18 @@ const filteredDataClient = (totalData, query) => {
   const remainData = totalData.filter((item) => {
     let isMatchItem = true;
     // filter name, id
-    const isSpecialCharacter = /[^\w\d]/.test(query.search);
 
-    if (isSpecialCharacter) isMatchItem = false;
+    const isId = !isNaN(parseInt(query.search));
+    if (query.search && isId && parseInt(query.search) !== item._id) {
+      isMatchItem = false;
+    }
 
-    if (!isSpecialCharacter) {
-      const isId = !isNaN(parseInt(query.search));
-      if (query.search && isId && parseInt(query.search) !== item._id) {
-        isMatchItem = false;
-      }
-
-      if (
-        query.search &&
-        !isId &&
-        !item.name_product.toLowerCase().includes(query.search.toLowerCase())
-      ) {
-        isMatchItem = false;
-      }
+    if (
+      query.search &&
+      !isId &&
+      !item.name_product.toLowerCase().includes(query.search.toLowerCase())
+    ) {
+      isMatchItem = false;
     }
 
     //filter price
@@ -100,23 +95,18 @@ const filteredSaleOffClient = (totalData, query) => {
   const remainData = totalData.filter((item) => {
     let isMatchItem = true;
     // filter name, id
-    const isSpecialCharacter = /[^\w\d]/.test(query.search);
 
-    if (isSpecialCharacter) isMatchItem = false;
+    const isId = !isNaN(parseInt(query.search));
+    if (query.search && isId && parseInt(query.search) !== item._id) {
+      isMatchItem = false;
+    }
 
-    if (!isSpecialCharacter) {
-      const isId = !isNaN(parseInt(query.search));
-      if (query.search && isId && parseInt(query.search) !== item._id) {
-        isMatchItem = false;
-      }
-
-      if (
-        query.search &&
-        !isId &&
-        !item.name_product.toLowerCase().includes(query.search.toLowerCase())
-      ) {
-        isMatchItem = false;
-      }
+    if (
+      query.search &&
+      !isId &&
+      !item.name_product.toLowerCase().includes(query.search.toLowerCase())
+    ) {
+      isMatchItem = false;
     }
 
     //filter price
@@ -142,8 +132,11 @@ const filteredSaleOffClient = (totalData, query) => {
     }
 
     //filter category
-
-    if (query.active && item.active !== query.active && isMatchItem) {
+    if (
+      query.active &&
+      item.active !== JSON.parse(query.active) &&
+      isMatchItem
+    ) {
       isMatchItem = false;
     }
 
@@ -166,7 +159,6 @@ const filteredSaleOffClient = (totalData, query) => {
 
     return isMatchItem;
   });
-
   return remainData;
 };
 

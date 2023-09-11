@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import Search from "./Search";
 import Pagination from "./Pagination";
 import { createContext } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -10,10 +9,11 @@ import {
   handleSameItem,
 } from "../../../utils/arrayUtils";
 
-export const saleOffProductListContext = createContext();
+export const saleOffContext = createContext();
 
-const SaleOffProductListProvider = ({ children }) => {
-  const itemsPerPage = 8;
+const SaleOffProvider = (props) => {
+  const { type, children, perPage } = props;
+  const itemsPerPage = perPage;
   const defaultCussor = -1;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,13 @@ const SaleOffProductListProvider = ({ children }) => {
 
   //set query to send server
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search");
+  const rateQuery = searchParams.get("rate");
+  const activeQuery = searchParams.get("active");
+  const fromdateQuery = searchParams.get("fromdate");
+  const todateQuery = searchParams.get("todate");
   const currentKiot = searchParams.get("kiotId");
+
   const [query, setQuery] = useState({
     search: "",
     rate: "",
@@ -39,20 +45,49 @@ const SaleOffProductListProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
 
-  const handleDataFromServer = (res, newCurrentPage) => {
+  useEffect(() => {
+    handleGetAllSaleoff(defaultCussor);
+  }, []);
+
+  useEffect(() => {
+    const newQuery = {
+      search: searchQuery ? searchQuery : "",
+      rate: rateQuery ? rateQuery : "",
+      active: activeQuery ? activeQuery : "",
+      fromdate: fromdateQuery ? fromdateQuery : "",
+      todate: todateQuery ? todateQuery : "",
+      Did: currentKiot ? currentKiot : "",
+    };
+    setQuery(newQuery);
+    handleSearch(newQuery);
+  }, [
+    searchQuery,
+    rateQuery,
+    activeQuery,
+    fromdateQuery,
+    todateQuery,
+    currentKiot,
+  ]);
+
+  const handleDataFromServer = async (cussor, newCurrentPage) => {
+    const res = await saleOffAPI.getAllSaleoff(cussor, query);
     const data = res.data.data;
 
-    const newLoadedData = handleSameItem(
-      cachedData,
-      data.saleOffProductList,
-      true
-    );
+    let newLoadedData = [];
+    if (type === 1) {
+      newLoadedData = handleSameItem(cachedData, data.saleOffProductList, true);
+    } else if (type === 2) {
+      newLoadedData = handleSameItem(
+        cachedData,
+        data.saleOffTransactionList,
+        true
+      );
+    }
 
-    setCachedData(newLoadedData);
     setTotalData(newLoadedData);
-
-    setCussor(data.cussor);
+    setCachedData(newLoadedData);
     setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
+    setCussor(data.cussor);
 
     if (newCurrentPage) {
       setCurrentData(
@@ -62,33 +97,27 @@ const SaleOffProductListProvider = ({ children }) => {
         )
       );
     } else {
-      setCurrentData(data.saleOffProductList.slice(0, itemsPerPage));
+      if (type === 1) {
+        setCurrentData(data.saleOffProductList.slice(0, itemsPerPage));
+      } else if (type === 2) {
+        setCurrentData(data.saleOffTransactionList.slice(0, itemsPerPage));
+      }
     }
   };
 
   const handleGetAllSaleoff = async (cussor = defaultCussor) => {
     try {
       setIsLoading(true);
-      const res = await saleOffAPI.getAllSaleoff(cussor, query);
-
-      handleDataFromServer(res);
-
-      setCurrentPage(1);
+      handleDataFromServer(cussor);
     } catch (error) {
-      console.log(error);
       setError(`${error.response.data.messege}, ${error.response.data.error}`);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSearch = async () => {
-    const { search, rate, active, fromdate, todate } = query;
-
-    if (!search && !rate && !active && !fromdate && !todate) {
-      return await handleGetAllSaleoff(defaultCussor);
-    }
-
+  const handleSearch = async (query) => {
+    setCurrentPage(1);
     let itemAfterClientSearch = filteredSaleOffClient(cachedData, query);
 
     if (itemAfterClientSearch.length <= itemsPerPage) {
@@ -100,19 +129,24 @@ const SaleOffProductListProvider = ({ children }) => {
         const res = await saleOffAPI.getAllSaleoff_query(cussor, query);
         const data = res.data.data;
 
-        const newQueryData = handleSameItem(
-          itemAfterClientSearch,
-          data.saleOffProductList
-        );
+        let newQueryData = [];
+
+        if (type === 1) {
+          newQueryData = handleSameItem(
+            itemAfterClientSearch,
+            data.saleOffProductList
+          );
+        } else if (type === 2) {
+          newQueryData = handleSameItem(
+            itemAfterClientSearch,
+            data.saleOffTransactionList
+          );
+        }
 
         setTotalData(newQueryData);
-
-        setCussor(-1);
         setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
         setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
-        setCurrentPage(1);
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -124,24 +158,22 @@ const SaleOffProductListProvider = ({ children }) => {
       try {
         setIsLoading(true);
         itemAfterClientSearch = await filteredSaleOffClient(cachedData, query);
-
         setTotalData(itemAfterClientSearch);
         setCussor(itemAfterClientSearch.slice(-1)[0]._id - 1);
         setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
         setTotalPages(Math.ceil(itemAfterClientSearch.length / itemsPerPage));
-        setCurrentPage(1);
       } catch (error) {
-        console.log(error);
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
+        setError(error.response);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       }
     }
   };
 
   const Props = {
+    type,
     itemsPerPage,
     defaultCussor,
     setIsLoading,
@@ -167,10 +199,6 @@ const SaleOffProductListProvider = ({ children }) => {
     handleGetAllSaleoff,
   };
 
-  useEffect(() => {
-    handleGetAllSaleoff(defaultCussor);
-  }, []);
-
   if (isLoading) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
@@ -188,18 +216,15 @@ const SaleOffProductListProvider = ({ children }) => {
   }
 
   return (
-    <div className="page-content">
-      <div className="container-fluid position-relative">
-        <div className="row p-2">
-          <saleOffProductListContext.Provider value={Props}>
-            <Search />
-            {children}
-            <Pagination />
-          </saleOffProductListContext.Provider>
-        </div>
+    <div className="w-100">
+      <div className="row p-2">
+        <saleOffContext.Provider value={Props}>
+          {children}
+          <Pagination />
+        </saleOffContext.Provider>
       </div>
     </div>
   );
 };
 
-export default SaleOffProductListProvider;
+export default SaleOffProvider;

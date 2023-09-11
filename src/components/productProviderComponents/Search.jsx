@@ -48,7 +48,7 @@ const Search = (props) => {
   };
 
   return (
-    <form className="search-form">
+    <form className="search-form m-2">
       <div className="search-input">
         <label htmlFor="search">
           <BsSearch />
@@ -81,7 +81,7 @@ const Search = (props) => {
             if (!max) {
               return (
                 <option key={el} value={el}>
-                  more than {min}
+                  More than {min}
                 </option>
               );
             } else {

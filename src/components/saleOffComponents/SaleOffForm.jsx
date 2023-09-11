@@ -11,9 +11,11 @@ import { useEffect } from "react";
 import { saleOffsContext } from "../../pages/SaleOffs";
 import { useSearchParams } from "react-router-dom";
 import saleOffAPI from "../../apis/saleOffAPI";
+import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
 
 const SaleOffForm = ({ setShow, saleOff }) => {
   const { setAlert } = useContext(saleOffsContext);
+  const { handleGetAllSaleoff, type } = useContext(saleOffContext);
   const { auth } = useContext(AuthContext);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -28,17 +30,15 @@ const SaleOffForm = ({ setShow, saleOff }) => {
 
   const handleSubmitForm = async () => {
     setShowConfirmModal(false);
-
     if (saleOff) {
       const newDataInForm = { ...dataInForm, saleOffId: saleOff._id };
-      console.log(newDataInForm);
       try {
         setIsLoading(true);
         const res = await saleOffAPI.updateSaleoff(newDataInForm);
         setAlert(true);
         setShow(false);
+        handleGetAllSaleoff();
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -51,8 +51,8 @@ const SaleOffForm = ({ setShow, saleOff }) => {
         const res = await saleOffAPI.createSaleoff(dataInForm);
         setAlert(true);
         setShow(false);
+        handleGetAllSaleoff();
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -68,7 +68,7 @@ const SaleOffForm = ({ setShow, saleOff }) => {
       rate: saleOff ? saleOff.price : "",
       kiot_id: currentKiot || "",
       active: saleOff ? saleOff.active : true,
-      type: saleOff ? saleOff.type : "1",
+      type: saleOff ? saleOff.type : type,
     },
 
     validationSchema: Yup.object({
@@ -216,6 +216,7 @@ const SaleOffForm = ({ setShow, saleOff }) => {
 
       <Modal
         show={showConfirmModal}
+        onHide={() => setShowConfirmModal(false)}
         style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       >
         <Modal.Header closeButton>
