@@ -21,10 +21,11 @@ const Cart = () => {
               )}
             </div>
           </div>
-          <div className="col w-75 h-50 m-0">
+          <div className="col w-100 h-50 m-0">
             <div className="total-payment position-relative p-2">
               <h5 className="header-title">Total Payment:</h5>
               <TablePayment />
+
               <button
                 className=" position-absolute bottom-0 start-50 translate-middle-x bg-success text-white border-0 rounded-pill px-3 my-2"
                 onClick={() => {

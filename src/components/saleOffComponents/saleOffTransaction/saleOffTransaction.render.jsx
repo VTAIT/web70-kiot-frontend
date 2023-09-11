@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import TableList from "../TableList";
-import { saleOffTransactionContext } from "./SaleOffTransactionProvider";
+import { saleOffContext } from "../saleOffProvider/SaleOffProvider";
 
 const SaleOffTransactionList = () => {
-  const SaleOffTransactionProps = useContext(saleOffTransactionContext);
+  const SaleOffTransactionProps = useContext(saleOffContext);
 
   return (
     <div className="mt-2">

@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
 import { handleSameItem } from "../../../utils/arrayUtils";
-import { saleOffProductListContext } from "./SaleOffProductListProvider";
+import { saleOffContext } from "./SaleOffProvider";
 import saleOffAPI from "../../../apis/saleOffAPI";
 
 const Pagination = (props) => {
-  const saleOffProps = useContext(saleOffProductListContext);
+  const saleOffProps = useContext(saleOffContext);
   const {
+    type,
     itemsPerPage,
     setError,
     totalPages,
@@ -36,10 +37,8 @@ const Pagination = (props) => {
 
     if (newCurrentPage >= totalPages && !isQuerying) {
       try {
-        const res = await saleOffAPI.getAllSaleoff(cussor, query);
-        handleDataFromServer(res, newCurrentPage);
+        handleDataFromServer(cussor, newCurrentPage);
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
@@ -49,11 +48,15 @@ const Pagination = (props) => {
         const res = await saleOffAPI.getAllSaleoff_query(cussor, query);
 
         const data = res.data.data;
+        let newQueryData = [];
 
-        const newQueryData = handleSameItem(totalData, data.saleOffProductList);
+        if (type === 1) {
+          newQueryData = handleSameItem(totalData, data.saleOffProductList);
+        } else if (type === 2) {
+          newQueryData = handleSameItem(totalData, data.saleOffTransactionList);
+        }
 
         setTotalData(newQueryData);
-
         setCussor(data.cussor);
         setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
         setCurrentData(
@@ -63,7 +66,6 @@ const Pagination = (props) => {
           )
         );
       } catch (error) {
-        console.log(error);
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );

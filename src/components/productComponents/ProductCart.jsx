@@ -5,7 +5,7 @@ import { caculatePromotionPrice } from "../../utils/cartUtils";
 import { productPropsContext } from "../productProviderComponents/ProductProvider";
 
 const ProductCart = ({ product }) => {
-  const { addProduct } = useContext(cartContext);
+  const { addProduct, cart } = useContext(cartContext);
   const productProps = useContext(productPropsContext);
   const saleOffProductList = productProps.saleOffProductList;
 
@@ -18,9 +18,20 @@ const ProductCart = ({ product }) => {
     return saleOffProduct;
   };
 
+  const handleChoosingProduct = (_id) => {
+    const choosingProduct = cart.find((el) => el.product._id === _id);
+    if (choosingProduct) {
+      return "chose-product";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div
-      className="card e-co-product w-cart m-2 "
+      className={`card e-co-product w-cart m-2 ${handleChoosingProduct(
+        product._id
+      )} `}
       onClick={() =>
         addProduct(
           product,
@@ -28,18 +39,20 @@ const ProductCart = ({ product }) => {
         )
       }
     >
-      <img
-        src={product.image}
-        alt={product.name}
-        className="img-fluid img-cart"
-      />
+      <div className="img-cart-container">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="img-fluid img-cart"
+        />
+      </div>
 
       {getSaleOffProduct(product) && getSaleOffProduct(product).active && (
         <div className="ribbon ribbon-pink">
           <span>{getSaleOffProduct(product).price}% OFF</span>
         </div>
       )}
-      <div className="card-body product-info rounded-2">
+      <div className="card-body product-info">
         <div className="w-100 d-flex justify-content-start">
           <div className="product-title">{product.name_product}</div>
         </div>
