@@ -69,6 +69,7 @@ function Profile() {
     updateAccount(userInfo);
 
     const kiotInfo = {
+      kiot_id: auth.user.kiot_id,
       fullName: fields.kiotName,
       phone: fields.kiotPhone,
       email: fields.kiotEmail,
@@ -143,7 +144,7 @@ function Profile() {
     >
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
-          <Form className="container rounded bg-white mt-5 mb-5">
+          <Form className="container rounded bg-white m-4">
             {actionStatus && (
               <div
                 class={
