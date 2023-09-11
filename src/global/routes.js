@@ -7,7 +7,7 @@ import PendingAccounts from "../pages/PendingAccounts.jsx";
 import Accounts from "../pages/Accounts.jsx";
 import Kiots from "../pages/Kiots.jsx";
 import Profile from "../pages/Profile.jsx";
-
+import SaleOffs from "../pages/SaleOffs.jsx";
 
 export const routes = [
   {
@@ -18,6 +18,11 @@ export const routes = [
   {
     path: "/productList",
     component: <ProductList />,
+    isPrivate: true,
+  },
+  {
+    path: "/saleoffs",
+    component: <SaleOffs />,
     isPrivate: true,
   },
   {

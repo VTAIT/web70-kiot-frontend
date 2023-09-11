@@ -2,19 +2,20 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
-import ProductFrom from "./ProductForm";
+import SaleOffForm from "./SaleOffForm";
 
-export default function AddProductModal({ handleGetAllProduct }) {
+export default function AddSaleOffModal() {
   const [show, setShow] = useState(false);
 
   return (
     <>
       <Button
-        className="my-2 d-flex align-items-center "
+        className="mx-2 d-flex align-items-center"
+        style={{ width: "fit-content" }}
         variant="primary"
         onClick={() => setShow(true)}
       >
-        <span>Add Product</span>
+        <span>Add Promotion</span>
         <MdOutlineAddCircleOutline className="text-light mx-1 fs-5" />
       </Button>
 
@@ -27,14 +28,11 @@ export default function AddProductModal({ handleGetAllProduct }) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            Add New Product
+            Add New Promotion
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProductFrom
-            setShow={setShow}
-            handleGetAllProduct={handleGetAllProduct}
-          />
+          <SaleOffForm setShow={setShow} />
         </Modal.Body>
       </Modal>
     </>
