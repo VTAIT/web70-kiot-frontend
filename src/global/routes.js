@@ -8,6 +8,8 @@ import Accounts from "../pages/Accounts.jsx";
 import Kiots from "../pages/Kiots.jsx";
 import Profile from "../pages/Profile.jsx";
 import SaleOffs from "../pages/SaleOffs.jsx";
+import Transactions from "../pages/Transactions.jsx";
+
 
 export const routes = [
   {
@@ -23,6 +25,12 @@ export const routes = [
   {
     path: "/saleoffs",
     component: <SaleOffs />,
+    isPrivate: true,
+  },
+  {
+
+    path: "/transactions",
+    component: <Transactions />,
     isPrivate: true,
   },
   {
