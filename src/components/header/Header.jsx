@@ -12,7 +12,7 @@ const Header = () => {
     auth.isAuthenticated && (
       <div className="topbar">
         <div className="topbar-left">
-          <a href="../dashboard/crm-index.html" className="logo">
+          <a href="" className="logo">
             <span>
               <img src={logo} alt="logo-small" className="logo-sm" />
             </span>
