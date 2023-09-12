@@ -10,6 +10,7 @@ import Profile from "../pages/Profile.jsx";
 import SaleOffs from "../pages/SaleOffs.jsx";
 import Transactions from "../pages/Transactions.jsx";
 
+
 export const routes = [
   {
     path: "/",
@@ -27,6 +28,7 @@ export const routes = [
     isPrivate: true,
   },
   {
+
     path: "/transactions",
     component: <Transactions />,
     isPrivate: true,

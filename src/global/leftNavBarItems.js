@@ -36,6 +36,7 @@ export const leftNavBarItems = [
     path: "/saleoffs",
     text: "SaleOffs",
   },
+
   {
     id: 8,
     path: "/transactions",
