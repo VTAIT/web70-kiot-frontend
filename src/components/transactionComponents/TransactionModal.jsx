@@ -19,7 +19,6 @@ const TransactionModal = ({
     editedTransaction &&
       setProductList(
         editedTransaction.product_list.map((product) => {
-          console.log("product:", { ...product, isReturned: false });
           return { ...product, isReturned: false };
         })
       );

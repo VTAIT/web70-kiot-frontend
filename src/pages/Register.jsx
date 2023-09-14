@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import {
@@ -13,6 +13,9 @@ import { useFormik } from "formik";
 import authAPI from "../apis/authAPI";
 
 const Register = () => {
+  useEffect(()=>{
+    localStorage.setItem("currentUrl", window.location.pathname);
+  },[])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const logo =

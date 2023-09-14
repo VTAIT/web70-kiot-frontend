@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Kiot from "../components/kiotComponents/Kiot";
 import kiotAPI from "../apis/kiotAPI";
+import leftNavBarItems from "../global/leftNavBarItems";
+import AppContext from "../contexts/AppContext/AppContext";
 
 const Kiots = () => {
   const [kiots, setKiots] = useState([]);
@@ -14,8 +16,14 @@ const Kiots = () => {
   };
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
 
   useEffect(() => {
+    localStorage.setItem("currentUrl",window.location.pathname)
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === window.location.pathname
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
     fetchKiots(actionStatus);
   }, []);
 

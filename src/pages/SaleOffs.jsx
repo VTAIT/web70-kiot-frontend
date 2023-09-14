@@ -1,16 +1,25 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Accordion, Toast, ToastContainer } from "react-bootstrap";
 import SaleOffProductList from "../components/saleOffComponents/saleOffProductList/SaleOffProductList.render";
 import SaleOffTransactionList from "../components/saleOffComponents/saleOffTransaction/saleOffTransaction.render";
 import AddSaleOffModal from "../components/saleOffComponents/AddSaleOffModal";
 import SaleOffProvider from "../components/saleOffComponents/saleOffProvider/SaleOffProvider";
 import Search from "../components/saleOffComponents/saleOffProvider/Search";
+import leftNavBarItems from "../global/leftNavBarItems";
+import AppContext from "../contexts/AppContext/AppContext";
 
 export const saleOffsContext = createContext();
 
 const SaleOffs = () => {
   const [alert, setAlert] = useState(false);
-
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
+  useEffect(() => {
+    localStorage.setItem("currentUrl", window.location.pathname);
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === window.location.pathname
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
+  }, []);
   return (
     <saleOffsContext.Provider value={{ setAlert }}>
       <div className="page-content container-fluid">

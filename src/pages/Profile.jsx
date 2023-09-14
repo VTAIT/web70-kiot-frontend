@@ -25,6 +25,7 @@ function Profile() {
   };
 
   useEffect(() => {
+    localStorage.setItem("currentUrl", window.location.pathname);
     getKiotInfo(actionStatus);
   }, []);
   const initialValues = {
@@ -175,7 +176,11 @@ function Profile() {
                     }
                   />
                   <span className="fw-bold">{auth.user.username}</span>
-                  {loading && <p className="text-info mt-3">Upload avatar in progress...</p>}
+                  {loading && (
+                    <p className="text-info mt-3">
+                      Upload avatar in progress...
+                    </p>
+                  )}
                   <div class="mb-3 mt-3">
                     <input
                       class="form-control"

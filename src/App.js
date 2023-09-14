@@ -1,5 +1,4 @@
-import { Route, Routes } from "react-router-dom";
-import AppState from "./contexts/AppContext/AppState";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import routes from "./global/routes";
 import AuthState from "./contexts/AuthContext/AuthState";
 import PrivateRoute from "./PrivateRoute";
@@ -7,8 +6,15 @@ import AdminRoute from "./AdminRoute";
 import NotAuthRoute from "./NotAuthRoute";
 import Header from "./components/header/Header";
 import LeftSideBar from "./components/leftSideBarComponents/LeftSideBar";
+import { useEffect } from "react";
+import AppState from "./contexts/AppContext/AppState";
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const urlLocalStorage = localStorage.getItem("currentUrl");
+    urlLocalStorage && navigate(urlLocalStorage);
+  }, []);
   return (
     <AppState>
       <AuthState>
@@ -17,7 +23,7 @@ function App() {
           <LeftSideBar />
           <Routes>
             {routes.map((route, index) => {
-              const { path, component, isPrivate, notAuth ,isAdmin} = route;
+              const { path, component, isPrivate, notAuth, isAdmin } = route;
               return (
                 <Route
                   key={index}
