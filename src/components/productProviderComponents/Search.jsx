@@ -48,7 +48,7 @@ const Search = (props) => {
   };
 
   return (
-    <form className="search-form m-2">
+    <form className="search-form my-2">
       <div className="search-input">
         <label htmlFor="search">
           <BsSearch />

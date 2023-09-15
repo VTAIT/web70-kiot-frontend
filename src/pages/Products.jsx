@@ -12,9 +12,9 @@ const Products = () => {
         <div className="container-fluid">
           <Search />
           <div className="container-fluid product-container">
-            <div className="container-fluid position-relative">
+            <div className="container-fluid position-relative p-0">
               <div className="row p-2">
-                <ProductProvider perPage={16}>
+                <ProductProvider perPage={15}>
                   <ProductRender />
                 </ProductProvider>
               </div>
