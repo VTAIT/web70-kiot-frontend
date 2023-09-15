@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Account from "../components/accountComponents/Account";
 import accountAPI from "../apis/accountAPI";
+import leftNavBarItems from "../global/leftNavBarItems";
+import AppContext from "../contexts/AppContext/AppContext";
 
 const PendingAccounts = () => {
   const [registeredUsers, setRegisteredUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
 
   useEffect(() => {
+    localStorage.setItem("currentUrl",window.location.pathname)
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === window.location.pathname
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
     fetchRegisterUser();
   }, []);
 

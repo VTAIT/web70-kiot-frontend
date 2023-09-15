@@ -18,8 +18,12 @@ const LeftSideBar = () => {
         <ul className="metismenu left-sidenav-menu mm-show">
           {leftNavBarItems.map((item) => {
             return item.adminOnly
-              ? user.role_id === 1 && <LeftSideBarItem item={item} />
-              : user.role_id !== 1 && <LeftSideBarItem item={item} />;
+              ? user.role_id === 1 && (
+                  <LeftSideBarItem key={item.id} item={item} />
+                )
+              : user.role_id !== 1 && (
+                  <LeftSideBarItem key={item.id} item={item} />
+                );
           })}
         </ul>
       </div>

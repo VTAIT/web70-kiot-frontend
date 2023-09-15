@@ -1,14 +1,23 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 import ProductListRender from "../components/productListComponents/ProductListRender";
 import ProductProvider from "../components/productProviderComponents/ProductProvider";
 import Search from "../components/productProviderComponents/Search";
+import AppContext from "../contexts/AppContext/AppContext";
+import leftNavBarItems from "../global/leftNavBarItems";
 
 export const productListContext = createContext();
 
 const ProductList = () => {
   const [alert, setAlert] = useState(false);
-
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
+  useEffect(() => {
+    localStorage.setItem("currentUrl", window.location.pathname);
+    const selectedItem = leftNavBarItems.filter(
+      (item) => item.path === window.location.pathname
+    )[0];
+    handleLeftSideBarSelectedItem(selectedItem.id);
+  }, []);
   return (
     <productListContext.Provider value={{ setAlert }}>
       <div className="page-content px-2">

@@ -1,14 +1,16 @@
 import { FaLock, FaRightToBracket, FaUser } from "react-icons/fa6";
 import { useFormik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import authAPI from "../apis/authAPI";
 import AppContext from "../contexts/AppContext/AppContext";
 
 const Login = () => {
-    const { leftSideBarSelectedItem, handleLeftSideBarSelectedItem } =
-    useContext(AppContext);
+  useEffect(() => {
+    localStorage.setItem("currentUrl", window.location.pathname);
+  }, []);
+  const { handleLeftSideBarSelectedItem } = useContext(AppContext);
   const logo =
     "https://drive.google.com/uc?export=view&id=1kvFDWul0NlJiF4Pc5fCGAdMqXhWWkUPY";
   const [loading, setLoading] = useState(false);
@@ -34,14 +36,13 @@ const Login = () => {
 
         await handleLogin();
         const responseMe = await authAPI.authInfo();
-        if(responseMe.data.data.userInfo.role_id === 1){
-            navigate("/kiots")
-            handleLeftSideBarSelectedItem(6)
-        }else{
-            handleLeftSideBarSelectedItem(1)
-            navigate("/");
+        if (responseMe.data.data.userInfo.role_id === 1) {
+          navigate("/kiots");
+          handleLeftSideBarSelectedItem(6);
+        } else {
+          handleLeftSideBarSelectedItem(1);
+          navigate("/");
         }
-          
       } catch (error) {
         console.log(error);
         setError(error.response.data.message);

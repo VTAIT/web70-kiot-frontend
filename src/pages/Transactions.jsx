@@ -19,8 +19,9 @@ const Transactions = () => {
   const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
+    localStorage.setItem("currentUrl", window.location.pathname);
     const selectedItem = leftNavBarItems.filter(
-      (item) => item.path === "/transactions"
+      (item) => item.path === window.location.pathname
     )[0];
     handleLeftSideBarSelectedItem(selectedItem.id);
     fetchTransactions(actionStatus);
