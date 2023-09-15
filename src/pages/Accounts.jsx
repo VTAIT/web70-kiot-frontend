@@ -21,13 +21,16 @@ const Accounts = () => {
   const { handleLeftSideBarSelectedItem } = useContext(AppContext);
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
+  
   useEffect(() => {
+    localStorage.setItem("currentUrl",window.location.pathname)
     const selectedItem = leftNavBarItems.filter(
-      (item) => item.path === "/accounts"
+      (item) => item.path === window.location.pathname
     )[0];
     handleLeftSideBarSelectedItem(selectedItem.id);
     fetchUsers(actionStatus);
   }, []);
+  
 
   const fetchUsers = async (actionSt) => {
     setTimeoutAlert(actionSt);

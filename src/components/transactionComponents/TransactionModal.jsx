@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 import transactionAPI from "../../apis/transaction";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
@@ -13,11 +13,28 @@ const TransactionModal = ({
   const [loading, setLoading] = useState(false);
   const { auth } = useContext(AuthContext);
   const { user } = auth;
+
+  const [productList, setProductList] = useState([]);
+  useEffect(() => {
+    editedTransaction &&
+      setProductList(
+        editedTransaction.product_list.map((product) => {
+          return { ...product, isReturned: false };
+        })
+      );
+  }, [editedTransaction]);
+
   const [returnedList, setReturnedList] = useState([]);
 
-  const handleReturnedItem = (item) => {
+  const handleReturnedItem = (item, index) => {
     setReturnedList((currentList) => [...currentList, item]);
+    setProductList((currentProductList) => {
+      return currentProductList.map((product, idx) => {
+        return index === idx ? { ...product, isReturned: true } : product;
+      });
+    });
   };
+
   const handleEditTransaction = () => {
     createTransaction();
   };
@@ -36,7 +53,7 @@ const TransactionModal = ({
       retrun_list: returnedList,
       product_list: [],
     };
-    console.log(newTransaction);
+
     await transactionAPI
       .create(newTransaction)
       .then(() => {
@@ -91,15 +108,21 @@ const TransactionModal = ({
           </thead>
           <tbody>
             {editedTransaction &&
-              editedTransaction.product_list.length > 0 &&
-              editedTransaction.product_list.map((item, index) => {
+              productList &&
+              productList.length > 0 &&
+              productList.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td>{item.name}</td>
+                    <td
+                      className={
+                        item.isReturned && "text-decoration-line-through"
+                      }
+                    >
+                      {item.name}
+                    </td>
                     <td>{item.value}</td>
                     <td>
-                      {" "}
-                      <span onClick={() => handleReturnedItem(item)}>
+                      <span onClick={() => handleReturnedItem(item, index)}>
                         <FaTrash className="text-info ms-2" />
                       </span>
                     </td>
@@ -119,17 +142,12 @@ const TransactionModal = ({
           <button
             type="button"
             onClick={handleEditTransaction}
-            // disabled={isSubmitting}
             className="btn btn-primary"
           >
-            {/* {isSubmitting && (
-              <span className="spinner-border spinner-border-sm mr-1"></span>
-            )} */}
             Save
           </button>
         </div>
       </BootstrapModal.Body>
-      {/* <BootstrapModal.Footer></BootstrapModal.Footer> */}
     </BootstrapModal>
   );
 };
