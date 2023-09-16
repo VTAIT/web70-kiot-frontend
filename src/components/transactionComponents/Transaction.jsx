@@ -29,7 +29,7 @@ const Transaction = (props) => {
           );
         })}
       </td>
-      <td>{transaction.code}</td>
+      <td>{transaction.code}_{transaction._id}</td>
       <td>{transaction.createdAt}</td>
 
       <td>
