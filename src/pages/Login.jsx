@@ -1,4 +1,11 @@
-import { FaLock, FaRightToBracket, FaUser } from "react-icons/fa6";
+import {
+  FaFacebookF,
+  FaGoogle,
+  FaLock,
+  FaRightToBracket,
+  FaTwitter,
+  FaUser,
+} from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext/AuthContext";
@@ -202,18 +209,18 @@ const Login = () => {
               <h6 className="my-4">Or Login With</h6>
               <ul className="list-inline mb-4">
                 <li className="list-inline-item">
-                  <a href className>
-                    <i className="fab fa-facebook-f facebook" />
+                  <a href className="facebook">
+                    <FaFacebookF />
                   </a>
                 </li>
                 <li className="list-inline-item">
-                  <a href className>
-                    <i className="fab fa-twitter twitter" />
+                  <a href className="twitter">
+                    <FaTwitter />
                   </a>
                 </li>
                 <li className="list-inline-item">
-                  <a href className>
-                    <i className="fab fa-google google" />
+                  <a href className="google">
+                    <FaGoogle />
                   </a>
                 </li>
               </ul>
