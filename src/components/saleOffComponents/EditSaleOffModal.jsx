@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import SaleOffForm from "./SaleOffForm";
+import { logo } from "../header/Header";
 
 export default function EditSaleOffModal({ saleOff }) {
   const [show, setShow] = useState(false);
@@ -17,11 +18,18 @@ export default function EditSaleOffModal({ saleOff }) {
         onHide={() => setShow(false)}
         size="lg"
         aria-labelledby="example-modal-sizes-title-lg"
-        className=""
+        className="saleoff-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            Edit Promotion
+          <Modal.Title id="contained-modal-title-vcenter">
+            <div className="logo">
+              <span>
+                <img src={logo} alt="logo-small" className="logo-sm" />
+              </span>
+              <span>
+                <div className="logo-lg">Brother </div>
+              </span>
+            </div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

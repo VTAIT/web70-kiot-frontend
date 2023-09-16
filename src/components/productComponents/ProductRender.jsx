@@ -6,7 +6,7 @@ import ProductCart from "./ProductCart";
 const ProductRender = () => {
   const productProps = useContext(productPropsContext);
   return (
-    <div className="d-flex justify-content-around flex-wrap h-65vh over-flow-scroll scrollbar-small">
+    <div className="d-flex justify-content-start flex-wrap h-vh over-flow-scroll scrollbar-small">
       {!productProps.currentData.length ? (
         <div className="text-danger">
           There are no prodcuts match with your search. Please choose the

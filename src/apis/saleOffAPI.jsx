@@ -7,8 +7,8 @@ const saleOffAPI = {
     axiosInstance.get(
       `/saleoff/query?cussor=${cussor}&search=${query.search}&rate=${query.rate}&active=${query.active}&fromdate=${query.fromdate}&todate=${query.todate}&Did=${query.Did}`
     ),
+  getByIdSaleoff: (Did = -1) => axiosInstance.get(`saleoff/getById?Did=${Did}`),
   createSaleoff: (values) => axiosInstance.post("/saleoff/create", values),
   updateSaleoff: (values) => axiosInstance.post("/saleoff/update", values),
-  getByIdSaleoff: () => {},
 };
 export default saleOffAPI;

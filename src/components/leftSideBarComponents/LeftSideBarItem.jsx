@@ -11,7 +11,7 @@ function LeftSideBarItem({ item }) {
         to={item.path}
         className="nav-link"
         onClick={(e) => {
-            handleLeftSideBarSelectedItem(item.id);
+          handleLeftSideBarSelectedItem(item.id);
         }}
       >
         <i className="ti-control-record" />

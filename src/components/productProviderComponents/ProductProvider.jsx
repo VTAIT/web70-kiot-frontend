@@ -222,7 +222,7 @@ const ProductProvider = (props) => {
   }
   return (
     <productPropsContext.Provider value={Props}>
-      <div className="container-fluid position-relative">
+      <div className="container-fluid position-relative p-0">
         {props.children}
         <Pagination />
       </div>

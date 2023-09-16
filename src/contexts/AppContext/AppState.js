@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import AppContext from "./AppContext";
 
 const AppState = ({ children }) => {
-  const [leftSideBarOpen, setLeftSideBarOpen] = useState(true);
+  const [leftSideBarOpen, setLeftSideBarOpen] = useState(false);
 
   const [leftSideBarSelectedItem, setLeftSideBarSelectedItem] = useState(1);
 

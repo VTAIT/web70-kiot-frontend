@@ -400,15 +400,85 @@ hr.thick {
 .total-payment{
   border:1px solid $gray-200;
   background-color: lighten($gray-100, 3%);
-  border-radius: 3px;
+  border-radius: 5px;
   .payment-title{
     color: $gray-700;
     font-weight: 500;
   }
-  button {
-
+  input {
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128,0.5);
+    outline: none;
+    max-width: 200px;
   }
 }
+
+.product-modal, .saleoff-modal, .payment-modal{
+  .logo{
+    display: flex;
+    align-items: center;
+    color: $primary;
+    gap:5px;
+    font-size: 20px;
+  }
+
+  img{
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+.payment-modal{
+
+
+  .payment-center-container{
+    display: flex;
+    background-color: rgb(238, 238, 238);    
+    justify-content: space-between;
+    height: 50vh;
+    .payment-method-container{
+      flex: 0 0 30%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+text-align: center;
+      .payment-methods{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        .payment-img{
+          height: auto;
+          width: 150px;
+          border: 1px solid rgba(128, 128, 128,0.5);
+          padding: 5px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          &.active{
+            border: 1px solid $success;
+          }
+          img{
+            height: 40px;
+            width: auto;
+  
+          }
+        }
+      }
+    }
+    .payment-infor-container{
+      flex: 0 0 65%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+    }
+  }
+}
+
 .cart-promo{
   padding: 90px;
   // background-image: url(../images/products/bg-cart.png);
@@ -610,7 +680,7 @@ hr.thick {
     .table-container {
       margin: 20px 0px;
       overflow-y: scroll;
-      height: 45vh;
+      height: 55vh;
       &::-webkit-scrollbar {
         width: 5px;
       }
@@ -625,8 +695,8 @@ hr.thick {
 .w-cart {
   height: fit-content;
 }
-.h-65vh{
-  height: 65vh;
+.h-vh{
+  height: 70vh;
 }
 
 
@@ -642,9 +712,7 @@ hr.thick {
   background-color: #888; 
   border-radius: 5px; 
 }
-//   &::-webkit-scrollbar-track {
-//   background-color: #f1f1f1; 
-// }
+
 
 }
 .category {
@@ -652,10 +720,6 @@ hr.thick {
 }
 
 .pagination {
-  // position: absolute;
-  // bottom: -60px;
-  // left: 50%;
-  // transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -790,7 +854,7 @@ hr.thick {
       }
     }
   }
-  .h-65vh{
-    height: 55vh;
+  .h-vh{
+    height: 60vh;
   }
 }
