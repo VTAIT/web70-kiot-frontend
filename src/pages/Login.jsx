@@ -34,9 +34,8 @@ const Login = () => {
 
         localStorage.setItem("accessToken", response.data.data.acceptToken);
 
-        await handleLogin();
-        const responseMe = await authAPI.authInfo();
-        if (responseMe.data.data.userInfo.role_id === 1) {
+        const userInfo = await handleLogin();
+        if (userInfo.role_id === 1) {
           navigate("/kiots");
           handleLeftSideBarSelectedItem(6);
         } else {
