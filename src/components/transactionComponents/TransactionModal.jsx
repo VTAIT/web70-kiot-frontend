@@ -27,33 +27,44 @@ const TransactionModal = ({
   const [returnedList, setReturnedList] = useState([]);
 
   const handleReturnedItem = (item, index) => {
-    setReturnedList((currentList) => [...currentList, item]);
-    setProductList((currentProductList) => {
-      return currentProductList.map((product, idx) => {
-        return index === idx ? { ...product, isReturned: true } : product;
+    if (!item.isReturned) {
+      setReturnedList((currentList) => [...currentList, item]);
+      setProductList((currentProductList) => {
+        return currentProductList.map((product, idx) => {
+          return index === idx ? { ...product, isReturned: true } : product;
+        });
       });
-    });
+    } else {
+      setReturnedList((currentList) =>
+        currentList.filter((i) => i._id !== item._id)
+      );
+      setProductList((currentProductList) => {
+        return currentProductList.map((product, idx) => {
+          return index === idx ? { ...product, isReturned: false } : product;
+        });
+      });
+    }
   };
 
   const handleEditTransaction = () => {
-    createTransaction();
+    createReturnedTransaction();
   };
 
   const returnedValue = returnedList.reduce((accumulator, item) => {
     return accumulator + item.value;
   }, 0);
 
-  async function createTransaction() {
+  async function createReturnedTransaction() {
     const newTransaction = {
       username: user.username,
       kiot_id: editedTransaction.kiot_id,
       status: 2,
-      deposit: 0,
+      // deposit: 0,
       returnV: returnedValue,
       retrun_list: returnedList,
-      product_list: [],
+      // product_list: [],
     };
-
+    setLoading(true);
     await transactionAPI
       .create(newTransaction)
       .then(() => {
@@ -87,7 +98,8 @@ const TransactionModal = ({
         <p>
           Transaction Code:{" "}
           <span className="fw-bold">
-            {editedTransaction && editedTransaction.code}
+            {editedTransaction &&
+              editedTransaction.code + "_" + editedTransaction._id}
           </span>
         </p>
         <table
