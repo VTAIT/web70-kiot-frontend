@@ -1,7 +1,7 @@
 import { Field, ErrorMessage } from "formik";
 import React from "react";
 
-function AccountModalFormItem({ item, isEditMode, errors, touched }) {
+function ModalFormItem({ item, isEditMode, errors, touched }) {
   return (
     <div className="form-row">
       <div className="form-group col">
@@ -33,4 +33,4 @@ function AccountModalFormItem({ item, isEditMode, errors, touched }) {
   );
 }
 
-export default AccountModalFormItem;
+export default ModalFormItem;

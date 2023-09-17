@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 import accountAPI from "../../apis/accountAPI";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import AccountModalFormItem from "./AccountModalFormItem";
-import { passwordModal } from "../../global/accountModalFormItems";
+import {
+  accountModalFormItems,
+  passwordModal,
+} from "../../global/accountModalFormItems";
+import ModalFormItem from "../../global/ModalFormItem";
 
 const AccountModal = ({
   show,
@@ -129,147 +132,18 @@ const AccountModal = ({
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ errors, touched, isSubmitting, setFieldValue }) => {
+          {({ errors, touched, isSubmitting,setFieldValue }) => {
             return (
               <Form>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Username</label>
-                    <Field
-                      name="username"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.username && touched.username
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="username"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Email</label>
-                    <Field
-                      name="email"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.email && touched.email ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Full Name</label>
-                    <Field
-                      name="fullName"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.fullName && touched.fullName
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="fullName"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Phone</label>
-                    <Field
-                      name="phone"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.phone && touched.phone ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="phone"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Address</label>
-                    <Field
-                      name="address"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.address && touched.address ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="address"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  {/* <div className="form-group col">
-                    <label>Gender</label>
-                    <Field
-                      name="gender"
-                      as="select"
-                      className={
-                        "form-control" +
-                        (errors.gender && touched.gender ? " is-invalid" : "")
-                      }
-                    >
-                      <option value=""></option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                      <option value="other">other</option>
-                    </Field>
-                    <ErrorMessage
-                      name="title"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div> */}
+                {accountModalFormItems.map((item) => (
+                  <ModalFormItem
+                    item={item}
+                    isEditMode={!isAddMode && true}
+                    errors={errors}
+                    touched={touched}
+                  />
+                ))}
 
-                  <div className="form-group col">
-                    <label>Role</label>
-                    <Field
-                      name="role"
-                      as="select"
-                      className={
-                        "form-control" +
-                        (errors.role && touched.role ? " is-invalid" : "")
-                      }
-                    >
-                      <option value=""></option>
-                      <option value="owner">Owner</option>
-                      <option value="employee">Employee</option>
-                    </Field>
-                    <ErrorMessage
-                      name="role"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
                 {!isAddMode && (
                   <div>
                     <h3 className="pt-3">Change Password</h3>
@@ -277,66 +151,10 @@ const AccountModal = ({
                   </div>
                 )}
 
-                {/* {passwordModal.map((item) => (
-                  <AccountModalFormItem  item={item} errors={errors} touched={touched} />
-                ))} */}
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>
-                      Password
-                      {/* {!isAddMode &&
-                        (!showPassword ? (
-                          <span>
-                            {" "}
-                            -{" "}
-                            <a
-                              onClick={() => setShowPassword(!showPassword)}
-                              className="text-primary"
-                            >
-                              Show
-                            </a>
-                          </span>
-                        ) : (
-                          <span> - {user.password}</span>
-                        ))} */}
-                    </label>
-                    <Field
-                      name="password"
-                      type="password"
-                      className={
-                        "form-control" +
-                        (errors.password && touched.password
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Confirm Password</label>
-                    <Field
-                      name="confirmPassword"
-                      type="password"
-                      className={
-                        "form-control" +
-                        (errors.confirmPassword && touched.confirmPassword
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="confirmPassword"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
+                {passwordModal.map((item) => (
+                  <ModalFormItem  item={item} errors={errors} touched={touched} />
+                ))}
+
                 <div className="form-group text-center">
                   <button
                     type="button"
@@ -361,7 +179,6 @@ const AccountModal = ({
           }}
         </Formik>
       </BootstrapModal.Body>
-      {/* <BootstrapModal.Footer></BootstrapModal.Footer> */}
     </BootstrapModal>
   );
 };
