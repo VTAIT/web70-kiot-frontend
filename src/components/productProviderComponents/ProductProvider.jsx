@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { filteredDataClient, handleSameItem } from "../../utils/arrayUtils";
+import { filteredDataClient, mergeData } from "../../utils/arrayUtils";
 import productAPI from "../../apis/productAPI";
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
@@ -49,6 +49,16 @@ const ProductProvider = (props) => {
   }, []);
 
   useEffect(() => {
+    setTotalPages(Math.ceil(totalData.length / itemsPerPage));
+    setCurrentData(
+      totalData.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+      )
+    );
+  }, [totalData, currentPage, itemsPerPage]);
+
+  useEffect(() => {
     const newQuery = {
       search: searchQuery ? searchQuery : "",
       price: priceQuery ? priceQuery : "",
@@ -68,16 +78,16 @@ const ProductProvider = (props) => {
     currentKiot,
   ]);
 
-  const handleDataFromServer = async (cussor, newCurrentPage) => {
+  const handleDataFromServer = async (cussor) => {
     const res = await productAPI.getAllProduct_query(cussor, query);
     const data = res.data.data;
 
-    const newLoadedData = handleSameItem(cachedData, data.productList, true);
-    const newSaleOffProductList = handleSameItem(
+    const newLoadedData = mergeData(cachedData, data.productList);
+    const newSaleOffProductList = mergeData(
       saleOffProductList,
       data.saleOffProductList
     );
-    const newSaleOffTransactionList = handleSameItem(
+    const newSaleOffTransactionList = mergeData(
       saleOffTransactionList,
       data.saleOffTransactionList
     );
@@ -85,20 +95,7 @@ const ProductProvider = (props) => {
     setCachedData(newLoadedData);
     setSaleOffProductList(newSaleOffProductList);
     setSaleOffTransactionList(newSaleOffTransactionList);
-    setTotalPages(Math.ceil(newLoadedData.length / itemsPerPage));
     setCussor(data.cussor);
-
-    //hanlde data when changing to new page
-    if (newCurrentPage) {
-      setCurrentData(
-        newLoadedData.slice(
-          (newCurrentPage - 1) * itemsPerPage,
-          newCurrentPage * itemsPerPage
-        )
-      );
-    } else {
-      setCurrentData(data.productList.slice(0, itemsPerPage));
-    }
   };
 
   const handleGetAllProduct = async (cussor = defaultCussor) => {
@@ -125,15 +122,12 @@ const ProductProvider = (props) => {
         const res = await productAPI.getAllProduct_query(cussor, query);
         const data = res.data.data;
 
-        const newQueryData = handleSameItem(
-          itemAfterClientSearch,
-          data.productList
-        );
-        const newSaleOffProductList = handleSameItem(
+        const newQueryData = mergeData(itemAfterClientSearch, data.productList);
+        const newSaleOffProductList = mergeData(
           saleOffProductList,
           data.saleOffProductList
         );
-        const newSaleOffTransactionList = handleSameItem(
+        const newSaleOffTransactionList = mergeData(
           saleOffTransactionList,
           data.saleOffTransactionList
         );
@@ -141,15 +135,14 @@ const ProductProvider = (props) => {
         setTotalData(newQueryData);
         setSaleOffProductList(newSaleOffProductList);
         setSaleOffTransactionList(newSaleOffTransactionList);
-
-        setCurrentData(newQueryData.slice(0, itemsPerPage)); // Set initial currentData
-        setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
       } catch (error) {
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
         );
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       }
     } else {
       console.log("more than perpage");
@@ -159,8 +152,6 @@ const ProductProvider = (props) => {
 
         setTotalData(itemAfterClientSearch);
         setCussor(itemAfterClientSearch.slice(-1)[0]._id - 1);
-        setCurrentData(itemAfterClientSearch.slice(0, itemsPerPage)); // Set initial currentData
-        setTotalPages(Math.ceil(itemAfterClientSearch.length / itemsPerPage));
       } catch (error) {
         setError(
           `${error.response.data.messege}, ${error.response.data.error}`
@@ -201,6 +192,7 @@ const ProductProvider = (props) => {
     currentKiot,
     handleDataFromServer,
     handleGetAllProduct,
+    handleSearch,
   };
 
   if (isLoading) {
