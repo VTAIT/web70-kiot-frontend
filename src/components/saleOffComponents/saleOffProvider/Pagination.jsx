@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
-import { handleSameItem } from "../../../utils/arrayUtils";
+import { mergeData } from "../../../utils/arrayUtils";
 import { saleOffContext } from "./SaleOffProvider";
 import saleOffAPI from "../../../apis/saleOffAPI";
 
@@ -8,17 +8,16 @@ const Pagination = (props) => {
   const saleOffProps = useContext(saleOffContext);
   const {
     type,
-    itemsPerPage,
     setError,
     totalPages,
-    setTotalPages,
     setCurrentPage,
+    currentPage,
     query,
     totalData,
     setTotalData,
-    setCurrentData,
     cussor,
     setCussor,
+    setIsLoading,
     handleDataFromServer,
   } = saleOffProps;
 
@@ -35,48 +34,30 @@ const Pagination = (props) => {
         query.todate
     );
 
-    if (newCurrentPage >= totalPages && !isQuerying) {
-      try {
-        handleDataFromServer(cussor, newCurrentPage);
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      }
-    } else if (newCurrentPage >= totalPages && isQuerying) {
-      try {
+    try {
+      setIsLoading(true);
+
+      if (newCurrentPage >= totalPages && !isQuerying) {
+        await handleDataFromServer(cussor);
+      } else if (newCurrentPage >= totalPages && isQuerying) {
         const res = await saleOffAPI.getAllSaleoff_query(cussor, query);
 
         const data = res.data.data;
         let newQueryData = [];
 
         if (type === 1) {
-          newQueryData = handleSameItem(totalData, data.saleOffProductList);
+          newQueryData = mergeData(totalData, data.saleOffProductList);
         } else if (type === 2) {
-          newQueryData = handleSameItem(totalData, data.saleOffTransactionList);
+          newQueryData = mergeData(totalData, data.saleOffTransactionList);
         }
 
         setTotalData(newQueryData);
         setCussor(data.cussor);
-        setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
-        setCurrentData(
-          newQueryData.slice(
-            (newCurrentPage - 1) * itemsPerPage,
-            newCurrentPage * itemsPerPage
-          )
-        );
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
       }
-    } else {
-      setCurrentData(
-        totalData.slice(
-          (newCurrentPage - 1) * itemsPerPage,
-          newCurrentPage * itemsPerPage
-        )
-      );
+    } catch (error) {
+      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,6 +70,7 @@ const Pagination = (props) => {
       pageCount={totalPages}
       previousLabel="< "
       renderOnZeroPageCount={null}
+      forcePage={currentPage - 1}
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

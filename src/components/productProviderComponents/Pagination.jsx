@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ReactPaginate from "react-paginate";
 import productAPI from "../../apis/productAPI";
-import { handleSameItem } from "../../utils/arrayUtils";
+import { mergeData } from "../../utils/arrayUtils";
 import { productPropsContext } from "./ProductProvider";
 
 const Pagination = (props) => {
@@ -9,13 +9,11 @@ const Pagination = (props) => {
   const {
     totalData,
     setTotalData,
-    setCurrentData,
-    itemsPerPage,
     cussor,
     setCussor,
     query,
     totalPages,
-    setTotalPages,
+    currentPage,
     setCurrentPage,
     handleDataFromServer,
     setError,
@@ -23,6 +21,7 @@ const Pagination = (props) => {
     setSaleOffProductList,
     saleOffTransactionList,
     setSaleOffTransactionList,
+    setIsLoading,
   } = productProps;
 
   const handlePageClick = async (e) => {
@@ -38,26 +37,22 @@ const Pagination = (props) => {
         query.todate
     );
 
-    if (newCurrentPage >= totalPages && !isQuerying) {
-      try {
-        handleDataFromServer(cussor, newCurrentPage);
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      }
-    } else if (newCurrentPage >= totalPages && isQuerying) {
-      try {
+    try {
+      setIsLoading(true);
+
+      if (newCurrentPage >= totalPages && !isQuerying) {
+        await handleDataFromServer(cussor);
+      } else if (newCurrentPage >= totalPages && isQuerying) {
         const res = await productAPI.getAllProduct_query(cussor, query);
 
         const data = res.data.data;
 
-        const newQueryData = handleSameItem(totalData, data.productList);
-        const newSaleOffProductList = handleSameItem(
+        const newQueryData = mergeData(totalData, data.productList);
+        const newSaleOffProductList = mergeData(
           saleOffProductList,
           data.saleOffProductList
         );
-        const newSaleOffTransactionList = handleSameItem(
+        const newSaleOffTransactionList = mergeData(
           saleOffTransactionList,
           data.saleOffTransactionList
         );
@@ -66,26 +61,11 @@ const Pagination = (props) => {
         setSaleOffProductList(newSaleOffProductList);
         setSaleOffTransactionList(newSaleOffTransactionList);
         setCussor(data.cussor);
-        setTotalPages(Math.ceil(newQueryData.length / itemsPerPage));
-
-        setCurrentData(
-          newQueryData.slice(
-            (newCurrentPage - 1) * itemsPerPage,
-            newCurrentPage * itemsPerPage
-          )
-        );
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
       }
-    } else {
-      setCurrentData(
-        totalData.slice(
-          (newCurrentPage - 1) * itemsPerPage,
-          newCurrentPage * itemsPerPage
-        )
-      );
+    } catch (error) {
+      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -98,6 +78,7 @@ const Pagination = (props) => {
       pageCount={totalPages}
       previousLabel="< "
       renderOnZeroPageCount={null}
+      forcePage={currentPage - 1}
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

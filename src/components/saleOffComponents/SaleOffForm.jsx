@@ -12,10 +12,12 @@ import { saleOffsContext } from "../../pages/SaleOffs";
 import { useSearchParams } from "react-router-dom";
 import saleOffAPI from "../../apis/saleOffAPI";
 import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
+import { mergeData } from "../../utils/arrayUtils";
 
 const SaleOffForm = ({ setShow, saleOff }) => {
   const { setAlert } = useContext(saleOffsContext);
-  const { handleGetAllSaleoff, type } = useContext(saleOffContext);
+  const { cachedData, setTotalData, setCachedData, type } =
+    useContext(saleOffContext);
   const { auth } = useContext(AuthContext);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -26,42 +28,8 @@ const SaleOffForm = ({ setShow, saleOff }) => {
   const currentKiot = searchParams.get("kiotId")
     ? searchParams.get("kiotId")
     : auth.user.kiot_id;
+
   const [dataInForm, setDataInForm] = useState({});
-
-  const handleSubmitForm = async () => {
-    setShowConfirmModal(false);
-    if (saleOff) {
-      const newDataInForm = { ...dataInForm, saleOffId: saleOff._id };
-      try {
-        setIsLoading(true);
-        const res = await saleOffAPI.updateSaleoff(newDataInForm);
-        setAlert(true);
-        setShow(false);
-        handleGetAllSaleoff();
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      try {
-        setIsLoading(true);
-        const res = await saleOffAPI.createSaleoff(dataInForm);
-        setAlert(true);
-        setShow(false);
-        handleGetAllSaleoff();
-      } catch (error) {
-        setError(
-          `${error.response.data.messege}, ${error.response.data.error}`
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
-
   const formik = useFormik({
     initialValues: {
       name_product: saleOff ? saleOff.name_product : "",
@@ -91,7 +59,39 @@ const SaleOffForm = ({ setShow, saleOff }) => {
     },
   });
 
-  useEffect(() => {}, []);
+  const handleSubmitForm = async () => {
+    setShowConfirmModal(false);
+    try {
+      setIsLoading(true);
+      if (saleOff) {
+        const newDataInForm = { ...dataInForm, saleOffId: saleOff._id };
+
+        const resSaleOff = await saleOffAPI.updateSaleoff(newDataInForm);
+
+        const updatedData = mergeData(cachedData, [
+          resSaleOff.data.data.saleOffInfo,
+        ]);
+
+        setCachedData(updatedData);
+        setTotalData(updatedData);
+      } else {
+        const resSaleOff = await saleOffAPI.createSaleoff(dataInForm);
+
+        const updatedData = mergeData(cachedData, [
+          resSaleOff.data.data.saleOffInfo,
+        ]);
+
+        setCachedData(updatedData);
+        setTotalData(updatedData);
+      }
+    } catch (error) {
+      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+    } finally {
+      setAlert(true);
+      setIsLoading(false);
+      setShow(false);
+    }
+  };
 
   if (isLoading) {
     return (

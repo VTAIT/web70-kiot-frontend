@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import EditSaleOffModal from "./EditSaleOffModal";
+
+import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
+import ShowCodetransaction from "./ShowCodetransaction";
 
 const Item = (props) => {
   const saleOff = props.saleOff;
+  const { type } = useContext(saleOffContext);
   return (
     <tr>
       <td>
@@ -22,6 +26,7 @@ const Item = (props) => {
       </td>
       <td>
         <EditSaleOffModal saleOff={saleOff} />
+        {type === 2 && <ShowCodetransaction code={saleOff._id} />}
       </td>
     </tr>
   );

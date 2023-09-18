@@ -13,12 +13,14 @@ import productAPI from "../../apis/productAPI";
 import { productListContext } from "../../pages/ProductList";
 import imageAPI from "../../apis/imageAPI";
 import { productPropsContext } from "../productProviderComponents/ProductProvider";
+import { mergeData } from "../../utils/arrayUtils";
 
-const categories = ["EU", "NA", "OC", "AF", "AS", "SA"];
+const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 
 const ProductFrom = ({ setShow, product }) => {
   const { setAlert } = useContext(productListContext);
-  const productProps = useContext(productPropsContext);
+  const { cachedData, setTotalData, setCachedData, currentKiot } =
+    useContext(productPropsContext);
   const { auth } = useContext(AuthContext);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -28,62 +30,6 @@ const ProductFrom = ({ setShow, product }) => {
   const [kiot, setKiot] = useState({});
 
   const [dataInForm, setDataInForm] = useState({});
-
-  const handleSubmitForm = async () => {
-    setShowConfirmModal(false);
-
-    const formData = new FormData();
-    formData.append("name_file", dataInForm.name_product);
-    formData.append("image", dataInForm.image);
-    formData.append("kiot_id", dataInForm.kiot_id);
-
-    try {
-      setIsLoading(true);
-      if (product) {
-        //for update product, because create and update modal use a form together
-        let dataForUpdateProduct;
-
-        if (dataInForm.image) {
-          const resImage = await imageAPI.createImage(formData);
-          const srcImage = resImage.data.data.imageInfo.src;
-
-          dataForUpdateProduct = {
-            ...dataInForm,
-            image: srcImage,
-            productId: product._id,
-          };
-        }
-        if (!dataInForm.image) {
-          dataForUpdateProduct = {
-            ...dataInForm,
-            image: "",
-            productId: product._id,
-          };
-        }
-
-        const resProduct = await productAPI.updateProduct(dataForUpdateProduct);
-
-        setAlert(true);
-        productProps.handleGetAllProduct();
-      } else {
-        const resImage = await imageAPI.createImage(formData);
-        const srcImage = resImage.data.data.imageInfo.src;
-
-        const dataForCreateProduct = { ...dataInForm, image: srcImage };
-
-        const resProduct = await productAPI.createProduct(dataForCreateProduct);
-
-        setAlert(true);
-        productProps.handleGetAllProduct();
-      }
-      setShow(false);
-    } catch (error) {
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const formik = useFormik({
     initialValues: {
       name_product: product ? product.name_product : "",
@@ -133,11 +79,76 @@ const ProductFrom = ({ setShow, product }) => {
     };
 
     if (auth.user.role_id === 1) {
-      getKiot(productProps.currentKiot);
+      getKiot(currentKiot);
     } else {
       getKiot(auth.user.kiot_id);
     }
   }, []);
+
+  const handleSubmitForm = async () => {
+    setShowConfirmModal(false);
+
+    const formData = new FormData();
+    formData.append("name_file", dataInForm.name_product);
+    formData.append("image", dataInForm.image);
+    formData.append("kiot_id", dataInForm.kiot_id);
+
+    try {
+      setIsLoading(true);
+      if (product) {
+        //for update product, because create and update modal use a form together
+        let dataForUpdateProduct;
+
+        if (dataInForm.image) {
+          const resImage = await imageAPI.createImage(formData);
+          const srcImage = resImage.data.data.imageInfo.src;
+
+          dataForUpdateProduct = {
+            ...dataInForm,
+            image: srcImage,
+            productId: product._id,
+          };
+        }
+        if (!dataInForm.image) {
+          dataForUpdateProduct = {
+            ...dataInForm,
+            image: "",
+            productId: product._id,
+          };
+        }
+
+        const resProduct = await productAPI.updateProduct(dataForUpdateProduct);
+        const updatedData = mergeData(cachedData, [
+          resProduct.data.data.productInfo,
+        ]);
+
+        setCachedData(updatedData);
+        setTotalData(updatedData);
+      } else {
+        const resImage = await imageAPI.createImage(formData);
+        const srcImage = resImage.data.data.imageInfo.src;
+
+        const dataForCreateProduct = { ...dataInForm, image: srcImage };
+
+        const resProduct = await productAPI.createProduct(dataForCreateProduct);
+        const updatedData = mergeData(cachedData, [
+          resProduct.data.data.productInfo,
+        ]);
+
+        setCachedData(updatedData);
+        setTotalData(updatedData);
+
+        setAlert(true);
+      }
+      setShow(false);
+    } catch (error) {
+      console.log(error);
+      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+    } finally {
+      setAlert(true);
+      setIsLoading(false);
+    }
+  };
 
   if (isLoading) {
     return (

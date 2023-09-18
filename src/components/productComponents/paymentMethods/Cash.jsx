@@ -19,13 +19,13 @@ const Cash = (props) => {
   const caculateChange = (paid) => {
     if (paid === "" || paid < 0) return 0;
 
-    const newChange = (parseInt(paid) - totalPayment).toFixed(1);
+    const newChange = (parseFloat(paid) - parseFloat(totalPayment)).toFixed(1);
     if (newChange < 0 || !newChange) return 0;
     if (newChange >= 0) return newChange;
   };
 
   const Status = (paid) => {
-    if (paid >= totalPayment) return true;
+    if (parseFloat(paid) >= parseFloat(totalPayment)) return true;
     return false;
   };
 

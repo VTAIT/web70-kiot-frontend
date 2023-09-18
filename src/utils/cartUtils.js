@@ -2,12 +2,12 @@ const tax = 10;
 
 const caculatePromotionPrice = (price, promotion_rate) => {
   const PromotionPrice = (price - (price * promotion_rate) / 100).toFixed(2);
-  return parseInt(PromotionPrice);
+  return parseFloat(PromotionPrice);
 };
 
 const caculateTotalPrice = (promotionPrice, quantity) => {
-  const total = promotionPrice * quantity;
-  return parseInt(total);
+  const total = (promotionPrice * quantity).toFixed(2);
+  return parseFloat(total);
 };
 
 const caculateTotalPayment = (cart) => {
@@ -20,24 +20,26 @@ const caculateTotalPayment = (cart) => {
         el.quantity
       );
   });
-  return parseInt(totalPayment);
+  totalPayment = totalPayment.toFixed(2);
+  return parseFloat(totalPayment);
 };
 
 const caculateTax = (cart) => {
-  const Tax = (caculateTotalPayment(cart) * tax) / 100;
+  const Tax = ((caculateTotalPayment(cart) * tax) / 100).toFixed(2);
 
-  return Tax;
+  return parseFloat(Tax);
 };
 
 const caculateTotalPaymentAfterTax = (cart) => {
-  const afterTax = caculateTotalPayment(cart) + caculateTax(cart);
-  return afterTax;
+  const afterTax = (caculateTotalPayment(cart) + caculateTax(cart)).toFixed(2);
+  return parseFloat(afterTax);
 };
 const caculateTotalPaymentWithSaleOff = (cart, rate) => {
-  const afterSaleOff =
+  const afterSaleOff = (
     caculateTotalPaymentAfterTax(cart) -
-    (caculateTotalPaymentAfterTax(cart) * rate) / 100;
-  return afterSaleOff;
+    (caculateTotalPaymentAfterTax(cart) * rate) / 100
+  ).toFixed(2);
+  return parseFloat(afterSaleOff);
 };
 
 const handleFormatCart = (cart) => {

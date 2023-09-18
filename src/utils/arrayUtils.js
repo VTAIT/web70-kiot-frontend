@@ -1,25 +1,25 @@
-const handleSameItem = (arr1, arr2, sort = false) => {
-  const seenIds = {};
-  const arr = [];
+const mergeData = (cachedData, newData, sort = true) => {
+  const idArr = {};
 
-  arr1.forEach((obj) => {
-    if (!seenIds[obj._id]) {
-      arr.push(obj);
-      seenIds[obj._id] = true;
+  cachedData?.forEach((obj1) => {
+    idArr[obj1._id] = { ...obj1 };
+  });
+
+  newData.forEach((obj2) => {
+    if (idArr[obj2._id]) {
+      idArr[obj2._id] = { ...idArr[obj2._id], ...obj2 };
+    } else {
+      idArr[obj2._id] = { ...obj2 };
     }
   });
 
-  arr2.forEach((obj) => {
-    if (!seenIds[obj._id]) {
-      arr.push(obj);
-      seenIds[obj._id] = true;
-    }
-  });
+  const combinedArray = Object.values(idArr);
 
   if (sort) {
-    arr.sort((a, b) => b._id - a._id);
+    combinedArray.sort((a, b) => b._id - a._id);
   }
-  return arr;
+
+  return combinedArray;
 };
 
 const filteredDataClient = (totalData, query) => {
@@ -162,4 +162,4 @@ const filteredSaleOffClient = (totalData, query) => {
   return remainData;
 };
 
-export { handleSameItem, filteredDataClient, filteredSaleOffClient };
+export { mergeData, filteredDataClient, filteredSaleOffClient };

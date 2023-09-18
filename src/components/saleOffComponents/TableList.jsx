@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Item from "./Item";
 
 const TableList = ({ data }) => {
@@ -26,4 +26,4 @@ const TableList = ({ data }) => {
   );
 };
 
-export default TableList;
+export default memo(TableList);

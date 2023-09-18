@@ -74,7 +74,7 @@ const PaymentModal = (props) => {
           saleOff.price
         );
         setPrice(saleOff.price);
-        setTotalPayment(newTotalPayment);
+        setTotalPayment(newTotalPayment.toFixed(1));
       } else {
         setValidCode(false);
         setTotalPayment(caculateTotalPaymentAfterTax(cart));
