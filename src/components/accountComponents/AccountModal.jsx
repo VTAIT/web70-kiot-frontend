@@ -73,7 +73,7 @@ const AccountModal = ({
       ...fields,
       role_id: fields.role === "owner" ? 2 : "employee" && 3,
     };
-    console.log(newUser);
+    setLoading(true);
     await accountAPI
       .create(newUser)
       .then(() => {
@@ -84,7 +84,8 @@ const AccountModal = ({
         setSubmitting(false);
         onUpdateAccount({ status: 0, message: error.response.data.error });
         console.log(error);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   async function updateUser(fields, setSubmitting) {
@@ -96,6 +97,7 @@ const AccountModal = ({
       ...setfields,
       userId: editedAccount._id,
     };
+    setLoading(true);
     await accountAPI
       .update(updatedFields)
       .then(() => {
@@ -108,7 +110,8 @@ const AccountModal = ({
       .catch((error) => {
         setSubmitting(false);
         onUpdateAccount({ status: 0, message: error.response.data.error });
-      });
+      })
+      .finally(setLoading(false));
   }
 
   return (
@@ -132,7 +135,7 @@ const AccountModal = ({
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ errors, touched, isSubmitting,setFieldValue }) => {
+          {({ errors, touched, isSubmitting, setFieldValue }) => {
             return (
               <Form>
                 {accountModalFormItems.map((item) => (
@@ -152,7 +155,11 @@ const AccountModal = ({
                 )}
 
                 {passwordModal.map((item) => (
-                  <ModalFormItem  item={item} errors={errors} touched={touched} />
+                  <ModalFormItem
+                    item={item}
+                    errors={errors}
+                    touched={touched}
+                  />
                 ))}
 
                 <div className="form-group text-center">

@@ -67,7 +67,7 @@ const CustomerModal = ({
       username: user.username,
       gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
     };
-    console.log(newCustomer);
+    setLoading(true);
     await customerAPI
       .create(newCustomer)
       .then(() => {
@@ -79,10 +79,12 @@ const CustomerModal = ({
       })
       .catch((error) => {
         setSubmitting(false);
+        setLoading(false);
         onUpdateCustomer({ status: 0, message: error.response.data.error });
         handleClose();
         console.log(error.response.data.error);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   async function updateCustomer(fields, setSubmitting) {
@@ -95,7 +97,7 @@ const CustomerModal = ({
       customerId: editedCustomer._id,
       gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
     };
-
+    setLoading(true);
     await customerAPI
       .update(updatedFields)
       .then(() => {
@@ -109,7 +111,8 @@ const CustomerModal = ({
         setSubmitting(false);
         handleClose();
         onUpdateCustomer({ status: 0, message: error.response.data.error });
-      });
+      })
+      .finally(setLoading(false));
   }
 
   return (

@@ -4,7 +4,6 @@ import {
   FaLock,
   FaRightToBracket,
   FaTwitter,
-  FaUser,
 } from "react-icons/fa6";
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -13,6 +12,7 @@ import authAPI from "../apis/authAPI";
 import AppContext from "../contexts/AppContext/AppContext";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { loginFormItems } from "../global/loginFormItems";
 
 const Login = () => {
   useEffect(() => {
@@ -101,56 +101,35 @@ const Login = () => {
                     {({ errors, touched, isSubmitting, setFieldValue }) => {
                       return (
                         <Form className="form-horizontal auth-form my-4">
-                          <div className="form-group col">
-                            <label>Username</label>
-                            <div className="input-group ">
-                              <span className="auth-form-icon">
-                                <FaUser />
-                              </span>
-                            </div>
-                            <Field
-                              name="username"
-                              type="text"
-                              placeholder="Enter username"
-                              className={
-                                "form-control" +
-                                (errors.username && touched.username
-                                  ? " is-invalid"
-                                  : "")
-                              }
-                            />
-                            <ErrorMessage
-                              name="username"
-                              component="div"
-                              className="invalid-feedback"
-                            />
-                          </div>
-
-                          <div className="form-row">
-                            <div className="form-group col">
-                              <label>Password</label>
-                              <div className="input-group">
+                          {loginFormItems.map((item) => {
+                            return <div key={item.fieldName} className="form-group col">
+                              <label>{item.label}</label>
+                              <div className="input-group ">
                                 <span className="auth-form-icon">
-                                  <FaLock />
+                                  {item.fieldIcon}
                                 </span>
                               </div>
                               <Field
-                                name="userpassword"
-                                placeholder="Enter password"
-                                type="password"
+                                name={item.fieldName}
+                                type={item.type?item.type:"text"}
+                                placeholder={`Enter ${item.label}`}
                                 className={
                                   "form-control" +
-                                  (errors.userpassword && touched.userpassword
+                                  (errors[item.fieldName] &&
+                                  touched[item.fieldName]
                                     ? " is-invalid"
                                     : "")
                                 }
                               />
                               <ErrorMessage
-                                name="userpassword"
+                                name={item.fieldName}
                                 component="div"
                                 className="invalid-feedback"
                               />
-                            </div>
+                            </div>;
+                          })}
+
+                          <div className="form-row">
                             {error && <p className="text-danger">{error}</p>}
                             <div className="form-group row mt-4">
                               <div className="col-sm-6">
