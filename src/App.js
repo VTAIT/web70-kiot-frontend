@@ -15,10 +15,16 @@ function App() {
     const urlLocalStorage = localStorage.getItem("currentUrl");
     urlLocalStorage && navigate(urlLocalStorage);
   }, []);
+  const pathname = window.location.pathname;
+  const ignore_css = ["/login", "/register"];
   return (
     <AppState>
       <AuthState>
-        <div className="page-wrapper">
+        <div
+          className={
+            ignore_css.includes(pathname) ? "pageWrapper" : "page-wrapper"
+          }
+        >
           <Header />
           <LeftSideBar />
           <Routes>
