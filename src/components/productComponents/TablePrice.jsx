@@ -21,41 +21,41 @@ const TablePrice = () => {
     setArrQuantity(cart.map((el) => el.quantity));
   }, [cart]);
 
-  // if (!cart.length) {
-  //   return (
-  //     <>
-  //       <div className="table  m-0 ">
-  //         <div
-  //           className="border-bottom"
-  //           style={{ position: "sticky", top: "0" }}
-  //         >
-  //           <div className="grid-table-price">
-  //             <div className="product-grid grid-head-color">
-  //               <strong>Product</strong>
-  //             </div>
-  //             <div className="quantity-grid grid-head-color">
-  //               <strong>Quantity</strong>
-  //             </div>
-  //             <div className="total-grid grid-head-color">
-  //               <strong>Total</strong>
-  //             </div>
-  //             <div className="action-grid grid-head-color">
-  //               <strong>Action</strong>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
+  if (!cart.length) {
+    return (
+      <>
+        <div className="table  m-0 ">
+          <div
+            className="border-bottom"
+            style={{ position: "sticky", top: "0" }}
+          >
+            <div className="grid-table-price">
+              <div className="product-grid grid-head-color">
+                <strong>Product</strong>
+              </div>
+              <div className="quantity-grid grid-head-color">
+                <strong>Quantity</strong>
+              </div>
+              <div className="total-grid grid-head-color">
+                <strong>Total</strong>
+              </div>
+              <div className="action-grid grid-head-color">
+                <strong>Action</strong>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  //       <div className="w-100 position-relative">
-  //         <div className="position-absolute top-50 start-50 translate-middle">
-  //           <h6 className="text-center" style={{ color: "rgb(142, 184, 227)" }}>
-  //             Please choose product
-  //           </h6>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // }
+        <div className="w-100 h-75 bg-white position-relative">
+          <div className="position-absolute top-50 start-50 translate-middle">
+            <h6 className="text-center" style={{ color: "rgb(142, 184, 227)" }}>
+              Please choose product
+            </h6>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="table m-0 ">
@@ -77,6 +77,7 @@ const TablePrice = () => {
       </div>
 
       <div>
+
         {!cart.length ? (
           <div className="position-absolute top-50 start-50 translate-middle">
             <h6 className="text-center" style={{ color: "rgb(142, 184, 227)" }}>
