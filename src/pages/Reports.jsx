@@ -24,6 +24,9 @@ const Reports = () => {
           }
         } else if (e.status == 2) {
           returnOrder += 1;
+          if (e.returnV) {
+            revenue -= e.returnV
+          }
         }
       });
 
