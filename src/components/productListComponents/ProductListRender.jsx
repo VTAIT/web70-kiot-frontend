@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import AddProductModal from "./AddProductModal";
 import TableList from "./TableList";
@@ -6,14 +6,20 @@ import { productPropsContext } from "../productProviderComponents/ProductProvide
 
 const ProductListRender = () => {
   const productProps = useContext(productPropsContext);
+
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (productProps.currentData.length > 0 || !productProps.isLoading) {
+      setDataLoaded(true);
+    }
+  }, [productProps.currentData, productProps.isLoading]);
+
   return (
     <div>
       <AddProductModal />
-      {!productProps.currentData.length ? (
-        <div className="text-danger">
-          There are no prodcuts match with your search. Please choose the
-          correct value!
-        </div>
+      {dataLoaded && !productProps.currentData.length ? (
+        <div className="text-danger">There are no prodcuts!</div>
       ) : (
         <TableList data={productProps.currentData} />
       )}

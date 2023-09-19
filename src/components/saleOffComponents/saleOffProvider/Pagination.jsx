@@ -55,7 +55,7 @@ const Pagination = (props) => {
         setCussor(data.cussor);
       }
     } catch (error) {
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+      setError(`${error.response.data.messege}`);
     } finally {
       setIsLoading(false);
     }

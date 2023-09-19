@@ -19,17 +19,7 @@ const Item = (props) => {
   };
   return (
     <tr>
-      <td>
-        <p className="d-inline-block align-middle mb-0">
-          <div className="d-inline-block align-middle mb-0 product-name">
-            {product.name_product}
-          </div>
-          <br />
-          {/* <span className="text-muted font-13">
-                        {item.description}
-                    </span> */}
-        </p>
-      </td>
+      <td>{product.name_product}</td>
       <td>{product.category}</td>
       <td>${product.price}</td>
       <td>

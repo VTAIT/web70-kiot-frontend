@@ -137,15 +137,13 @@ const ProductFrom = ({ setShow, product }) => {
 
         setCachedData(updatedData);
         setTotalData(updatedData);
-
-        setAlert(true);
       }
       setShow(false);
+      setAlert(true);
     } catch (error) {
       console.log(error);
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+      setError(`${error.response.data.messege}`);
     } finally {
-      setAlert(true);
       setIsLoading(false);
     }
   };

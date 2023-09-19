@@ -5,6 +5,7 @@ import { createContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import saleOffAPI from "../../../apis/saleOffAPI";
 import { filteredSaleOffClient, mergeData } from "../../../utils/arrayUtils";
+import Search from "./Search";
 
 export const saleOffContext = createContext();
 
@@ -23,11 +24,6 @@ const SaleOffProvider = (props) => {
 
   //set query to send server
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search");
-  const rateQuery = searchParams.get("rate");
-  const activeQuery = searchParams.get("active");
-  const fromdateQuery = searchParams.get("fromdate");
-  const todateQuery = searchParams.get("todate");
   const currentKiot = searchParams.get("kiotId");
 
   const [query, setQuery] = useState({
@@ -56,26 +52,6 @@ const SaleOffProvider = (props) => {
     );
   }, [totalData, currentPage, itemsPerPage]);
 
-  useEffect(() => {
-    const newQuery = {
-      search: searchQuery ? searchQuery : "",
-      rate: rateQuery ? rateQuery : "",
-      active: activeQuery ? activeQuery : "",
-      fromdate: fromdateQuery ? fromdateQuery : "",
-      todate: todateQuery ? todateQuery : "",
-      Did: currentKiot ? currentKiot : "",
-    };
-    setQuery(newQuery);
-    handleSearch(newQuery);
-  }, [
-    searchQuery,
-    rateQuery,
-    activeQuery,
-    fromdateQuery,
-    todateQuery,
-    currentKiot,
-  ]);
-
   const handleDataFromServer = async (cussor) => {
     const res = await saleOffAPI.getAllSaleoff(cussor, query);
     const data = res.data.data;
@@ -95,9 +71,9 @@ const SaleOffProvider = (props) => {
   const handleGetAllSaleoff = async (cussor = defaultCussor) => {
     try {
       setIsLoading(true);
-      handleDataFromServer(cussor);
+      await handleDataFromServer(cussor);
     } catch (error) {
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+      setError(`${error.response.data.messege}`);
     } finally {
       setIsLoading(false);
     }
@@ -108,7 +84,6 @@ const SaleOffProvider = (props) => {
     let itemAfterClientSearch = filteredSaleOffClient(cachedData, query);
 
     if (itemAfterClientSearch.length <= itemsPerPage) {
-      console.log("less than perpage");
       try {
         setIsLoading(true);
 
@@ -139,14 +114,13 @@ const SaleOffProvider = (props) => {
         setIsLoading(false);
       }
     } else {
-      console.log("more than perpage");
       try {
         setIsLoading(true);
         itemAfterClientSearch = await filteredSaleOffClient(cachedData, query);
         setTotalData(itemAfterClientSearch);
         setCussor(itemAfterClientSearch.slice(-1)[0]._id - 1);
       } catch (error) {
-        setError(error.response);
+        setError(`${error.response.data.messege}`);
       } finally {
         setTimeout(() => {
           setIsLoading(false);
@@ -203,8 +177,11 @@ const SaleOffProvider = (props) => {
     <div className="w-100">
       <div className="row p-2">
         <saleOffContext.Provider value={Props}>
+          <div className="my-2">
+            <Search {...Props} />
+          </div>
           {children}
-          <Pagination />
+          {totalPages ? <Pagination /> : ""}
         </saleOffContext.Provider>
       </div>
     </div>

@@ -8,15 +8,7 @@ import AuthContext from "../../../contexts/AuthContext/AuthContext";
 export const priceRange = ["0-10", "10-20", "20-30", "30-40", "40-50", "50"];
 
 const Search = (props) => {
-  const { auth } = useContext(AuthContext);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState({
-    search: "",
-    rate: "",
-    active: "",
-    fromdate: "",
-    todate: "",
-  });
+  const { query, setQuery, handleSearch } = props;
 
   const changeSearchInput = (e) => {
     const newQueryValue = { ...query, search: e.target.value };
@@ -39,16 +31,8 @@ const Search = (props) => {
     setQuery(newQueryValue);
   };
 
-  const handleSearch = () => {
-    const newQuery = {
-      kiotId: searchParams.get("kiotId") || auth.user.kiot_id,
-      ...query,
-    };
-    setSearchParams(newQuery);
-  };
-
   return (
-    <form className="search-form m-2">
+    <form className="search-form m-0 p-0">
       <div className="search-input">
         <label htmlFor="search">
           <BsSearch />
@@ -137,7 +121,7 @@ const Search = (props) => {
         className="search-btn"
         onClick={(e) => {
           e.preventDefault();
-          handleSearch();
+          handleSearch(query);
         }}
       >
         Search

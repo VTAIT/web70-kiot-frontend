@@ -16,16 +16,24 @@ const TablePayment = () => {
           <tr>
             <td className="payment-title">Order Total:</td>
             <td>
-              {cart.length && <strong>${caculateTotalPayment(cart)}</strong>}
+              {cart.length && (
+                <span className="text-dark">${caculateTotalPayment(cart)}</span>
+              )}
             </td>
             <td className="payment-title">Tax:</td>
-            <td>{cart.length && <strong>${caculateTax(cart)}</strong>}</td>
+            <td>
+              {cart.length && (
+                <span className="text-dark">${caculateTax(cart)}</span>
+              )}
+            </td>
           </tr>
           <tr>
             <td className="payment-title">Subtotal</td>
-            <td className="text-dark">
+            <td>
               {cart.length && (
-                <strong>${caculateTotalPaymentAfterTax(cart)}</strong>
+                <strong className="text-dark">
+                  ${caculateTotalPaymentAfterTax(cart)}
+                </strong>
               )}
             </td>
           </tr>

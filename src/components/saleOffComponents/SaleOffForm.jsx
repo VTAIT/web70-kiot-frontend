@@ -84,12 +84,12 @@ const SaleOffForm = ({ setShow, saleOff }) => {
         setCachedData(updatedData);
         setTotalData(updatedData);
       }
-    } catch (error) {
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
-    } finally {
       setAlert(true);
-      setIsLoading(false);
       setShow(false);
+    } catch (error) {
+      setError(`${error.response.data.messege}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
