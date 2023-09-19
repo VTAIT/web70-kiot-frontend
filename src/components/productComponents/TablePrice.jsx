@@ -21,35 +21,82 @@ const TablePrice = () => {
     setArrQuantity(cart.map((el) => el.quantity));
   }, [cart]);
 
+  if (!cart.length) {
+    return (
+      <>
+        <div className="table  m-0 ">
+          <div
+            className="border-bottom"
+            style={{ position: "sticky", top: "0" }}
+          >
+            <div className="grid-table-price">
+              <div className="product-grid grid-head-color">
+                <strong>Product</strong>
+              </div>
+              <div className="quantity-grid grid-head-color">
+                <strong>Quantity</strong>
+              </div>
+              <div className="total-grid grid-head-color">
+                <strong>Total</strong>
+              </div>
+              <div className="action-grid grid-head-color">
+                <strong>Action</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-100 h-75 bg-white position-relative">
+          <div className="position-absolute top-50 start-50 translate-middle">
+            <h6 className="text-center" style={{ color: "rgb(142, 184, 227)" }}>
+              Please choose product
+            </h6>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
-    <table className="table w-100 mb-0">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+    <div className="table m-0 ">
+      <div className="border-bottom" style={{ position: "sticky", top: "0" }}>
+        <div className="grid-table-price">
+          <div className="product-grid grid-head-color">
+            <strong>Product</strong>
+          </div>
+          <div className="quantity-grid grid-head-color">
+            <strong>Quantity</strong>
+          </div>
+          <div className="total-grid grid-head-color">
+            <strong>Total</strong>
+          </div>
+          <div className="action-grid grid-head-color">
+            <strong>Action</strong>
+          </div>
+        </div>
+      </div>
+
+      <div>
         {cart.map((el, index) => {
           return (
-            <tr className="align-items-center" key={el.product._id}>
-              <td>
+            <div
+              className="grid-table-price border-bottom"
+              key={el.product._id}
+            >
+              <div className="product-grid">
                 <div className="d-flex flex-column">
                   <img src={el.product.image} alt={el.product.name_product} />
-                  <p className="d-inline-block align-middle mb-0">
-                    <div className="d-inline-block align-middle mb-0 product-name">
+                  <div className="d-inline-block align-middle mb-0">
+                    <div className="d-inline-block align-middle mb-0 grid-text">
                       {el.product.name_product}
                     </div>
-                    <br />
-                  </p>
+                  </div>
                 </div>
-              </td>
+              </div>
 
-              <td>
+              <div className="quantity-grid">
                 <input
-                  className="form-control w-50"
+                  className="form-control w-75"
                   type="number"
                   value={arrQuantity[index]}
                   onChange={(e) => handleOnChange(e.target.value, index)}
@@ -57,29 +104,29 @@ const TablePrice = () => {
                     changeQuantity(el.product, arrQuantity[index]);
                   }}
                 />
-                <div className="text-muted font-13 ">
+                <div className="text-muted font-13">
                   x ${caculatePromotionPrice(el.product.price, el.saleOff)}
                 </div>
-              </td>
+              </div>
 
-              <td>
+              <div className="total-grid grid-text">
                 $
                 {caculateTotalPrice(
                   caculatePromotionPrice(el.product.price, el.saleOff),
                   el.quantity
                 )}
-              </td>
+              </div>
 
-              <td>
+              <div className="action-grid">
                 <button onClick={() => changeQuantity(el.product, 0)}>
                   <AiFillCloseCircle />
                 </button>
-              </td>
-            </tr>
+              </div>
+            </div>
           );
         })}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

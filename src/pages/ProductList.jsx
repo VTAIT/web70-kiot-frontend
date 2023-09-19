@@ -2,10 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 import ProductListRender from "../components/productListComponents/ProductListRender";
 import ProductProvider from "../components/productProviderComponents/ProductProvider";
-import Search from "../components/productProviderComponents/Search";
 import AppContext from "../contexts/AppContext/AppContext";
 import leftNavBarItems from "../global/leftNavBarItems";
-
 export const productListContext = createContext();
 
 const ProductList = () => {
@@ -21,7 +19,6 @@ const ProductList = () => {
   return (
     <productListContext.Provider value={{ setAlert }}>
       <div className="page-content px-2">
-        <Search />
         <ProductProvider perPage={8}>
           <ProductListRender />
         </ProductProvider>

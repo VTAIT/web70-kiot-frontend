@@ -1,21 +1,13 @@
 import React, { useContext } from "react";
 import EditSaleOffModal from "./EditSaleOffModal";
-
 import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
-import ShowCodetransaction from "./ShowCodetransaction";
 
 const Item = (props) => {
   const saleOff = props.saleOff;
   const { type } = useContext(saleOffContext);
   return (
     <tr>
-      <td>
-        <p className="d-inline-block align-middle mb-0">
-          <div className="d-inline-block align-middle mb-0 product-name">
-            {saleOff.name_product}
-          </div>
-        </p>
-      </td>
+      <td>{saleOff.name_product}</td>
       <td>{saleOff.price}%</td>
       <td>
         {saleOff.active ? (
@@ -24,9 +16,19 @@ const Item = (props) => {
           <p className="text-danger m-0">No</p>
         )}
       </td>
+
+      {type === 2 && (
+        <td>
+          {saleOff.active ? (
+            <p className="text-success m-0">{saleOff._id}</p>
+          ) : (
+            <p className="text-danger m-0">{saleOff._id}</p>
+          )}
+        </td>
+      )}
+
       <td>
         <EditSaleOffModal saleOff={saleOff} />
-        {type === 2 && <ShowCodetransaction code={saleOff._id} />}
       </td>
     </tr>
   );

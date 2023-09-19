@@ -29,7 +29,7 @@ const ProductCart = ({ product }) => {
 
   return (
     <div
-      className={`card e-co-product w-cart m-2 ${handleChoosingProduct(
+      className={`card e-co-product w-cart ${handleChoosingProduct(
         product._id
       )} `}
       onClick={() =>

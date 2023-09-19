@@ -1,22 +1,11 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdOutlineAttachMoney, MdCategory } from "react-icons/md";
-import { useSearchParams } from "react-router-dom";
-import AuthContext from "../../contexts/AuthContext/AuthContext";
 export const categories = ["", "EU", "NA", "OC", "AF", "AS", "SA"];
 export const priceRange = ["0-50", "50-100", "100"];
 
 const Search = (props) => {
-  const { auth } = useContext(AuthContext);
-  const [query, setQuery] = useState({
-    search: "",
-    price: "",
-    category: "",
-    fromdate: "",
-    todate: "",
-  });
-
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { query, setQuery, handleSearch } = props;
 
   const changeSearchInput = (e) => {
     const newQueryValue = { ...query, search: e.target.value };
@@ -37,14 +26,6 @@ const Search = (props) => {
   const changeToDateInput = (e) => {
     const newQueryValue = { ...query, todate: e.target.value };
     setQuery(newQueryValue);
-  };
-
-  const handleSearch = async () => {
-    const newQuery = {
-      kiotId: searchParams.get("kiotId") || auth.user.kiot_id,
-      ...query,
-    };
-    setSearchParams(newQuery);
   };
 
   return (
@@ -113,9 +94,6 @@ const Search = (props) => {
       </div>
 
       <div className="selection-container date-selection">
-        {/* <p>
-                    <span>Date:</span>
-                </p> */}
         <div className="date-item">
           <label htmlFor="fromdate">From:</label>
           <input
@@ -142,7 +120,7 @@ const Search = (props) => {
         className="search-btn"
         onClick={(e) => {
           e.preventDefault();
-          handleSearch();
+          handleSearch(query);
         }}
       >
         Search

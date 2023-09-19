@@ -6,6 +6,7 @@ import { Spinner } from "react-bootstrap";
 import Pagination from "./Pagination";
 import { createContext } from "react";
 import { useSearchParams } from "react-router-dom";
+import Search from "./Search";
 
 export const productPropsContext = createContext();
 
@@ -25,11 +26,6 @@ const ProductProvider = (props) => {
 
   //set query to send server
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search");
-  const priceQuery = searchParams.get("price");
-  const categoryQuery = searchParams.get("category");
-  const fromdateQuery = searchParams.get("fromdate");
-  const todateQuery = searchParams.get("todate");
   const currentKiot = searchParams.get("kiotId");
 
   const [query, setQuery] = useState({
@@ -58,26 +54,6 @@ const ProductProvider = (props) => {
     );
   }, [totalData, currentPage, itemsPerPage]);
 
-  useEffect(() => {
-    const newQuery = {
-      search: searchQuery ? searchQuery : "",
-      price: priceQuery ? priceQuery : "",
-      category: categoryQuery ? categoryQuery : "",
-      fromdate: fromdateQuery ? fromdateQuery : "",
-      todate: todateQuery ? todateQuery : "",
-      Did: currentKiot ? currentKiot : "",
-    };
-    setQuery(newQuery);
-    handleSearch(newQuery);
-  }, [
-    searchQuery,
-    priceQuery,
-    categoryQuery,
-    fromdateQuery,
-    todateQuery,
-    currentKiot,
-  ]);
-
   const handleDataFromServer = async (cussor) => {
     const res = await productAPI.getAllProduct_query(cussor, query);
     const data = res.data.data;
@@ -101,9 +77,9 @@ const ProductProvider = (props) => {
   const handleGetAllProduct = async (cussor = defaultCussor) => {
     try {
       setIsLoading(true);
-      handleDataFromServer(cussor);
+      await handleDataFromServer(cussor);
     } catch (error) {
-      setError(`${error.response.data.messege}, ${error.response.data.error}`);
+      setError(`${error.response.data.messege}`);
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +90,6 @@ const ProductProvider = (props) => {
     let itemAfterClientSearch = filteredDataClient(cachedData, query);
 
     if (itemAfterClientSearch.length <= itemsPerPage) {
-      console.log("less than perpage");
       try {
         setIsLoading(true);
 
@@ -145,7 +120,6 @@ const ProductProvider = (props) => {
         }, 500);
       }
     } else {
-      console.log("more than perpage");
       try {
         setIsLoading(true);
         itemAfterClientSearch = await filteredDataClient(cachedData, query);
@@ -195,30 +169,49 @@ const ProductProvider = (props) => {
     handleSearch,
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex-grow-1">
-        <div className="position-absolute top-50 start-50 translate-middle">
-          <Spinner animation="border" variant="info" />;
-        </div>
-      </div>
-    );
+  if (error) {
+    return <Error error={error} />;
   }
 
-  if (error) {
-    return (
+  return (
+    <productPropsContext.Provider value={Props}>
+      <div className="container-fluid">
+        <Search {...Props} />
+        <div className="container-fluid  product-container">
+          <div className="container-fluid position-relative h-product-container p-0">
+            {isLoading ? (
+              <Load />
+            ) : (
+              <div className="container-fluid position-relative h-product-container p-0">
+                {props.children}
+                {totalPages ? <Pagination /> : ""}
+              </div>
+            )}
+          </div>
+          {props.rightSide}
+        </div>
+      </div>
+    </productPropsContext.Provider>
+  );
+};
+
+export const Load = () => {
+  return (
+    <div className="flex-grow-1 ">
+      <div className="position-absolute top-50 start-50 translate-middle">
+        <Spinner animation="border" variant="info" />;
+      </div>
+    </div>
+  );
+};
+
+export const Error = ({ error }) => {
+  return (
+    <div className="flex-grow-1 h-product-container">
       <div className="position-absolute top-50 start-50 translate-middle text-danger">
         {error}
       </div>
-    );
-  }
-  return (
-    <productPropsContext.Provider value={Props}>
-      <div className="container-fluid position-relative p-0">
-        {props.children}
-        <Pagination />
-      </div>
-    </productPropsContext.Provider>
+    </div>
   );
 };
 

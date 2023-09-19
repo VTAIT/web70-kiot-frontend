@@ -134,11 +134,15 @@ const Cash = (props) => {
           </tr>
         </tbody>
       </table>
-      {Status(paid) && (
-        <Button onClick={handlePayMent} className="position-absolute end-0">
+      <div className="w-100 d-flex justify-content-end">
+        <Button
+          onClick={handlePayMent}
+          className="end-0"
+          style={Status(paid) ? { opacity: 1 } : { opacity: 0 }}
+        >
           Confirm
         </Button>
-      )}
+      </div>
     </div>
   );
 };

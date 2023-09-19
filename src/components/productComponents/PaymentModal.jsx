@@ -122,6 +122,7 @@ const PaymentModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className="payment-modal"
+      dialogClassName="payment-dialog"
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -130,7 +131,7 @@ const PaymentModal = (props) => {
               <img src={logo} alt="logo-small" className="logo-sm" />
             </span>
             <span>
-              <div className="logo-lg">Brother </div>
+              <div className="logo-lg">Payment </div>
             </span>
           </div>
         </Modal.Title>

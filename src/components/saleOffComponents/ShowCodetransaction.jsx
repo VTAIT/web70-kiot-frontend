@@ -10,7 +10,8 @@ const ShowCodetransaction = ({ code }) => {
       <span
         variant="text-secondary"
         ref={target}
-        onClick={() => setShow(!show)}
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
       >
         <PiBarcode className="ms-2" />
       </span>

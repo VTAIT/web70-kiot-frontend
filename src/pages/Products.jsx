@@ -3,7 +3,6 @@ import CartProvider from "../contexts/CartContext/CartProvider";
 import Cart from "../components/productComponents/Cart";
 import ProductProvider from "../components/productProviderComponents/ProductProvider";
 import ProductRender from "../components/productComponents/ProductRender";
-import Search from "../components/productProviderComponents/Search";
 import AppContext from "../contexts/AppContext/AppContext";
 import leftNavBarItems from "../global/leftNavBarItems";
 
@@ -19,19 +18,9 @@ const Products = () => {
   return (
     <CartProvider>
       <div className="page-content">
-        <div className="container-fluid">
-          <Search />
-          <div className="container-fluid product-container">
-            <div className="container-fluid position-relative p-0">
-              <div className="row p-2">
-                <ProductProvider perPage={15}>
-                  <ProductRender />
-                </ProductProvider>
-              </div>
-            </div>
-            <Cart />
-          </div>
-        </div>
+        <ProductProvider perPage={15} rightSide={<Cart />}>
+          <ProductRender />
+        </ProductProvider>
       </div>
     </CartProvider>
   );
