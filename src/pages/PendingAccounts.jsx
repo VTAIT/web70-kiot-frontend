@@ -38,7 +38,7 @@ const PendingAccounts = () => {
             <div className="row">
               <div className="col-12">
                 <div className="card">
-                  {loading ? <h2>Loading ... </h2> :
+                  {loading ? <p>Loading Pending Accounts... </p> :
                     <div className="card-body">
                       <h4 className="mt-0 header-title">
                         Registered Account List
