@@ -6,7 +6,7 @@ function Forbidden() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/");
-    }, 80000);
+    }, 8000);
   });
   return (
     <div className="container rounded bg-white m-4 profile-form p-4">
