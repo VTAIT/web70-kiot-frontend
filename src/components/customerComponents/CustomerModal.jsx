@@ -44,7 +44,7 @@ const CustomerModal = ({
     fullName: Yup.string().required("Full Name is required"),
     gender: Yup.string().required("Gender is required"),
     phone: Yup.string().required("Phone is required"),
-    email: Yup.string(),
+    email: Yup.string().email(),
     address: Yup.string().required("Address is required"),
     rank: Yup.number(),
   });

@@ -178,7 +178,7 @@ const Login = () => {
                   <p className>
                     Don't have an account ?{" "}
                     <NavLink to="/register" className="text-primary ml-2">
-                      Free Resister
+                      Free Register
                     </NavLink>
                   </p>
                 </div>
