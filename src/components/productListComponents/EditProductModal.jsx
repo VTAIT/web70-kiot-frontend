@@ -27,7 +27,7 @@ export default function EditProductModal({ product }) {
                 <img src={logo} alt="logo-small" className="logo-sm" />
               </span>
               <span>
-                <div className="logo-lg">Brother </div>
+                <div className="logo-lg">Edit product</div>
               </span>
             </div>
           </Modal.Title>

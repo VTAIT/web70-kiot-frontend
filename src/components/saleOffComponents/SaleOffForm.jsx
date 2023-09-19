@@ -9,14 +9,14 @@ import AuthContext from "../../contexts/AuthContext/AuthContext";
 import { useState } from "react";
 import { useEffect } from "react";
 import { saleOffsContext } from "../../pages/SaleOffs";
-import { useSearchParams } from "react-router-dom";
 import saleOffAPI from "../../apis/saleOffAPI";
 import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
 import { mergeData } from "../../utils/arrayUtils";
+import kiotAPI from "../../apis/kiotAPI";
 
 const SaleOffForm = ({ setShow, saleOff }) => {
   const { setAlert } = useContext(saleOffsContext);
-  const { cachedData, setTotalData, setCachedData, type } =
+  const { cachedData, setTotalData, setCachedData, type, currentKiot } =
     useContext(saleOffContext);
   const { auth } = useContext(AuthContext);
 
@@ -24,17 +24,14 @@ const SaleOffForm = ({ setShow, saleOff }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentKiot = searchParams.get("kiotId")
-    ? searchParams.get("kiotId")
-    : auth.user.kiot_id;
+  const [kiot, setKiot] = useState({});
 
   const [dataInForm, setDataInForm] = useState({});
   const formik = useFormik({
     initialValues: {
       name_product: saleOff ? saleOff.name_product : "",
       rate: saleOff ? saleOff.price : "",
-      kiot_id: currentKiot || "",
+      kiot_id: saleOff ? saleOff.kiot_id : "",
       active: saleOff ? saleOff.active : true,
       type: saleOff ? saleOff.type : type,
     },
@@ -58,6 +55,25 @@ const SaleOffForm = ({ setShow, saleOff }) => {
       setShowConfirmModal(true);
     },
   });
+
+  useEffect(() => {
+    const getKiot = async (kiot_id) => {
+      try {
+        const res = await kiotAPI.getById(kiot_id);
+        setKiot(res.data.data.kiotInfo);
+      } catch (error) {
+        setError(
+          `${error.response.data.messege}, ${error.response.data.error}`
+        );
+      }
+    };
+
+    if (auth.user.role_id === 1) {
+      getKiot(currentKiot);
+    } else {
+      getKiot(auth.user.kiot_id);
+    }
+  }, []);
 
   const handleSubmitForm = async () => {
     setShowConfirmModal(false);
@@ -95,15 +111,19 @@ const SaleOffForm = ({ setShow, saleOff }) => {
 
   if (isLoading) {
     return (
-      <div className="position-absolute top-50 start-50 translate-middle">
-        <Spinner animation="border" variant="info" />
+      <div className="h-base-modal position-relative">
+        <div className="position-absolute top-50 start-50 translate-middle ">
+          <Spinner animation="border" variant="info" />
+        </div>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="position-absolute top-50 start-50 translate-middle text-danger">
-        {error}
+      <div className="h-base-modal position-relative">
+        <div className="position-absolute top-50 start-50 translate-middle h-50 text-danger">
+          {error}
+        </div>
       </div>
     );
   }
@@ -157,13 +177,13 @@ const SaleOffForm = ({ setShow, saleOff }) => {
 
         <Row>
           <Form.Group as={Col} controlId="kiot_id">
-            <Form.Label>Ki-ot's ID:</Form.Label>
+            <Form.Label>Ki-ot's name:</Form.Label>
             <Form.Select
               value={formik.values.kiot_id}
               onChange={formik.handleChange}
             >
               <option value="">Choose...</option>
-              <option value={currentKiot}>{currentKiot}</option>
+              <option value={kiot._id}>{kiot.username}</option>
             </Form.Select>
             {formik.errors.kiot_id && (
               <p className="text-danger">{formik.errors.kiot_id}</p>
@@ -191,7 +211,7 @@ const SaleOffForm = ({ setShow, saleOff }) => {
             variant="secondary"
             onClick={() => setShow(false)}
           >
-            No
+            Cancel
           </Button>
           <Button
             style={{
@@ -209,7 +229,7 @@ const SaleOffForm = ({ setShow, saleOff }) => {
             }}
             type="submit"
           >
-            Yes
+            Save
           </Button>
         </Row>
       </Form>
@@ -219,7 +239,7 @@ const SaleOffForm = ({ setShow, saleOff }) => {
         onHide={() => setShowConfirmModal(false)}
         style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Confirm information:</Modal.Title>
         </Modal.Header>
         <Modal.Body>Do you want to change promotion list?</Modal.Body>
@@ -231,10 +251,10 @@ const SaleOffForm = ({ setShow, saleOff }) => {
               setShowConfirmModal(false);
             }}
           >
-            Close
+            No
           </Button>
           <Button variant="primary" onClick={handleSubmitForm}>
-            Save Changes
+            Yes
           </Button>
         </Modal.Footer>
       </Modal>
