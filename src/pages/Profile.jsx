@@ -145,7 +145,7 @@ function Profile() {
     >
       {({ errors, touched, isSubmitting, setFieldValue }) => {
         return (
-          <Form className="container rounded bg-white m-4">
+          <Form className="container rounded bg-white m-4 profile-form">
             {actionStatus && (
               <div
                 class={
