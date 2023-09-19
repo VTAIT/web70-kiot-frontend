@@ -42,5 +42,10 @@ export const leftNavBarItems = [
     path: "/transactions",
     text: "Transactions",
   },
+  {
+    id: 9,
+    path: "/report",
+    text: "Report",
+  },
 ];
 export default leftNavBarItems;

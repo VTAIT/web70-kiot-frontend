@@ -9,7 +9,7 @@ const accountModalFormItems = [
   },
   {
     label: "Full name",
-    fieldName: "fullname",
+    fieldName: "fullName",
   },
   {
     label: "Phone",

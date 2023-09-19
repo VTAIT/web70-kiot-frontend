@@ -116,6 +116,7 @@ const Transactions = () => {
                             <th>Deposit</th>
                             <th>Return Value</th>
                             <th>Return List</th>
+                            <th>Value</th>
                             <th>Product List</th>
                             <th>Code</th>
                             <th>Created At</th>

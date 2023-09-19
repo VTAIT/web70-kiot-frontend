@@ -1,21 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/AuthContext/AuthContext";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
-import {
-  FaEnvelope,
-  FaLock,
-  FaLockOpen,
-  FaPhoneFlip,
-  FaRightToBracket,
-  FaUser,
-} from "react-icons/fa6";
+import { FaRightToBracket } from "react-icons/fa6";
 import { useFormik } from "formik";
 import authAPI from "../apis/authAPI";
+import { registerFormItems } from "../global/registerFormItems";
 
 const Register = () => {
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem("currentUrl", window.location.pathname);
-  },[])
+  }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const logo =
@@ -42,7 +36,7 @@ const Register = () => {
           fullName: values.full_name,
           phone: values.mo_number,
           address: values.address,
-          active:false
+          active: false,
         });
         if (response.status === 200) {
           navigate("/login");
@@ -99,124 +93,26 @@ const Register = () => {
                     className="form-horizontal auth-form my-4"
                     action="index.html"
                   >
-                    <div className="form-group">
-                      <label htmlFor="username">Username</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaUser />
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="username"
-                          placeholder="Enter Username"
-                          onChange={handleChange}
-                          value={values.username}
-                        />
-                      </div>
-                    </div>
-                    {/*end form-group*/}
-                    <div className="form-group">
-                      <label htmlFor="full_name">Full Name</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaUser />
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="full_name"
-                          placeholder="Enter Full Name"
-                          onChange={handleChange}
-                          value={values.full_name}
-                        />
-                      </div>
-                    </div>
-                    {/*end form-group*/}
-                    <div className="form-group">
-                      <label htmlFor="address">Address</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaEnvelope />
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          placeholder="Enter Address"
-                          onChange={handleChange}
-                          value={values.address}
-                        />
-                      </div>
-                    </div>
-                    {/*end form-group*/}
-                    <div className="form-group">
-                      <label htmlFor="useremail">Email</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaEnvelope />
-                        </span>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="useremail"
-                          placeholder="Enter Email"
-                          onChange={handleChange}
-                          value={values.useremail}
-                        />
-                      </div>
-                    </div>
-                    {/*end form-group*/}
-                    <div className="form-group">
-                      <label htmlFor="userpassword">Password</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaLock />
-                        </span>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="userpassword"
-                          placeholder="Enter Password"
-                          onChange={handleChange}
-                          value={values.userpassword}
-                        />
-                      </div>
-                    </div>
-                    {/*end form-group*/}
-                    <div className="form-group">
-                      <label htmlFor="conf_password">Confirm Password</label>
-                      <div className="input-group mb-3">
-                        <span className="auth-form-icon">
-                          <FaLockOpen />
-                        </span>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="conf_password"
-                          placeholder="Enter Confirm Password"
-                          onChange={handleChange}
-                          value={values.conf_password}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="mo_number">Mobile Number</label>
-                        <div className="input-group mb-3">
-                          <span className="auth-form-icon">
-                            <FaPhoneFlip />
-                          </span>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="mo_number"
-                            placeholder="Enter Mobile Number"
-                            onChange={handleChange}
-                            value={values.mo_number}
-                          />
+                    {registerFormItems.map((item) => {
+                      return (
+                        <div key={item.fieldName} className="form-group">
+                          <label htmlFor={item.fieldName}>{item.label}</label>
+                          <div className="input-group mb-3">
+                            <span className="auth-form-icon">
+                              {item.fieldIcon}
+                            </span>
+                            <input
+                              type={item.type ? item.type : "text"}
+                              className="form-control"
+                              id={item.fieldName}
+                              placeholder={`Enter ${item.label}`}
+                              onChange={handleChange}
+                              value={values[item.fieldName]}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      {/*end form-group*/}
-                    </div>
+                      );
+                    })}
                     {error && <p className="text-danger">{error}</p>}
                     {/*end form-group*/}
                     <div className="form-group row mt-4">

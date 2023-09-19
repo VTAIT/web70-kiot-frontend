@@ -333,28 +333,50 @@ a {
 body {
   font-size: 0.845rem;
   font-weight: 400;
+  background: #eee;
 }
 
+.card {
+  box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.avatar.sm {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 0.818125rem;
+}
+.table-nowrap .table td,
+.table-nowrap .table th {
+  white-space: nowrap;
+}
+.table > :not(caption) > * > * {
+  padding: 0.75rem 1.25rem;
+  border-bottom-width: 1px;
+}
+table th {
+  font-weight: 600;
+  background-color: #eeecfd !important;
+}
 
-body{margin-top:20px;
-  background:#eee;
-  }
-  .card {
-      box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-  }
-  .avatar.sm {
-      width: 2.25rem;
-      height: 2.25rem;
-      font-size: .818125rem;
-  }
-  .table-nowrap .table td, .table-nowrap .table th {
-      white-space: nowrap;
-  }
-  .table>:not(caption)>*>* {
-      padding: 0.75rem 1.25rem;
-      border-bottom-width: 1px;
-  }
-  table th {
-      font-weight: 600;
-      background-color: #eeecfd !important;
-  }
+.account-body .account-social a {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 14px;
+  z-index: 100;
+  color: #fff;
+}
+.account-body .account-social a.facebook {
+  background-color: #1761fd;
+}
+.account-body .account-social a.twitter {
+  background-color: #13daf1;
+}
+.account-body .account-social a.google {
+  background-color: #fd3c97;
+}
+.profile-form{
+  max-width: 100vw;
+}

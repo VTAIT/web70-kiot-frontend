@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 import customerAPI from "../../apis/customerAPI";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import AuthContext from "../../contexts/AuthContext/AuthContext";
-
+import { customerModalFormItems } from "../../global/customerModalFormItems";
+import ModalFormItem from "../../global/ModalFormItem";
 
 const CustomerModal = ({
   show,
@@ -66,7 +67,7 @@ const CustomerModal = ({
       username: user.username,
       gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
     };
-    console.log(newCustomer);
+    setLoading(true);
     await customerAPI
       .create(newCustomer)
       .then(() => {
@@ -78,10 +79,12 @@ const CustomerModal = ({
       })
       .catch((error) => {
         setSubmitting(false);
+        setLoading(false);
         onUpdateCustomer({ status: 0, message: error.response.data.error });
         handleClose();
         console.log(error.response.data.error);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   async function updateCustomer(fields, setSubmitting) {
@@ -94,7 +97,7 @@ const CustomerModal = ({
       customerId: editedCustomer._id,
       gender: fields.gender === "male" ? 1 : fields.gender === "female" ? 2 : 3,
     };
-   
+    setLoading(true);
     await customerAPI
       .update(updatedFields)
       .then(() => {
@@ -108,7 +111,8 @@ const CustomerModal = ({
         setSubmitting(false);
         handleClose();
         onUpdateCustomer({ status: 0, message: error.response.data.error });
-      });
+      })
+      .finally(setLoading(false));
   }
 
   return (
@@ -134,123 +138,14 @@ const CustomerModal = ({
           {({ errors, touched, isSubmitting, setFieldValue }) => {
             return (
               <Form>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Fullname</label>
-                    <Field
-                      name="fullName"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.fullName && touched.fullName
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="fullName"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Gender</label>
-                    <Field
-                      name="gender"
-                      as="select"
-                      className={
-                        "form-control" +
-                        (errors.gender && touched.gender ? " is-invalid" : "")
-                      }
-                    >
-                      <option value=""></option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                      <option value="other">other</option>
-                    </Field>
-                    <ErrorMessage
-                      name="gender"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Email</label>
-                    <Field
-                      name="email"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.email && touched.email ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Phone</label>
-                    <Field
-                      name="phone"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.phone && touched.phone ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="phone"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Address</label>
-                    <Field
-                      name="address"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.address && touched.address ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="address"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label>Rank</label>
-                    <Field
-                      name="rank"
-                      type="text"
-                      className={
-                        "form-control" +
-                        (errors.rank && touched.rank ? " is-invalid" : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="rank"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                </div>
+                {customerModalFormItems.map((item) => (
+                  <ModalFormItem
+                    item={item}
+                    isEditMode={!isAddMode && true}
+                    errors={errors}
+                    touched={touched}
+                  />
+                ))}
 
                 <div className="form-group text-center">
                   <button
