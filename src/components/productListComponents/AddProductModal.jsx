@@ -33,7 +33,7 @@ export default function AddProductModal({ handleGetAllProduct }) {
                 <img src={logo} alt="logo-small" className="logo-sm" />
               </span>
               <span>
-                <div className="logo-lg">Brother </div>
+                <div className="logo-lg">Add product</div>
               </span>
             </div>
           </Modal.Title>

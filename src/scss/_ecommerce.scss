@@ -699,6 +699,10 @@ hr.thick {
   height: 70vh;
 }
 
+.h-saleoff-container{
+  height: 60vh;
+}
+
 .over-flow-scroll{
   overflow-y: scroll;
 }
@@ -837,4 +841,14 @@ hr.thick {
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5);
   }
+}
+
+.text-error-color {
+  color: rgba(255, 128, 102, 0.8)!important;
+}
+.text-info-color {
+  color: rgb(142, 184, 227)!important;
+}
+.h-base-modal{
+  height: 40vh;
 }

@@ -1,5 +1,6 @@
 import React, { memo, useContext, useEffect, useState } from "react";
 import Item from "./Item";
+import { ImFilesEmpty } from "react-icons/im";
 import { saleOffContext } from "./saleOffProvider/SaleOffProvider";
 
 const TableList = () => {
@@ -14,7 +15,19 @@ const TableList = () => {
   }, [currentData, isLoading]);
 
   if (!currentData.length && dataLoaded) {
-    return <div className="text-danger">There are no saleoffs</div>;
+    return (
+      <div className="w-100 rounded h-saleoff-container position-relative bg-white">
+        <div className="position-absolute top-50 start-50 translate-middle text-danger">
+          <h6 className="text-center text-info-color p-0">
+            <ImFilesEmpty fontSize={45} />
+          </h6>
+
+          <h6 className="text-center text-info-color p-0">
+            There are no saleoffs!
+          </h6>
+        </div>
+      </div>
+    );
   }
 
   return (

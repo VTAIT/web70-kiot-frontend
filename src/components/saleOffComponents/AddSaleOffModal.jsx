@@ -34,7 +34,7 @@ export default function AddSaleOffModal() {
                 <img src={logo} alt="logo-small" className="logo-sm" />
               </span>
               <span>
-                <div className="logo-lg">Brother </div>
+                <div className="logo-lg">Add Promotion</div>
               </span>
             </div>
           </Modal.Title>
