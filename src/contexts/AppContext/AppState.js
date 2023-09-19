@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import AppContext from "./AppContext";
 
 const AppState = ({ children }) => {
-  const [leftSideBarOpen, setLeftSideBarOpen] = useState(false);
+  const [leftSideBarOpen, setLeftSideBarOpen] = useState(
+    window.location.pathname === "/" ? false : true
+  );
 
   const [leftSideBarSelectedItem, setLeftSideBarSelectedItem] = useState(1);
 

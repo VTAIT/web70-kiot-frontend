@@ -49,9 +49,7 @@ const ProductFrom = ({ setShow, product }) => {
 
       price: Yup.string().required("Price is required"),
 
-      image: product
-        ? Yup.mixed().notRequired()
-        : Yup.mixed().required("Image is required"),
+      image: Yup.mixed().notRequired(),
 
       description: Yup.string().required("Description is required"),
 
@@ -109,6 +107,7 @@ const ProductFrom = ({ setShow, product }) => {
             productId: product._id,
           };
         }
+
         if (!dataInForm.image) {
           dataForUpdateProduct = {
             ...dataInForm,
@@ -125,10 +124,23 @@ const ProductFrom = ({ setShow, product }) => {
         setCachedData(updatedData);
         setTotalData(updatedData);
       } else {
-        const resImage = await imageAPI.createImage(formData);
-        const srcImage = resImage.data.data.imageInfo.src;
+        let dataForCreateProduct;
 
-        const dataForCreateProduct = { ...dataInForm, image: srcImage };
+        if (dataInForm.image) {
+          const resImage = await imageAPI.createImage(formData);
+          const srcImage = resImage.data.data.imageInfo.src;
+          dataForCreateProduct = {
+            ...dataInForm,
+            image: srcImage,
+          };
+        }
+
+        if (!dataInForm.image) {
+          dataForCreateProduct = {
+            ...dataInForm,
+            image: "",
+          };
+        }
 
         const resProduct = await productAPI.createProduct(dataForCreateProduct);
         const updatedData = mergeData(cachedData, [
@@ -150,15 +162,20 @@ const ProductFrom = ({ setShow, product }) => {
 
   if (isLoading) {
     return (
-      <div className="position-absolute top-50 start-50 translate-middle">
-        <Spinner animation="border" variant="info" />
+      <div className="h-base-modal position-relative">
+        <div className="position-absolute top-50 start-50 translate-middle ">
+          <Spinner animation="border" variant="info" />
+        </div>
       </div>
     );
   }
+
   if (error) {
     return (
-      <div className="position-absolute top-50 start-50 translate-middle text-danger">
-        {error}
+      <div className="h-base-modal position-relative">
+        <div className="position-absolute top-50 start-50 translate-middle h-50 text-danger">
+          {error}
+        </div>
       </div>
     );
   }
@@ -279,7 +296,7 @@ const ProductFrom = ({ setShow, product }) => {
             variant="secondary"
             onClick={() => setShow(false)}
           >
-            No
+            Cancel
           </Button>
           <Button
             style={{
@@ -298,7 +315,7 @@ const ProductFrom = ({ setShow, product }) => {
             }}
             type="submit"
           >
-            Yes
+            Save
           </Button>
         </Row>
       </Form>
@@ -307,7 +324,7 @@ const ProductFrom = ({ setShow, product }) => {
         show={showConfirmModal}
         style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Confirm information:</Modal.Title>
         </Modal.Header>
         <Modal.Body>Do you want to change product list?</Modal.Body>
@@ -319,10 +336,10 @@ const ProductFrom = ({ setShow, product }) => {
               setShowConfirmModal(false);
             }}
           >
-            Close
+            No
           </Button>
           <Button variant="primary" onClick={handleSubmitForm}>
-            Save Changes
+            Yes
           </Button>
         </Modal.Footer>
       </Modal>

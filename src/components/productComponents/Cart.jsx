@@ -28,14 +28,16 @@ const Cart = () => {
           <h5 className="header-title">Total Payment:</h5>
           <TablePayment />
 
-          <button
-            className=" position-absolute bottom-0 start-50 translate-middle-x bg-success text-white border-0 rounded-pill px-3 my-2"
-            onClick={() => {
-              cart.length && setModalShow(true);
-            }}
-          >
-            Accept
-          </button>
+          <div className="d-flex justify-content-center align-items-center">
+            <button
+              className="bg-success text-white border-0 rounded-pill px-3 py-1 my-2"
+              onClick={() => {
+                cart.length && setModalShow(true);
+              }}
+            >
+              Accept
+            </button>
+          </div>
         </div>
       </div>
       <PaymentModal show={modalShow} onHide={() => setModalShow(false)} />

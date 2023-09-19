@@ -3,6 +3,7 @@ import { useContext } from "react";
 import AddProductModal from "./AddProductModal";
 import TableList from "./TableList";
 import { productPropsContext } from "../productProviderComponents/ProductProvider";
+import { EmptyProduct } from "../productComponents/ProductRender";
 
 const ProductListRender = () => {
   const productProps = useContext(productPropsContext);
@@ -19,7 +20,7 @@ const ProductListRender = () => {
     <div>
       <AddProductModal />
       {dataLoaded && !productProps.currentData.length ? (
-        <div className="text-danger">There are no prodcuts!</div>
+        <EmptyProduct />
       ) : (
         <TableList data={productProps.currentData} />
       )}
