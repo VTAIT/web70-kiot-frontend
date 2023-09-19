@@ -10,7 +10,9 @@ const Cart = () => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <div className="cart w-100 d-flex align-items-center flex-column justify-content-between position-relative">
+
+    <div className="cart w-100 h-product-container d-flex align-items-center flex-column justify-content-between position-relative">
+
       <div className="w-100 shopping-cart scrollbar-small d-flex flex-column">
         <div className="position-relative table-container w-100">
           <TablePrice />
@@ -18,7 +20,9 @@ const Cart = () => {
       </div>
       <div
         className="col m-0 p-0"
-        style={{ width: "70%", minWidth: "fit-content" }}
+
+        style={{ width: "100%", minWidth: "fit-content" }}
+
       >
         <div className="total-payment position-relative p-2">
           <h5 className="header-title">Total Payment:</h5>
