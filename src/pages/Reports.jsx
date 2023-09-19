@@ -57,7 +57,7 @@ const Reports = () => {
                   <div className='row' style={{ justifyContent: "space-between" }}>
                     <Item name='New Orders' value={repost[0]} icon={<FaCartShopping className="card-eco-icon  align-self-center" />} />
                     <Item name='Return Orders' value={repost[1]} icon={<FaRetweet className="card-eco-icon  align-self-center" />} />
-                    <Item name='Revenue' value={repost[2]} icon={<FaRegMoneyBill1 className="card-eco-icon  align-self-center" />} />
+                    <Item name='Revenue' value={'$ '+ repost[2]} icon={<FaRegMoneyBill1 className="card-eco-icon  align-self-center" />} />
                   </div>
                 </div>
               </div>
