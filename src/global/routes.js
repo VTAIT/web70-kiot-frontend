@@ -54,12 +54,13 @@ export const routes = [
   {
     path: "/accounts",
     component: <Accounts />,
+    isAdminOwner: true,
     isPrivate: true,
   },
   {
     path: "/profile",
     component: <Profile />,
-    isPrivate: true,
+    isAdmin: true,
   },
   {
     path: "/login",
@@ -74,7 +75,8 @@ export const routes = [
   {
     path: "/report",
     component: <Reports />,
-    isPrivate: true,
+    isAdminOwner: true,
+    isPrivate: true
   },
 ];
 export default routes;

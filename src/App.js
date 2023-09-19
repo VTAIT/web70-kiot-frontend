@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import LeftSideBar from "./components/leftSideBarComponents/LeftSideBar";
 import { useEffect } from "react";
 import AppState from "./contexts/AppContext/AppState";
+import AdminOwnerRoute from "./AdminOwnerRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -29,7 +30,14 @@ function App() {
           <LeftSideBar />
           <Routes>
             {routes.map((route, index) => {
-              const { path, component, isPrivate, notAuth, isAdmin } = route;
+              const {
+                path,
+                component,
+                isPrivate,
+                notAuth,
+                isAdmin,
+                isAdminOwner,
+              } = route;
               return (
                 <Route
                   key={index}
@@ -38,6 +46,8 @@ function App() {
                     isPrivate ? (
                       isAdmin ? (
                         <AdminRoute component={component} />
+                      ) : isAdminOwner ? (
+                        <AdminOwnerRoute component={component} />
                       ) : (
                         <PrivateRoute component={component} />
                       )
@@ -46,13 +56,6 @@ function App() {
                     ) : (
                       component
                     )
-                    // isPrivate ? (
-                    //   <PrivateRoute component={component} />
-                    // ) : notAuth ? (
-                    //   <NotAuthRoute component={component} />
-                    // ) : (
-                    //   component
-                    // )
                   }
                 />
               );
