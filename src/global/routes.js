@@ -9,6 +9,7 @@ import Kiots from "../pages/Kiots.jsx";
 import Profile from "../pages/Profile.jsx";
 import SaleOffs from "../pages/SaleOffs.jsx";
 import Transactions from "../pages/Transactions.jsx";
+import Reports from "../pages/Reports.jsx";
 
 
 export const routes = [
@@ -69,6 +70,11 @@ export const routes = [
     path: "/register",
     component: <Register />,
     notAuth: true,
+  },
+  {
+    path: "/report",
+    component: <Reports />,
+    isPrivate: true,
   },
 ];
 export default routes;
