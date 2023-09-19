@@ -29,9 +29,18 @@ const Transaction = (props) => {
           );
         })}
       </td>
-      <td>{transaction.code}_{transaction._id}</td>
-      <td>{transaction.createdAt}</td>
-
+      <td>
+        {transaction.code}_{transaction._id}
+      </td>
+      <td>
+        {new Date(transaction.createdAt).toLocaleDateString("en-US", {
+          minute: "2-digit",
+          hour: "2-digit",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </td>
       <td>
         {transaction.status !== 2 && (
           <span onClick={props.onEditTransaction}>
