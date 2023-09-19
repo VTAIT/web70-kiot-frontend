@@ -20,6 +20,7 @@ const Transaction = (props) => {
           );
         })}
       </td>
+      <td>{transaction.value}</td>
       <td>
         {transaction.product_list.map((item) => {
           return (
