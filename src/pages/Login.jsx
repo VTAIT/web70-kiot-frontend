@@ -104,11 +104,11 @@ const Login = () => {
                           {loginFormItems.map((item) => {
                             return <div key={item.fieldName} className="form-group col">
                               <label>{item.label}</label>
-                              <div className="input-group ">
+                              {/* <div className="input-group ">
                                 <span className="auth-form-icon">
                                   {item.fieldIcon}
                                 </span>
-                              </div>
+                              </div> */}
                               <Field
                                 name={item.fieldName}
                                 type={item.type?item.type:"text"}

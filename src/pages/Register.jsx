@@ -98,9 +98,9 @@ const Register = () => {
                         <div key={item.fieldName} className="form-group">
                           <label htmlFor={item.fieldName}>{item.label}</label>
                           <div className="input-group mb-3">
-                            <span className="auth-form-icon">
+                            {/* <span className="auth-form-icon">
                               {item.fieldIcon}
-                            </span>
+                            </span> */}
                             <input
                               type={item.type ? item.type : "text"}
                               className="form-control"
