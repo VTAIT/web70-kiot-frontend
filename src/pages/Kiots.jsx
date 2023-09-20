@@ -19,7 +19,7 @@ const Kiots = () => {
   const { handleLeftSideBarSelectedItem } = useContext(AppContext);
 
   useEffect(() => {
-    localStorage.setItem("currentUrl",window.location.pathname)
+    localStorage.setItem("currentUrl", window.location.pathname);
     const selectedItem = leftNavBarItems.filter(
       (item) => item.path === window.location.pathname
     )[0];
@@ -85,85 +85,84 @@ const Kiots = () => {
 
   return (
     <div className="container-fluid mt-4">
-      {actionStatus && (
-        <div
-          class={
-            actionStatus.status === 1
-              ? "alert alert-success alert-dismissible"
-              : "alert alert-danger alert-dismissible"
-          }
-        >
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            onClick={dismissAlert}
-          ></button>
+      {loading ? (
+        <p>Loading kiots ...</p>
+      ) : (
+        <>
+          {actionStatus && (
+            <div
+              class={
+                actionStatus.status === 1
+                  ? "alert alert-success alert-dismissible"
+                  : "alert alert-danger alert-dismissible"
+              }
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                onClick={dismissAlert}
+              ></button>
 
-          <strong>{actionStatus.message}</strong>
-        </div>
-      )}
-      <div className="row">
-        <div className="col-sm-12">
-          {/* account list */}
+              <strong>{actionStatus.message}</strong>
+            </div>
+          )}
           <div className="row">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="mt-0 header-title">Kiot List</h4>
-                  <table
-                    id="datatable"
-                    className="table table-bordered dt-responsive nowrap"
-                    style={{
-                      borderCollapse: "collapse",
-                      borderSpacing: 0,
-                      width: "100%",
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>Owner</th>
-                        <th>Kiot Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Description</th>
-                        <th>Active</th>
-                        <th>Created At</th>
-                        <th>Links</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {kiots &&
-                        kiots.length > 0 &&
-                        kiots.map((kiot, index) => {
-                          return (
-                            <Kiot
-                              kiot={kiot}
-                              key={index}
-                              updateList={fetchKiots}
-                              onEditKiot={() => handleEditKiot(kiot)}
-                              onDeleteKiot={() => handleDeleteKiot(kiot)}
-                              onEnableKiot={() => handleEnableKiot(kiot)}
-                            />
-                          );
-                        })}
-                    </tbody>
-                  </table>
+            <div className="col-sm-12">
+              {/* account list */}
+              <div className="row">
+                <div className="col-12">
+                  <div className="card">
+                    <div className="card-body">
+                      <h4 className="mt-0 header-title">Kiot List</h4>
+                      <table
+                        id="datatable"
+                        className="table table-bordered dt-responsive nowrap"
+                        style={{
+                          borderCollapse: "collapse",
+                          borderSpacing: 0,
+                          width: "100%",
+                        }}
+                      >
+                        <thead>
+                          <tr>
+                            <th>Owner</th>
+                            <th>Kiot Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                            <th>Created At</th>
+                            <th>Links</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {kiots &&
+                            kiots.length > 0 &&
+                            kiots.map((kiot, index) => {
+                              return (
+                                <Kiot
+                                  kiot={kiot}
+                                  key={index}
+                                  updateList={fetchKiots}
+                                  onEditKiot={() => handleEditKiot(kiot)}
+                                  onDeleteKiot={() => handleDeleteKiot(kiot)}
+                                  onEnableKiot={() => handleEnableKiot(kiot)}
+                                />
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/* <AccountModal
-        show={accountModalOpen}
-        handleClose={handleClose}
-        onUpdateAccount={fetchUsers}
-        editedAccount={editedAccount}
-        isAddMode={isAddMode}
-      /> */}
+        </>
+      )}
     </div>
   );
 };
