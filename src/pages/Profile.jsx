@@ -62,6 +62,7 @@ function Profile() {
     kiotName: Yup.string().required("Kiot Name is required"),
     description: Yup.string(),
   });
+  
   function onSubmit(fields, { setStatus, setSubmitting, resetForm }) {
     setStatus();
     const userInfo = {
@@ -72,6 +73,7 @@ function Profile() {
       phone: fields.phone,
       address: fields.address,
       password: fields.password,
+      active: auth.user.active
     };
     updateAccount(userInfo);
 
