@@ -41,7 +41,7 @@ const AccountModal = ({
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
     fullName: Yup.string().required("Full Name is required"),
-    email: Yup.string(),
+    email: Yup.string().email(),
     phone: Yup.string().required("Phone is required"),
     address: Yup.string().required("Address is required"),
     role: Yup.string(),

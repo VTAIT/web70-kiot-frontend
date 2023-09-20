@@ -21,16 +21,15 @@ const Accounts = () => {
   const { handleLeftSideBarSelectedItem } = useContext(AppContext);
   const [editedAccount, setEditedAccount] = useState();
   const [isAddMode, setIsAddMode] = useState(true);
-  
+
   useEffect(() => {
-    localStorage.setItem("currentUrl",window.location.pathname)
+    localStorage.setItem("currentUrl", window.location.pathname);
     const selectedItem = leftNavBarItems.filter(
       (item) => item.path === window.location.pathname
     )[0];
     handleLeftSideBarSelectedItem(selectedItem.id);
     fetchUsers(actionStatus);
   }, []);
-  
 
   const fetchUsers = async (actionSt) => {
     setTimeoutAlert(actionSt);
@@ -90,104 +89,112 @@ const Accounts = () => {
 
   return (
     <div className="container-fluid mt-4">
-      {actionStatus && (
-        <div
-          class={
-            actionStatus.status === 1
-              ? "alert alert-success alert-dismissible"
-              : "alert alert-danger alert-dismissible"
-          }
-        >
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            onClick={dismissAlert}
-          ></button>
+      {loading ? (
+        <p>Loading accounts ...</p>
+      ) : (
+        <>
+          {actionStatus && (
+            <div
+              class={
+                actionStatus.status === 1
+                  ? "alert alert-success alert-dismissible"
+                  : "alert alert-danger alert-dismissible"
+              }
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                onClick={dismissAlert}
+              ></button>
 
-          <strong>{actionStatus.message}</strong>
-        </div>
-      )}
-      <div className="row">
-        <div className="col-sm-12">
-          {/* account list */}
+              <strong>{actionStatus.message}</strong>
+            </div>
+          )}
           <div className="row">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body">
-                  <div
-                    className="mt-0 header-title"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h4 className="mt-0 header-title">Account List</h4>
-                    <button
-                      className="btn btn-primary mb-4 fw-bolder "
-                      type="button"
-                      onClick={handleShow}
-                    >
-                      Add Account
-                    </button>
+            <div className="col-sm-12">
+              {/* account list */}
+              <div className="row">
+                <div className="col-12">
+                  <div className="card">
+                    <div className="card-body">
+                      <div
+                        className="mt-0 header-title"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <h4 className="mt-0 header-title">Account List</h4>
+                        <button
+                          className="btn btn-primary mb-4 fw-bolder "
+                          type="button"
+                          onClick={handleShow}
+                        >
+                          Add Account
+                        </button>
+                      </div>
+                      <table
+                        id="datatable"
+                        className="table table-bordered dt-responsive nowrap"
+                        style={{
+                          borderCollapse: "collapse",
+                          borderSpacing: 0,
+                          width: "100%",
+                        }}
+                      >
+                        <thead>
+                          <tr>
+                            <th>User Name</th>
+                            <th>Full Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Active</th>
+                            <th>Kiot ID</th>
+                            <th>Role ID</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users &&
+                            users.length > 0 &&
+                            users.map((account, index) => {
+                              return (
+                                <Account
+                                  account={account}
+                                  key={index}
+                                  updateList={fetchUsers}
+                                  onEditAccount={() =>
+                                    handleEditAccount(account)
+                                  }
+                                  onDeleteAccount={() =>
+                                    handleDeleteaccount(account)
+                                  }
+                                  onEnableAccount={() =>
+                                    handleEnableAccount(account)
+                                  }
+                                />
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                  <table
-                    id="datatable"
-                    className="table table-bordered dt-responsive nowrap"
-                    style={{
-                      borderCollapse: "collapse",
-                      borderSpacing: 0,
-                      width: "100%",
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>User Name</th>
-                        <th>Full Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Active</th>
-                        <th>Kiot ID</th>
-                        <th>Role ID</th>
-                        <th>Created At</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users &&
-                        users.length > 0 &&
-                        users.map((account, index) => {
-                          return (
-                            <Account
-                              account={account}
-                              key={index}
-                              updateList={fetchUsers}
-                              onEditAccount={() => handleEditAccount(account)}
-                              onDeleteAccount={() =>
-                                handleDeleteaccount(account)
-                              }
-                              onEnableAccount={() =>
-                                handleEnableAccount(account)
-                              }
-                            />
-                          );
-                        })}
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <AccountModal
-        show={accountModalOpen}
-        handleClose={handleClose}
-        onUpdateAccount={fetchUsers}
-        editedAccount={editedAccount}
-        isAddMode={isAddMode}
-      />
+          <AccountModal
+            show={accountModalOpen}
+            handleClose={handleClose}
+            onUpdateAccount={fetchUsers}
+            editedAccount={editedAccount}
+            isAddMode={isAddMode}
+          />
+        </>
+      )}
     </div>
   );
 };
