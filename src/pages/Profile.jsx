@@ -34,6 +34,7 @@ function Profile() {
     localStorage.setItem("currentUrl", window.location.pathname);
     getKiotInfo(actionStatus);
   }, []);
+  
   const initialValues = {
     fullName: auth.user.fullName,
     phone: auth.user.phone,
@@ -62,7 +63,7 @@ function Profile() {
     kiotName: Yup.string().required("Kiot Name is required"),
     description: Yup.string(),
   });
-  
+
   function onSubmit(fields, { setStatus, setSubmitting, resetForm }) {
     setStatus();
     const userInfo = {
@@ -73,7 +74,7 @@ function Profile() {
       phone: fields.phone,
       address: fields.address,
       password: fields.password,
-      active: auth.user.active
+      active: auth.user.active,
     };
     updateAccount(userInfo);
 
@@ -86,10 +87,6 @@ function Profile() {
       describe: fields.description,
     };
     updateKiot(kiotInfo);
-    getKiotInfo({
-      status: 1,
-      message: "Profile is updated successfully!",
-    });
   }
   const setTimeoutAlert = (actionSt) => {
     if (actionSt) {
@@ -107,6 +104,7 @@ function Profile() {
         // setSubmitting(false);
         console.log(error.response.data.message);
       });
+    handleLogin();
   }
 
   async function updateKiot(fields, setSubmitting) {
@@ -117,6 +115,10 @@ function Profile() {
         // setSubmitting(false);
         console.log(error.response.data.message);
       });
+    getKiotInfo({
+      status: 1,
+      message: "Profile is updated successfully!",
+    });
   }
 
   const handleUpload = async () => {
